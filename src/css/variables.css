@@ -83,3 +83,41 @@
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
 }
+
+/* ========== RESPONSIVE VARIABLE OVERRIDES ========== */
+@media (max-width: 1200px) {
+  :root {
+    --padding-x: 48px;
+    --text-6xl: 3rem;
+    --text-5xl: 2.5rem;
+    --text-4xl: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --padding-x: 24px;
+    --header-height: 64px;
+    --text-6xl: 2.5rem;
+    --text-5xl: 2rem;
+    --text-4xl: 1.75rem;
+    --text-3xl: 1.5rem;
+    --space-24: 4rem;
+    --space-20: 3.5rem;
+    --space-16: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --padding-x: 16px;
+    --text-6xl: 2rem;
+    --text-5xl: 1.75rem;
+    --text-4xl: 1.5rem;
+    --text-3xl: 1.25rem;
+    --space-24: 3rem;
+    --space-20: 2.5rem;
+    --space-16: 2rem;
+    --space-12: 2rem;
+  }
+}

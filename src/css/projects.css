@@ -136,3 +136,58 @@
 .sidebar-card-thumb.gradient-pink {
   background: linear-gradient(135deg, #EC4899, #F472B6);
 }
+
+/* ========== RESPONSIVE: PROJECTS ========== */
+@media (max-width: 1200px) {
+  .projects-split {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-hero .section-title {
+    font-size: var(--text-4xl);
+  }
+
+  .projects-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .projects-sidebar {
+    order: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .projects-preview {
+    order: 1;
+    min-height: auto;
+    padding: var(--space-8);
+  }
+
+  .projects-preview-actions {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .projects-preview-actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-preview {
+    padding: var(--space-6);
+  }
+
+  .projects-preview-title {
+    font-size: var(--text-2xl);
+  }
+}

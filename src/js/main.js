@@ -32,6 +32,7 @@ function initLucideIcons() {
 // Initialize all
 document.addEventListener('DOMContentLoaded', () => {
   initLucideIcons();
+  initMobileNav();
   initScrollAnimations();
   initParallaxBlobs();
   initHeaderScroll();
@@ -50,6 +51,43 @@ document.addEventListener('DOMContentLoaded', () => {
     initThreeScene(heroCanvas, { count: heroCanvas.dataset.particles || 60 });
   }
 });
+
+// ========== MOBILE NAVIGATION ==========
+function initMobileNav() {
+  const header = document.querySelector('.header');
+  const nav = document.querySelector('.header-nav');
+  if (!header || !nav) return;
+
+  // Create hamburger toggle button
+  const toggle = document.createElement('button');
+  toggle.className = 'mobile-nav-toggle';
+  toggle.setAttribute('aria-label', 'Toggle navigation');
+  toggle.innerHTML = '<span></span><span></span><span></span>';
+
+  // Insert before header-actions (or at end of header .container)
+  const container = header.querySelector('.container');
+  const actions = header.querySelector('.header-actions');
+  if (actions) {
+    container.insertBefore(toggle, actions);
+  } else {
+    container.appendChild(toggle);
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    toggle.classList.toggle('active', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close nav when clicking a link
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+}
 
 // ========== SCROLL-TRIGGERED ANIMATIONS ==========
 function initScrollAnimations() {

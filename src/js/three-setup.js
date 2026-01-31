@@ -14,7 +14,7 @@ const fragmentShader = /* glsl */ `
   uniform float u_time;
   uniform vec2 u_resolution;
   uniform vec2 u_mouse;
-  uniform vec3 u_colors[4];
+  uniform vec3 u_colors[8];
 
   varying vec2 vUv;
 
@@ -81,6 +81,13 @@ const fragmentShader = /* glsl */ `
     return 42.0 * dot(m * m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
   }
 
+  // Rotate 2D point
+  vec2 rotate2D(vec2 p, float a) {
+    float s = sin(a);
+    float c = cos(a);
+    return vec2(p.x * c - p.y * s, p.x * s + p.y * c);
+  }
+
   void main() {
     vec2 uv = vUv;
     float aspect = u_resolution.x / u_resolution.y;
@@ -88,47 +95,102 @@ const fragmentShader = /* glsl */ `
 
     float t = u_time;
 
-    // Mouse influence — gaussian falloff
+    // Mouse influence — wider gaussian falloff, displaces UV
     vec2 mouseUV = u_mouse;
     mouseUV.x *= aspect;
     float mouseDist = length(uv - mouseUV);
-    float mouseInfluence = exp(-mouseDist * mouseDist * 12.0) * 0.15;
+    float mouseInfluence = exp(-mouseDist * mouseDist * 6.0) * 0.25;
+    vec2 mouseDisplace = normalize(uv - mouseUV + 0.001) * mouseInfluence * 0.3;
 
-    // First domain warp
-    float warp1x = snoise(vec3(uv * 1.2, t * 0.7)) * 0.4;
-    float warp1y = snoise(vec3(uv * 1.2 + 100.0, t * 0.7)) * 0.4;
-    vec2 warped = uv + vec2(warp1x, warp1y) + vec2(mouseInfluence * 0.5);
+    // First domain warp — slow large-scale flow
+    float warp1x = snoise(vec3(uv * 1.0, t * 0.6)) * 0.5;
+    float warp1y = snoise(vec3(uv * 1.0 + 100.0, t * 0.6)) * 0.5;
+    vec2 warped = uv + vec2(warp1x, warp1y) + mouseDisplace;
 
-    // Second domain warp (viscous folding)
-    float warp2x = snoise(vec3(warped * 0.8, t * 0.5 + 50.0)) * 0.3;
-    float warp2y = snoise(vec3(warped * 0.8 + 200.0, t * 0.5 + 50.0)) * 0.3;
+    // Second domain warp — viscous folding
+    float warp2x = snoise(vec3(warped * 0.7, t * 0.4 + 50.0)) * 0.4;
+    float warp2y = snoise(vec3(warped * 0.7 + 200.0, t * 0.4 + 50.0)) * 0.4;
     vec2 doubleWarped = warped + vec2(warp2x, warp2y);
 
-    // Multi-octave noise
-    float n = 0.0;
-    n += snoise(vec3(doubleWarped * 0.6, t * 0.3)) * 0.5;        // base blobs
-    n += snoise(vec3(doubleWarped * 1.5, t * 0.6 + 10.0)) * 0.3; // medium swirls
-    n += snoise(vec3(doubleWarped * 3.0, t * 1.0 + 20.0)) * 0.15; // fine turbulence
-    n += snoise(vec3(doubleWarped * 5.0, t * 1.5 + 30.0)) * 0.05; // detail
+    // Third domain warp — fine viscous tendrils
+    float warp3x = snoise(vec3(doubleWarped * 1.5, t * 0.8 + 150.0)) * 0.15;
+    float warp3y = snoise(vec3(doubleWarped * 1.5 + 300.0, t * 0.8 + 150.0)) * 0.15;
+    vec2 tripleWarped = doubleWarped + vec2(warp3x, warp3y);
 
-    // Normalize to 0..1
-    n = n * 0.5 + 0.5;
+    // Slowly rotating coordinate for extra organic movement
+    vec2 rotUV = rotate2D(tripleWarped - 0.5, t * 0.15) + 0.5;
 
-    // Mouse brightening
-    n += mouseInfluence * 0.8;
+    // Two independent noise fields for color channel separation
+    float n1 = 0.0;
+    n1 += snoise(vec3(tripleWarped * 0.5, t * 0.25)) * 0.5;
+    n1 += snoise(vec3(tripleWarped * 1.2, t * 0.5 + 10.0)) * 0.3;
+    n1 += snoise(vec3(tripleWarped * 2.5, t * 0.9 + 20.0)) * 0.15;
+    n1 += snoise(vec3(tripleWarped * 4.0, t * 1.2 + 30.0)) * 0.05;
+    n1 = n1 * 0.5 + 0.5;
 
-    // 4-color palette blend via smoothstep
-    vec3 color;
-    color = mix(u_colors[0], u_colors[1], smoothstep(0.0, 0.35, n));
-    color = mix(color, u_colors[2], smoothstep(0.35, 0.65, n));
-    color = mix(color, u_colors[3], smoothstep(0.65, 1.0, n));
+    float n2 = 0.0;
+    n2 += snoise(vec3(rotUV * 0.6, t * 0.3 + 500.0)) * 0.5;
+    n2 += snoise(vec3(rotUV * 1.4, t * 0.55 + 510.0)) * 0.3;
+    n2 += snoise(vec3(rotUV * 2.8, t * 0.85 + 520.0)) * 0.15;
+    n2 += snoise(vec3(rotUV * 4.5, t * 1.1 + 530.0)) * 0.05;
+    n2 = n2 * 0.5 + 0.5;
+
+    // Mouse brightening on both channels
+    n1 += mouseInfluence * 0.6;
+    n2 += mouseInfluence * 0.4;
+
+    // Time-varying palette offset — colors cycle slowly
+    float paletteShift = t * 0.12;
+
+    // 8-color palette blend using two noise channels
+    // Channel 1: selects base color pair
+    // Channel 2: cross-mixes with adjacent colors
+    float idx1 = n1 * 7.0; // maps 0..1 to 0..7 (8 colors)
+    float idx2 = n2 * 7.0;
+
+    // Shift indices over time for continuous color cycling
+    idx1 = mod(idx1 + paletteShift, 7.0);
+    idx2 = mod(idx2 + paletteShift * 1.3 + 3.5, 7.0);
+
+    // Blend from palette using idx1
+    int i1 = int(floor(idx1));
+    float f1 = fract(idx1);
+    vec3 col1;
+    // Manual indexing for WebGL1 compatibility
+    vec3 ca, cb;
+    if (i1 == 0) { ca = u_colors[0]; cb = u_colors[1]; }
+    else if (i1 == 1) { ca = u_colors[1]; cb = u_colors[2]; }
+    else if (i1 == 2) { ca = u_colors[2]; cb = u_colors[3]; }
+    else if (i1 == 3) { ca = u_colors[3]; cb = u_colors[4]; }
+    else if (i1 == 4) { ca = u_colors[4]; cb = u_colors[5]; }
+    else if (i1 == 5) { ca = u_colors[5]; cb = u_colors[6]; }
+    else { ca = u_colors[6]; cb = u_colors[7]; }
+    col1 = mix(ca, cb, smoothstep(0.0, 1.0, f1));
+
+    // Blend from palette using idx2
+    int i2 = int(floor(idx2));
+    float f2 = fract(idx2);
+    vec3 col2;
+    vec3 cc, cd;
+    if (i2 == 0) { cc = u_colors[0]; cd = u_colors[1]; }
+    else if (i2 == 1) { cc = u_colors[1]; cd = u_colors[2]; }
+    else if (i2 == 2) { cc = u_colors[2]; cd = u_colors[3]; }
+    else if (i2 == 3) { cc = u_colors[3]; cd = u_colors[4]; }
+    else if (i2 == 4) { cc = u_colors[4]; cd = u_colors[5]; }
+    else if (i2 == 5) { cc = u_colors[5]; cd = u_colors[6]; }
+    else { cc = u_colors[6]; cd = u_colors[7]; }
+    col2 = mix(cc, cd, smoothstep(0.0, 1.0, f2));
+
+    // Cross-mix the two color channels for richer blending
+    float crossMix = snoise(vec3(tripleWarped * 0.4, t * 0.2 + 800.0)) * 0.5 + 0.5;
+    vec3 color = mix(col1, col2, crossMix);
 
     // Vignette edge fade
     vec2 vignetteUV = vUv * 2.0 - 1.0;
     float vignette = 1.0 - dot(vignetteUV * 0.5, vignetteUV * 0.5);
     vignette = smoothstep(0.0, 0.7, vignette);
 
-    float alpha = 0.4 * vignette;
+    float alpha = 0.45 * vignette;
 
     gl_FragColor = vec4(color, alpha);
   }
@@ -149,7 +211,7 @@ class FluidGradient {
       this.animate();
       this.addEventListeners();
     } else {
-      this.uniforms.u_time.value = 5.0; // offset so static frame looks interesting
+      this.uniforms.u_time.value = 5.0;
       this.renderer.render(this.scene, this.camera);
     }
   }
@@ -175,10 +237,14 @@ class FluidGradient {
       u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
       u_colors: {
         value: [
-          new THREE.Color('#FF6B6B'), // coral
+          new THREE.Color('#FF6B6B'), // coral red
+          new THREE.Color('#FF8E53'), // warm orange
+          new THREE.Color('#FFE66D'), // golden yellow
           new THREE.Color('#4ECDC4'), // teal
-          new THREE.Color('#A78BFA'), // purple
-          new THREE.Color('#FFE66D'), // yellow
+          new THREE.Color('#45B7D1'), // sky blue
+          new THREE.Color('#6C5CE7'), // indigo
+          new THREE.Color('#A78BFA'), // lavender purple
+          new THREE.Color('#F472B6'), // pink
         ],
       },
     };
@@ -200,7 +266,7 @@ class FluidGradient {
     if (this.disposed) return;
     requestAnimationFrame(() => this.animate());
 
-    this.uniforms.u_time.value += 0.0003;
+    this.uniforms.u_time.value += 0.0004;
 
     // Smooth mouse lerp for viscous lag
     this.smoothMouse.x += (this.targetMouse.x - this.smoothMouse.x) * 0.03;
@@ -216,6 +282,13 @@ class FluidGradient {
       this.targetMouse.y = 1.0 - e.clientY / window.innerHeight;
     };
 
+    this.onTouchMove = (e) => {
+      if (e.touches.length > 0) {
+        this.targetMouse.x = e.touches[0].clientX / window.innerWidth;
+        this.targetMouse.y = 1.0 - e.touches[0].clientY / window.innerHeight;
+      }
+    };
+
     this.onResize = () => {
       const width = this.container.clientWidth || window.innerWidth;
       const height = this.container.clientHeight || 600;
@@ -224,6 +297,7 @@ class FluidGradient {
     };
 
     window.addEventListener('mousemove', this.onMouseMove);
+    window.addEventListener('touchmove', this.onTouchMove, { passive: true });
     window.addEventListener('resize', this.onResize);
   }
 
@@ -231,6 +305,7 @@ class FluidGradient {
     this.disposed = true;
 
     if (this.onMouseMove) window.removeEventListener('mousemove', this.onMouseMove);
+    if (this.onTouchMove) window.removeEventListener('touchmove', this.onTouchMove);
     if (this.onResize) window.removeEventListener('resize', this.onResize);
 
     if (this.mesh) {
