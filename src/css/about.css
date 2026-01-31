@@ -22,7 +22,7 @@
 
 .about-hero-title {
   font-size: var(--text-5xl);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-text-heading);
   line-height: 1.15;
   margin-bottom: var(--space-8);
@@ -51,11 +51,30 @@
   background: var(--color-bg-light);
   color: var(--color-text-secondary);
   transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.about-social-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.about-social-icon:hover::before {
+  opacity: 1;
 }
 
 .about-social-icon:hover {
-  background: var(--color-text-heading);
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
 .about-social-icon svg {

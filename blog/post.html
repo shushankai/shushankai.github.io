@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Understanding Attention Mechanisms - neural.lab</title>
+  <title>Understanding Attention Mechanisms - sushi.lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
   <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/animations.css">
   <link rel="stylesheet" href="/src/css/blog.css">
 </head>
 <body>
@@ -20,10 +21,7 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="/" class="header-logo">
-        <span class="logo-icon"><i data-lucide="brain" style="width:18px;height:18px;"></i></span>
-        neural<span class="logo-dot">.</span>lab
-      </a>
+      <a href="/" class="header-logo">sushi<span class="logo-dot">.</span>lab</a>
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog/" class="active">Blog</a>
@@ -39,22 +37,23 @@
   </header>
 
   <!-- Post Hero -->
-  <section class="post-hero blob-container">
-    <div class="blob blob-pink"></div>
-    <div class="blob blob-yellow"></div>
-    <div class="blob blob-green"></div>
+  <section class="post-hero blob-container" style="position: relative;">
+    <div class="three-canvas-container" data-particles="40"></div>
+    <div class="blob blob-pink" data-parallax="-0.04"></div>
+    <div class="blob blob-yellow" data-parallax="0.06"></div>
+    <div class="blob blob-green" data-parallax="-0.03"></div>
     <div class="container post-hero-content">
-      <a href="/blog/" class="post-back-link">
+      <a href="/blog/" class="post-back-link" data-animate="fade-up">
         <i data-lucide="arrow-left"></i> Back to Blog
       </a>
-      <div class="post-tags">
+      <div class="post-tags" data-animate="fade-up" data-delay="100">
         <span class="tag tag-accent">Deep Learning</span>
         <span class="tag tag-purple">Research</span>
         <span class="tag tag-default">Tutorial</span>
       </div>
-      <h1 class="post-title">Understanding Attention Mechanisms in Transformers</h1>
-      <p class="post-subtitle">A comprehensive guide to self-attention, multi-head attention, and why transformers changed everything in deep learning.</p>
-      <div class="post-author-row">
+      <h1 class="post-title" data-animate="fade-up" data-delay="200">Understanding Attention Mechanisms in Transformers</h1>
+      <p class="post-subtitle" data-animate="fade-up" data-delay="300">A comprehensive guide to self-attention, multi-head attention, and why transformers changed everything in deep learning.</p>
+      <div class="post-author-row" data-animate="fade-up" data-delay="400">
         <div class="post-avatar">
           <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;">SS</div>
         </div>
@@ -73,27 +72,27 @@
   <div class="post-layout container">
     <!-- Main Article -->
     <article class="article-body">
-      <p class="intro">
+      <p class="intro" data-animate="fade-up">
         The Transformer architecture, introduced in the groundbreaking "Attention Is All You Need" paper,
         fundamentally changed how we approach sequence modeling problems. At its core lies the attention
         mechanism &mdash; a elegant solution that allows models to focus on relevant parts of the input
         when producing output.
       </p>
 
-      <h2 id="what-is-attention">What is Attention?</h2>
-      <p>
+      <h2 id="what-is-attention" data-animate="fade-up">What is Attention?</h2>
+      <p data-animate="fade-up">
         In the context of neural networks, attention is a mechanism that allows the model to dynamically
         focus on different parts of the input sequence when producing each element of the output. Think
         of it like reading a sentence &mdash; when you're trying to understand a particular word, your brain
         automatically pays more attention to the relevant context words.
       </p>
-      <p>
+      <p data-animate="fade-up">
         The key insight of the attention mechanism is that instead of compressing an entire input sequence
         into a fixed-size vector, we can let the model learn which parts of the input are most relevant
         for each output step.
       </p>
 
-      <div class="callout callout-insight">
+      <div class="callout callout-insight" data-animate="fade-up">
         <div class="callout-title">
           <i data-lucide="lightbulb"></i> Key Insight
         </div>
@@ -104,20 +103,20 @@
         </p>
       </div>
 
-      <h2 id="self-attention">Self-Attention Mechanism</h2>
-      <p>
+      <h2 id="self-attention" data-animate="fade-up">Self-Attention Mechanism</h2>
+      <p data-animate="fade-up">
         Self-attention, also known as intra-attention, is the variant of attention used within the
         Transformer. It relates different positions of a single sequence to compute a representation
         of the same sequence. Each element in the sequence attends to all other elements, producing
         a new representation that captures contextual relationships.
       </p>
-      <p>
+      <p data-animate="fade-up">
         The self-attention mechanism operates through three learned linear projections: Queries (Q),
         Keys (K), and Values (V). These are computed from the input embeddings and used to calculate
         attention scores.
       </p>
 
-      <div class="code-block">
+      <div class="code-block" data-animate="fade-up">
         <div class="code-block-header">
           <span class="code-block-lang">python</span>
           <button class="code-copy-btn">
@@ -153,14 +152,14 @@
         <span class="keyword">return</span> self.W_o(torch.matmul(attn, V))</code></pre>
       </div>
 
-      <h2 id="multi-head-attention">Multi-Head Attention</h2>
-      <p>
+      <h2 id="multi-head-attention" data-animate="fade-up">Multi-Head Attention</h2>
+      <p data-animate="fade-up">
         Instead of performing a single attention function, multi-head attention runs multiple attention
         operations in parallel. Each "head" can learn to attend to different types of information &mdash;
         for example, one head might focus on syntactic relationships while another focuses on semantic ones.
       </p>
 
-      <div class="callout callout-experiment">
+      <div class="callout callout-experiment" data-animate="fade-up">
         <div class="callout-title">
           <i data-lucide="flask-conical"></i> Experiment Result
         </div>
@@ -171,20 +170,20 @@
         </p>
       </div>
 
-      <h2 id="practical-applications">Practical Applications</h2>
-      <p>
+      <h2 id="practical-applications" data-animate="fade-up">Practical Applications</h2>
+      <p data-animate="fade-up">
         The attention mechanism has found applications far beyond its original NLP domain. Today,
         attention-based models are state-of-the-art in computer vision (ViT), speech recognition,
         protein structure prediction (AlphaFold), and even reinforcement learning.
       </p>
-      <p>
+      <p data-animate="fade-up">
         The versatility of attention comes from its ability to model arbitrary relationships between
         elements, without the inductive biases imposed by convolutional or recurrent architectures.
         This makes it particularly powerful for tasks where the relationships between elements are
         complex and varied.
       </p>
 
-      <div class="callout callout-takeaway">
+      <div class="callout callout-takeaway" data-animate="fade-up">
         <div class="callout-title">
           <i data-lucide="bookmark"></i> Takeaway
         </div>
@@ -195,8 +194,8 @@
         </p>
       </div>
 
-      <h2 id="whats-next">What's Next?</h2>
-      <p>
+      <h2 id="whats-next" data-animate="fade-up">What's Next?</h2>
+      <p data-animate="fade-up">
         Research in attention mechanisms continues to evolve rapidly. Efficient attention variants like
         linear attention, sparse attention, and flash attention are making it possible to process
         longer sequences with less computational cost. Meanwhile, new architectures are exploring
@@ -205,7 +204,7 @@
     </article>
 
     <!-- Sidebar -->
-    <aside class="post-sidebar">
+    <aside class="post-sidebar" data-animate="slide-left" data-delay="200">
       <div class="toc-card">
         <h3 class="toc-title"><i data-lucide="list"></i> Table of Contents</h3>
         <nav class="toc-list">
@@ -234,6 +233,16 @@
           </a>
         </div>
       </div>
+
+      <div class="literary-quote" data-quotes='[
+        {"text":"The real voyage of discovery consists not in seeking new landscapes, but in having new eyes.","author":"Marcel Proust"},
+        {"text":"A mind that is stretched by a new experience can never go back to its old dimensions.","author":"Oliver Wendell Holmes"},
+        {"text":"The more I learn, the more I realize how much I don\u2019t know.","author":"Albert Einstein"},
+        {"text":"It is not that I am so smart, it is just that I stay with problems longer.","author":"Albert Einstein"}
+      ]'>
+        <blockquote></blockquote><span class="quote-cursor"></span>
+        <cite></cite>
+      </div>
     </aside>
   </div>
 
@@ -242,8 +251,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">neural<span class="logo-dot">.</span>lab</div>
-          <p class="footer-tagline">Exploring the intersection of machine learning, creative coding, and visual art.</p>
+          <div class="footer-logo">sushi<span class="logo-dot">.</span>lab</div>
+          <p class="footer-tagline">A living archive of explorations, experiments, and everything in between. Passionate about AI, ML, and pushing boundaries.</p>
           <div class="footer-social">
             <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
             <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
@@ -281,7 +290,7 @@
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2026 neural.lab. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 sushi.lab. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>

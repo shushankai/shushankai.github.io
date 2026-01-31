@@ -1,0 +1,235 @@
+/* ========== SCROLL-TRIGGERED ANIMATIONS ========== */
+
+/* Base state: hidden before animation triggers */
+[data-animate] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Prevent animation flash on page load */
+.no-js [data-animate] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Fade Up ---- */
+[data-animate="fade-up"] {
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="fade-up"].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Fade In ---- */
+[data-animate="fade-in"] {
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="fade-in"].is-visible {
+  opacity: 1;
+}
+
+/* ---- Slide Left (from right) ---- */
+[data-animate="slide-left"] {
+  transform: translateX(60px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="slide-left"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Slide Right (from left) ---- */
+[data-animate="slide-right"] {
+  transform: translateX(-60px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="slide-right"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Scale In ---- */
+[data-animate="scale-in"] {
+  transform: scale(0.9);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="scale-in"].is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---- Text Reveal (clip-path wipe) ---- */
+[data-animate="text-reveal"] {
+  clip-path: inset(0 100% 0 0);
+  opacity: 1; /* text-reveal uses clip instead of opacity */
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate="text-reveal"].is-visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* ---- Stagger delays for children ---- */
+[data-stagger] > [data-animate]:nth-child(1) { transition-delay: 0ms; }
+[data-stagger] > [data-animate]:nth-child(2) { transition-delay: 100ms; }
+[data-stagger] > [data-animate]:nth-child(3) { transition-delay: 200ms; }
+[data-stagger] > [data-animate]:nth-child(4) { transition-delay: 300ms; }
+[data-stagger] > [data-animate]:nth-child(5) { transition-delay: 400ms; }
+[data-stagger] > [data-animate]:nth-child(6) { transition-delay: 500ms; }
+
+/* Also support [data-delay] for manual delays */
+[data-delay="100"] { transition-delay: 100ms !important; }
+[data-delay="200"] { transition-delay: 200ms !important; }
+[data-delay="300"] { transition-delay: 300ms !important; }
+[data-delay="400"] { transition-delay: 400ms !important; }
+[data-delay="500"] { transition-delay: 500ms !important; }
+[data-delay="600"] { transition-delay: 600ms !important; }
+
+/* ========== PARALLAX BLOBS ========== */
+.blob[data-parallax] {
+  transition: transform 0.1s linear;
+}
+
+/* ========== HEADER SCROLL BEHAVIOR ========== */
+.header {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
+}
+
+.header.header-hidden {
+  transform: translateY(-100%);
+}
+
+.header.header-scrolled {
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
+  border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ========== HERO ENTRANCE ANIMATIONS ========== */
+.hero-content [data-animate] {
+  /* Hero items get faster, snappier transitions */
+  transition-duration: 0.6s;
+}
+
+/* ========== CARD HOVER LIFT ENHANCEMENT ========== */
+.card,
+.sidebar-card,
+.art-card,
+.interest-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+}
+
+.card:hover,
+.art-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+}
+
+.interest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== GRADIENT BLOB FLOAT ANIMATION ========== */
+@keyframes blob-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15px, -20px) scale(1.05); }
+  66% { transform: translate(-10px, 10px) scale(0.97); }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-20px, 15px) scale(0.95); }
+  66% { transform: translate(12px, -8px) scale(1.03); }
+}
+
+@keyframes blob-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(10px, 20px) scale(1.04); }
+  66% { transform: translate(-15px, -12px) scale(0.96); }
+}
+
+.blob-animated:nth-child(odd) {
+  animation: blob-float-1 8s ease-in-out infinite;
+}
+
+.blob-animated:nth-child(even) {
+  animation: blob-float-2 10s ease-in-out infinite;
+}
+
+.blob-animated:nth-child(3n) {
+  animation: blob-float-3 12s ease-in-out infinite;
+}
+
+/* ========== READING PROGRESS BAR ANIMATION ========== */
+.reading-progress {
+  transition: width 0.15s linear;
+}
+
+/* ========== LINK UNDERLINE ANIMATION ========== */
+.header-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-nav a:hover::after,
+.header-nav a.active::after {
+  width: 100%;
+}
+
+/* ========== BUTTON PRESS EFFECT ========== */
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* ========== SMOOTH SECTION DIVIDER ========== */
+.rainbow-divider {
+  background: var(--gradient-rainbow);
+  height: 3px;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rainbow-divider.is-visible {
+  transform: scaleX(1);
+}
+
+/* ========== REDUCE MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  .blob-animated {
+    animation: none !important;
+  }
+
+  .header {
+    transition: none !important;
+  }
+}

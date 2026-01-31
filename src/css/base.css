@@ -3,6 +3,7 @@ body {
   font-size: var(--text-base);
   color: var(--color-text-primary);
   background-color: var(--color-bg-white);
+  padding-top: var(--header-height);
 }
 
 h1, h2, h3, h4, h5, h6 {

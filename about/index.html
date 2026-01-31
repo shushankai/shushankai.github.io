@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - neural.lab</title>
+  <title>About - sushi.lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
   <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/animations.css">
   <link rel="stylesheet" href="/src/css/about.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="/" class="header-logo">
-        <span class="logo-icon"><i data-lucide="brain" style="width:18px;height:18px;"></i></span>
-        neural<span class="logo-dot">.</span>lab
-      </a>
+      <a href="/" class="header-logo">sushi<span class="logo-dot">.</span>lab</a>
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog/">Blog</a>
@@ -36,30 +34,29 @@
   </header>
 
   <!-- About Hero -->
-  <section class="about-hero">
-    <div class="container">
+  <section class="about-hero" style="position: relative;">
+    <div class="three-canvas-container" data-particles="40"></div>
+    <div class="container" style="position: relative; z-index: 1;">
       <div class="about-hero-text">
-        <p class="about-hero-label">About Me</p>
-        <h1 class="about-hero-title">Shushank Singh</h1>
-        <p class="about-hero-bio">
-          I'm a machine learning engineer and creative coder with a passion for building tools
-          that make complex systems understandable and beautiful. My work lives at the intersection
-          of artificial intelligence, data visualization, and interactive art.
+        <p class="about-hero-label" data-animate="fade-up">About Me</p>
+        <h1 class="about-hero-title" data-animate="fade-up" data-delay="100">Shushank Singh</h1>
+        <p class="about-hero-bio" data-animate="fade-up" data-delay="200">
+          Welcome to my corner of the internet. This is a living archive of my explorations,
+          experiments, and everything in between. I'm passionate about artificial intelligence,
+          machine learning, and building things that push the boundaries of what's possible.
         </p>
-        <p class="about-hero-bio">
-          Currently exploring the frontiers of generative AI, neural network interpretability,
-          and creative applications of deep learning. When I'm not training models, you'll find
-          me creating generative art, contributing to open-source projects, or writing about the
-          latest developments in ML.
+        <p class="about-hero-bio" data-animate="fade-up" data-delay="300">
+          Here you'll find my thoughts on AI research, technical deep dives, project write-ups,
+          and insights from my journey in the world of technology.
         </p>
-        <div class="about-social-row">
+        <div class="about-social-row" data-animate="fade-up" data-delay="400">
           <a href="https://github.com/shushankai" target="_blank" rel="noopener" class="about-social-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
           <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" class="about-social-icon" aria-label="Twitter"><i data-lucide="twitter"></i></a>
           <a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener" class="about-social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
           <a href="mailto:shushank.brain@gmail.com" class="about-social-icon" aria-label="Mail"><i data-lucide="mail"></i></a>
         </div>
       </div>
-      <div class="about-avatar">
+      <div class="about-avatar" data-animate="scale-in" data-delay="200">
         <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:4rem;">&#128104;&#8205;&#128187;</div>
       </div>
     </div>
@@ -71,15 +68,15 @@
   <!-- Art Inspirations -->
   <section class="art-section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-animate="fade-up">
         <div>
           <p class="section-label">Visual Inspiration</p>
           <h2 class="section-title">Art Inspirations</h2>
         </div>
       </div>
-      <div class="art-grid">
+      <div class="art-grid" data-stagger>
         <!-- Art Card 1 -->
-        <article class="art-card">
+        <article class="art-card" data-animate="fade-up">
           <div class="art-card-image" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4);"></div>
           <div class="art-card-body">
             <div class="art-card-tags">
@@ -95,7 +92,7 @@
           </div>
         </article>
         <!-- Art Card 2 -->
-        <article class="art-card">
+        <article class="art-card" data-animate="fade-up">
           <div class="art-card-image" style="background: linear-gradient(135deg, #7C3AED, #3B82F6, #06B6D4);"></div>
           <div class="art-card-body">
             <div class="art-card-tags">
@@ -111,7 +108,7 @@
           </div>
         </article>
         <!-- Art Card 3 -->
-        <article class="art-card">
+        <article class="art-card" data-animate="fade-up">
           <div class="art-card-image" style="background: linear-gradient(135deg, #059669, #4ECDC4, #FFE66D);"></div>
           <div class="art-card-body">
             <div class="art-card-tags">
@@ -130,15 +127,26 @@
     </div>
   </section>
 
+  <!-- Literary Quote -->
+  <div class="literary-quote container" data-animate="fade-up" data-quotes='[
+    {"text":"Curiouser and curiouser!","author":"Lewis Carroll"},
+    {"text":"The mind is not a vessel to be filled, but a fire to be kindled.","author":"Plutarch"},
+    {"text":"Imagination is more important than knowledge.","author":"Albert Einstein"},
+    {"text":"In the middle of difficulty lies opportunity.","author":"Albert Einstein"}
+  ]'>
+    <blockquote></blockquote><span class="quote-cursor"></span>
+    <cite></cite>
+  </div>
+
   <!-- Current Interests -->
   <section class="interests-section">
     <div class="container">
-      <div class="section-header" style="justify-content: center; text-align: center; flex-direction: column; align-items: center;">
+      <div class="section-header" style="justify-content: center; text-align: center; flex-direction: column; align-items: center;" data-animate="fade-up">
         <p class="section-label">What I'm Into</p>
         <h2 class="section-title">Current Interests</h2>
       </div>
-      <div class="interests-grid">
-        <article class="interest-card">
+      <div class="interests-grid" data-stagger>
+        <article class="interest-card" data-animate="fade-up">
           <div class="interest-icon coral">
             <i data-lucide="brain"></i>
           </div>
@@ -148,7 +156,7 @@
             visualization techniques for model internals and attention patterns.
           </p>
         </article>
-        <article class="interest-card">
+        <article class="interest-card" data-animate="fade-up">
           <div class="interest-icon green">
             <i data-lucide="palette"></i>
           </div>
@@ -158,7 +166,7 @@
             and interactive experiences that blur the line between human and machine creativity.
           </p>
         </article>
-        <article class="interest-card">
+        <article class="interest-card" data-animate="fade-up">
           <div class="interest-icon purple">
             <i data-lucide="bar-chart-3"></i>
           </div>
@@ -175,20 +183,19 @@
   <!-- Learning Philosophy -->
   <section class="philosophy-section">
     <div class="container">
-      <div class="section-header" style="margin-bottom: var(--space-16);">
+      <div class="section-header" style="margin-bottom: var(--space-16);" data-animate="fade-up">
         <div>
           <p class="section-label">How I Think</p>
           <h2 class="section-title">Learning Philosophy</h2>
         </div>
       </div>
       <div class="philosophy-grid">
-        <div>
+        <div data-animate="slide-right">
           <div class="philosophy-quote">
             <blockquote>
-              The best way to understand something is to build it from scratch, break it apart,
-              and rebuild it better.
+              We can only see a short distance ahead, but we can see plenty there that needs to be done.
             </blockquote>
-            <cite>&mdash; A lesson learned through many failed experiments</cite>
+            <cite>&mdash; Alan Turing</cite>
           </div>
           <p class="philosophy-text">
             I believe in learning by doing. Every project, no matter how small, is an opportunity
@@ -201,8 +208,8 @@
             theory and practice, understanding both the "why" and the "how."
           </p>
         </div>
-        <div class="philosophy-principles">
-          <div class="principle">
+        <div class="philosophy-principles" data-stagger>
+          <div class="principle" data-animate="fade-up">
             <div class="principle-number">1</div>
             <div class="principle-content">
               <h4>Build to Understand</h4>
@@ -210,7 +217,7 @@
               makes you a better engineer and helps you debug complex systems.</p>
             </div>
           </div>
-          <div class="principle">
+          <div class="principle" data-animate="fade-up">
             <div class="principle-number">2</div>
             <div class="principle-content">
               <h4>Share What You Learn</h4>
@@ -218,7 +225,7 @@
               something simply, you don't understand it well enough.</p>
             </div>
           </div>
-          <div class="principle">
+          <div class="principle" data-animate="fade-up">
             <div class="principle-number">3</div>
             <div class="principle-content">
               <h4>Embrace the Unknown</h4>
@@ -236,8 +243,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">neural<span class="logo-dot">.</span>lab</div>
-          <p class="footer-tagline">Exploring the intersection of machine learning, creative coding, and visual art.</p>
+          <div class="footer-logo">sushi<span class="logo-dot">.</span>lab</div>
+          <p class="footer-tagline">A living archive of explorations, experiments, and everything in between. Passionate about AI, ML, and pushing boundaries.</p>
           <div class="footer-social">
             <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
             <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
@@ -275,7 +282,7 @@
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2026 neural.lab. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 sushi.lab. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>

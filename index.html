@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>neural.lab - Home</title>
+  <title>sushi.lab - Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
   <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/animations.css">
   <link rel="stylesheet" href="/src/css/home.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="/" class="header-logo">
-        <span class="logo-icon"><i data-lucide="brain" style="width:18px;height:18px;"></i></span>
-        neural<span class="logo-dot">.</span>lab
-      </a>
+      <a href="/" class="header-logo">sushi<span class="logo-dot">.</span>lab</a>
       <nav class="header-nav">
         <a href="/" class="active">Home</a>
         <a href="/blog/">Blog</a>
@@ -36,37 +34,37 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
+  <section class="hero" style="position: relative;">
+    <div class="three-canvas-container" data-particles="80"></div>
+    <div class="container" style="position: relative; z-index: 1;">
       <div class="hero-content">
-        <p class="hero-greeting mono">// Hello, World!</p>
-        <h1 class="hero-name">Shushank<br>Singh</h1>
-        <div class="hero-role">
+        <p class="hero-greeting mono" data-animate="fade-up">// Hello, World!</p>
+        <h1 class="hero-name" data-animate="fade-up" data-delay="100">Shushank<br>Singh</h1>
+        <div class="hero-role" data-animate="fade-up" data-delay="200">
           <span class="dash">&mdash;</span>
           ML Engineer & Creative Coder
           <span class="sparkle">&#10024;</span>
         </div>
-        <p class="hero-bio">
-          Exploring the intersection of machine learning, creative coding,
-          and visual art. Building tools that help us understand complex systems
-          through beautiful, interactive experiences.
+        <p class="hero-bio" data-animate="fade-up" data-delay="300">
+          Welcome to my corner of the internet. I'm passionate about artificial intelligence,
+          machine learning, and building things that push the boundaries of what's possible.
         </p>
-        <ul class="hero-checklist">
+        <ul class="hero-checklist" data-animate="fade-up" data-delay="400">
           <li>
             <span class="check-icon"><i data-lucide="check"></i></span>
-            Deep Learning & Neural Networks
+            Artificial Intelligence & Machine Learning
           </li>
           <li>
             <span class="check-icon"><i data-lucide="check"></i></span>
-            Creative Coding & Generative Art
+            AI Research & Technical Deep Dives
           </li>
           <li>
             <span class="check-icon"><i data-lucide="check"></i></span>
-            Data Visualization & Interactive Media
+            Experiments & Pushing Boundaries
           </li>
         </ul>
-        <div class="hero-wave">&#128075;</div>
-        <div class="hero-cta">
+        <div class="hero-wave" data-animate="fade-up" data-delay="500">&#128075;</div>
+        <div class="hero-cta" data-animate="fade-up" data-delay="600">
           <a href="/projects/" class="btn btn-primary">
             <i data-lucide="flask-conical"></i>
             View Projects
@@ -77,13 +75,13 @@
           </a>
         </div>
       </div>
-      <div class="hero-visual blob-container">
-        <div class="blob blob-pink"></div>
-        <div class="blob blob-yellow"></div>
-        <div class="blob blob-green"></div>
-        <div class="blob blob-blue"></div>
-        <div class="blob blob-purple"></div>
-        <div class="hero-image">
+      <div class="hero-visual blob-container" data-animate="fade-in" data-delay="200">
+        <div class="blob blob-pink" data-parallax="-0.05"></div>
+        <div class="blob blob-yellow" data-parallax="0.08"></div>
+        <div class="blob blob-green" data-parallax="-0.06"></div>
+        <div class="blob blob-blue" data-parallax="0.04"></div>
+        <div class="blob blob-purple" data-parallax="-0.07"></div>
+        <div class="hero-image" data-animate="scale-in" data-delay="300">
           <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;">&#128104;&#8205;&#128187;</div>
         </div>
         <div class="hero-speech-bubble">Hello! &#128075;</div>
@@ -93,10 +91,22 @@
     </div>
   </section>
 
-  <!-- Featured Blog Section -->
-  <section class="featured-blog">
+  <!-- Literary Quote -->
+  <div class="literary-quote container" data-animate="fade-up" data-quotes='[
+    {"text":"The purpose of computation is insight, not numbers.","author":"Richard Hamming"},
+    {"text":"Any sufficiently advanced technology is indistinguishable from magic.","author":"Arthur C. Clarke"},
+    {"text":"The computer was born to solve problems that did not exist before.","author":"Bill Gates"},
+    {"text":"Simplicity is the ultimate sophistication.","author":"Leonardo da Vinci"},
+    {"text":"The only way to do great work is to love what you do.","author":"Steve Jobs"}
+  ]'>
+    <blockquote></blockquote><span class="quote-cursor"></span>
+    <cite></cite>
+  </div>
+
+  <!-- Latest Articles (Dark Card Grid) -->
+  <section class="dark-section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header dark-section-header" data-animate="fade-up">
         <div>
           <p class="section-label">From the Lab Notebook</p>
           <h2 class="section-title">Latest Articles</h2>
@@ -105,62 +115,48 @@
           View all <i data-lucide="arrow-right"></i>
         </a>
       </div>
-      <div class="blog-grid">
-        <!-- Blog Card 1 -->
-        <article class="card blog-card">
-          <div class="card-image" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);"></div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-accent">Deep Learning</span>
-              <span class="tag tag-purple">Research</span>
-            </div>
-            <h3 class="card-title">Understanding Attention Mechanisms in Transformers</h3>
-            <p class="card-excerpt">A deep dive into how self-attention works, why it revolutionized NLP, and how to implement it from scratch.</p>
-            <div class="card-meta">
-              <span><i data-lucide="clock"></i> 8 min read</span>
-              <span><i data-lucide="calendar"></i> Jan 15, 2026</span>
-            </div>
-          </div>
+      <div class="dark-card-grid cols-3" data-stagger>
+        <article class="dark-card" data-animate="fade-up">
+          <div class="dark-card-icon"><i data-lucide="brain"></i></div>
+          <h3 class="dark-card-title">Understanding Attention Mechanisms</h3>
+          <p class="dark-card-desc mono">A deep dive into how self-attention works and why it revolutionized NLP.</p>
+          <ul class="dark-card-features">
+            <li><i data-lucide="check"></i> Deep Learning</li>
+            <li><i data-lucide="check"></i> Research</li>
+            <li><i data-lucide="check"></i> 8 min read</li>
+          </ul>
+          <a href="/blog/post.html" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
         </article>
-        <!-- Blog Card 2 -->
-        <article class="card blog-card">
-          <div class="card-image" style="background: linear-gradient(135deg, #4ECDC4, #44E5B5);"></div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-green">Creative Coding</span>
-            </div>
-            <h3 class="card-title">Generative Art with Neural Style Transfer</h3>
-            <p class="card-excerpt">Exploring the beautiful intersection of art and AI through neural style transfer techniques.</p>
-            <div class="card-meta">
-              <span><i data-lucide="clock"></i> 6 min read</span>
-              <span><i data-lucide="calendar"></i> Jan 8, 2026</span>
-            </div>
-          </div>
+        <article class="dark-card" data-animate="fade-up">
+          <div class="dark-card-icon"><i data-lucide="palette"></i></div>
+          <h3 class="dark-card-title">Generative Art with Neural Style Transfer</h3>
+          <p class="dark-card-desc mono">Exploring the intersection of art and AI through style transfer techniques.</p>
+          <ul class="dark-card-features">
+            <li><i data-lucide="check"></i> Creative Coding</li>
+            <li><i data-lucide="check"></i> Tutorial</li>
+            <li><i data-lucide="check"></i> 6 min read</li>
+          </ul>
+          <a href="/blog/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
         </article>
-        <!-- Blog Card 3 -->
-        <article class="card blog-card">
-          <div class="card-image" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);"></div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-purple">Computer Vision</span>
-              <span class="tag tag-default">Tutorial</span>
-            </div>
-            <h3 class="card-title">Building a Real-Time Object Detection Pipeline</h3>
-            <p class="card-excerpt">Step-by-step guide to building an efficient object detection system using YOLOv8.</p>
-            <div class="card-meta">
-              <span><i data-lucide="clock"></i> 12 min read</span>
-              <span><i data-lucide="calendar"></i> Dec 28, 2025</span>
-            </div>
-          </div>
+        <article class="dark-card" data-animate="fade-up">
+          <div class="dark-card-icon"><i data-lucide="eye"></i></div>
+          <h3 class="dark-card-title">Building Real-Time Object Detection</h3>
+          <p class="dark-card-desc mono">Step-by-step guide to efficient object detection using YOLOv8.</p>
+          <ul class="dark-card-features">
+            <li><i data-lucide="check"></i> Computer Vision</li>
+            <li><i data-lucide="check"></i> YOLOv8</li>
+            <li><i data-lucide="check"></i> 12 min read</li>
+          </ul>
+          <a href="/blog/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Featured Projects Section -->
-  <section class="featured-projects">
+  <!-- Recent Work (Dark Card Grid) -->
+  <section class="dark-section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header dark-section-header" data-animate="fade-up">
         <div>
           <p class="section-label">Experiments & Projects</p>
           <h2 class="section-title">Recent Work</h2>
@@ -169,66 +165,28 @@
           View all <i data-lucide="arrow-right"></i>
         </a>
       </div>
-      <div class="projects-grid">
-        <!-- Project Card 1 -->
-        <article class="card project-card">
-          <div class="card-visual">
-            <div class="terminal-mockup">
-              <div class="terminal-dots">
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-              </div>
-              <div class="terminal-line"><span class="prompt">$</span> python train.py --model transformer</div>
-              <div class="terminal-line">Loading dataset... &#9989;</div>
-              <div class="terminal-line">Epoch 1/50: loss=2.341, acc=0.67</div>
-              <div class="terminal-line">Epoch 2/50: loss=1.892, acc=0.74</div>
-              <div class="terminal-line">Epoch 3/50: loss=1.456, acc=0.81</div>
-              <div class="terminal-line"><span class="prompt">></span> Training complete. Best acc: 0.94</div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Neural Style Transfer Engine</h3>
-            <p class="card-excerpt">A real-time style transfer system that transforms photos into artistic styles using deep neural networks.</p>
-            <div class="tech-stack">
-              <span class="tag tag-accent">PyTorch</span>
-              <span class="tag tag-green">Python</span>
-              <span class="tag tag-purple">CUDA</span>
-            </div>
-            <a href="#" class="github-link">
-              <i data-lucide="github"></i> View on GitHub
-            </a>
-          </div>
+      <div class="dark-card-grid cols-2" data-stagger>
+        <article class="dark-card" data-animate="fade-up">
+          <div class="dark-card-icon"><i data-lucide="cpu"></i></div>
+          <h3 class="dark-card-title">Neural Style Transfer Engine</h3>
+          <p class="dark-card-desc mono">A real-time style transfer system using deep neural networks and GPU acceleration.</p>
+          <ul class="dark-card-features">
+            <li><i data-lucide="check"></i> PyTorch</li>
+            <li><i data-lucide="check"></i> CUDA</li>
+            <li><i data-lucide="check"></i> Real-time</li>
+          </ul>
+          <a href="/projects/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
         </article>
-        <!-- Project Card 2 -->
-        <article class="card project-card">
-          <div class="card-visual" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
-            <div class="terminal-mockup" style="background: rgba(255,255,255,0.05);">
-              <div class="terminal-dots">
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-              </div>
-              <div class="terminal-line" style="color: #60A5FA;">// Data Visualization Engine</div>
-              <div class="terminal-line" style="color: #FFE66D;">const viz = new DataViz();</div>
-              <div class="terminal-line" style="color: #4ECDC4;">viz.render(dataset, {</div>
-              <div class="terminal-line" style="color: #A78BFA;">&nbsp;&nbsp;type: 'neural-network',</div>
-              <div class="terminal-line" style="color: #FF6B6B;">&nbsp;&nbsp;animate: true</div>
-              <div class="terminal-line" style="color: #4ECDC4;">});</div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Interactive Data Visualization Toolkit</h3>
-            <p class="card-excerpt">A WebGL-powered toolkit for creating beautiful, interactive data visualizations in the browser.</p>
-            <div class="tech-stack">
-              <span class="tag tag-yellow">JavaScript</span>
-              <span class="tag tag-default">Three.js</span>
-              <span class="tag tag-green">D3.js</span>
-            </div>
-            <a href="#" class="github-link">
-              <i data-lucide="github"></i> View on GitHub
-            </a>
-          </div>
+        <article class="dark-card" data-animate="fade-up">
+          <div class="dark-card-icon"><i data-lucide="bar-chart-3"></i></div>
+          <h3 class="dark-card-title">Interactive Data Viz Toolkit</h3>
+          <p class="dark-card-desc mono">A WebGL-powered toolkit for creating beautiful, interactive data visualizations.</p>
+          <ul class="dark-card-features">
+            <li><i data-lucide="check"></i> Three.js</li>
+            <li><i data-lucide="check"></i> D3.js</li>
+            <li><i data-lucide="check"></i> WebGL</li>
+          </ul>
+          <a href="/projects/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
         </article>
       </div>
     </div>
@@ -240,9 +198,9 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            neural<span class="logo-dot">.</span>lab
+            sushi<span class="logo-dot">.</span>lab
           </div>
-          <p class="footer-tagline">Exploring the intersection of machine learning, creative coding, and visual art. Building beautiful tools for complex systems.</p>
+          <p class="footer-tagline">A living archive of explorations, experiments, and everything in between. Passionate about AI, ML, and pushing the boundaries of what's possible.</p>
           <div class="footer-social">
             <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
             <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
@@ -280,7 +238,7 @@
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2026 neural.lab. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 sushi.lab. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>

@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - neural.lab</title>
+  <title>Blog - sushi.lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
   <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/animations.css">
   <link rel="stylesheet" href="/src/css/blog.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="/" class="header-logo">
-        <span class="logo-icon"><i data-lucide="brain" style="width:18px;height:18px;"></i></span>
-        neural<span class="logo-dot">.</span>lab
-      </a>
+      <a href="/" class="header-logo">sushi<span class="logo-dot">.</span>lab</a>
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog/" class="active">Blog</a>
@@ -36,12 +34,13 @@
   </header>
 
   <!-- Blog Hero -->
-  <section class="blog-hero">
-    <div class="container">
-      <p class="section-label">The Lab Notebook</p>
-      <h1 class="section-title">Collections</h1>
-      <p class="section-description">Deep dives into machine learning, creative coding, and the art of building intelligent systems.</p>
-      <div class="search-filter-row">
+  <section class="blog-hero" style="position: relative;">
+    <div class="three-canvas-container" data-particles="40"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <p class="section-label" data-animate="fade-up">The Lab Notebook</p>
+      <h1 class="section-title" data-animate="fade-up" data-delay="100">Collections</h1>
+      <p class="section-description" data-animate="fade-up" data-delay="200">Thoughts on AI research, technical deep dives, and insights from my journey in the world of technology.</p>
+      <div class="search-filter-row" data-animate="fade-up" data-delay="300">
         <div class="search-box">
           <i data-lucide="search"></i>
           <input type="text" placeholder="Search articles...">
@@ -59,43 +58,43 @@
   <!-- Blog Split Layout -->
   <section class="blog-split container">
     <!-- Left Sidebar -->
-    <div class="blog-sidebar">
-      <div class="sidebar-card active">
+    <div class="blog-sidebar" data-animate="slide-right" data-stagger>
+      <div class="sidebar-card active" data-animate="fade-up">
         <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);"></div>
         <div class="sidebar-card-content">
           <h3 class="sidebar-card-title">Understanding Attention Mechanisms</h3>
           <p class="sidebar-card-desc">A deep dive into how self-attention works and why it matters.</p>
         </div>
       </div>
-      <div class="sidebar-card">
+      <div class="sidebar-card" data-animate="fade-up">
         <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #4ECDC4, #44E5B5);"></div>
         <div class="sidebar-card-content">
           <h3 class="sidebar-card-title">Generative Art with Neural Style Transfer</h3>
           <p class="sidebar-card-desc">Creating art at the intersection of AI and creativity.</p>
         </div>
       </div>
-      <div class="sidebar-card">
+      <div class="sidebar-card" data-animate="fade-up">
         <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);"></div>
         <div class="sidebar-card-content">
           <h3 class="sidebar-card-title">Building Real-Time Object Detection</h3>
           <p class="sidebar-card-desc">Step-by-step guide to efficient object detection with YOLOv8.</p>
         </div>
       </div>
-      <div class="sidebar-card">
+      <div class="sidebar-card" data-animate="fade-up">
         <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);"></div>
         <div class="sidebar-card-content">
           <h3 class="sidebar-card-title">The Math Behind Backpropagation</h3>
           <p class="sidebar-card-desc">Understanding gradients and how neural networks learn.</p>
         </div>
       </div>
-      <div class="sidebar-card">
+      <div class="sidebar-card" data-animate="fade-up">
         <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #EC4899, #F472B6);"></div>
         <div class="sidebar-card-content">
           <h3 class="sidebar-card-title">Diffusion Models Explained</h3>
           <p class="sidebar-card-desc">How diffusion models generate images from noise.</p>
         </div>
       </div>
-      <div class="sidebar-card">
+      <div class="sidebar-card" data-animate="fade-up">
         <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);"></div>
         <div class="sidebar-card-content">
           <h3 class="sidebar-card-title">Reinforcement Learning Fundamentals</h3>
@@ -105,25 +104,25 @@
     </div>
 
     <!-- Right Preview Panel -->
-    <div class="blog-preview blob-container">
-      <div class="blob blob-pink"></div>
-      <div class="blob blob-yellow"></div>
-      <div class="blob blob-green"></div>
-      <div class="blob blob-purple"></div>
+    <div class="blog-preview blob-container" data-animate="slide-left">
+      <div class="blob blob-pink" data-parallax="-0.04"></div>
+      <div class="blob blob-yellow" data-parallax="0.06"></div>
+      <div class="blob blob-green" data-parallax="-0.05"></div>
+      <div class="blob blob-purple" data-parallax="0.03"></div>
       <div class="blog-preview-content">
-        <p class="blog-preview-label">Featured Article</p>
-        <h2 class="blog-preview-title">Understanding Attention Mechanisms in Transformers</h2>
-        <p class="blog-preview-desc">
+        <p class="blog-preview-label" data-animate="fade-up">Featured Article</p>
+        <h2 class="blog-preview-title" data-animate="fade-up" data-delay="100">Understanding Attention Mechanisms in Transformers</h2>
+        <p class="blog-preview-desc" data-animate="fade-up" data-delay="200">
           A comprehensive deep dive into how self-attention works, why it revolutionized natural language processing,
           and a step-by-step implementation guide from scratch. We explore the mathematical foundations, practical
           applications, and the future of attention-based architectures.
         </p>
-        <div class="blog-preview-meta">
+        <div class="blog-preview-meta" data-animate="fade-up" data-delay="300">
           <span><i data-lucide="clock"></i> 8 min read</span>
           <span><i data-lucide="calendar"></i> January 15, 2026</span>
           <span><i data-lucide="tag"></i> Deep Learning</span>
         </div>
-        <a href="/blog/post.html" class="btn btn-primary" style="margin-top: var(--space-4);">
+        <a href="/blog/post.html" class="btn btn-primary" style="margin-top: var(--space-4);" data-animate="fade-up" data-delay="400">
           Read Article <i data-lucide="arrow-right"></i>
         </a>
       </div>
@@ -135,8 +134,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">neural<span class="logo-dot">.</span>lab</div>
-          <p class="footer-tagline">Exploring the intersection of machine learning, creative coding, and visual art.</p>
+          <div class="footer-logo">sushi<span class="logo-dot">.</span>lab</div>
+          <p class="footer-tagline">A living archive of explorations, experiments, and everything in between. Passionate about AI, ML, and pushing boundaries.</p>
           <div class="footer-social">
             <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
             <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
@@ -174,7 +173,7 @@
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2026 neural.lab. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 sushi.lab. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
