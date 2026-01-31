@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>neural.lab - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/variables.css">
+  <link rel="stylesheet" href="/src/css/reset.css">
+  <link rel="stylesheet" href="/src/css/base.css">
+  <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/home.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="header-logo">
+        <span class="logo-icon"><i data-lucide="brain" style="width:18px;height:18px;"></i></span>
+        neural<span class="logo-dot">.</span>lab
+      </a>
+      <nav class="header-nav">
+        <a href="/" class="active">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects/">Projects</a>
+        <a href="/about/">About</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub">
+          <i data-lucide="github"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-greeting mono">// Hello, World!</p>
+        <h1 class="hero-name">Shushank<br>Singh</h1>
+        <div class="hero-role">
+          <span class="dash">&mdash;</span>
+          ML Engineer & Creative Coder
+          <span class="sparkle">&#10024;</span>
+        </div>
+        <p class="hero-bio">
+          Exploring the intersection of machine learning, creative coding,
+          and visual art. Building tools that help us understand complex systems
+          through beautiful, interactive experiences.
+        </p>
+        <ul class="hero-checklist">
+          <li>
+            <span class="check-icon"><i data-lucide="check"></i></span>
+            Deep Learning & Neural Networks
+          </li>
+          <li>
+            <span class="check-icon"><i data-lucide="check"></i></span>
+            Creative Coding & Generative Art
+          </li>
+          <li>
+            <span class="check-icon"><i data-lucide="check"></i></span>
+            Data Visualization & Interactive Media
+          </li>
+        </ul>
+        <div class="hero-wave">&#128075;</div>
+        <div class="hero-cta">
+          <a href="/projects/" class="btn btn-primary">
+            <i data-lucide="flask-conical"></i>
+            View Projects
+          </a>
+          <a href="/about/" class="btn btn-outline">
+            <i data-lucide="user"></i>
+            About Me
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual blob-container">
+        <div class="blob blob-pink"></div>
+        <div class="blob blob-yellow"></div>
+        <div class="blob blob-green"></div>
+        <div class="blob blob-blue"></div>
+        <div class="blob blob-purple"></div>
+        <div class="hero-image">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;">&#128104;&#8205;&#128187;</div>
+        </div>
+        <div class="hero-speech-bubble">Hello! &#128075;</div>
+        <span class="hero-braces hero-brace-left">{</span>
+        <span class="hero-braces hero-brace-right">}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Blog Section -->
+  <section class="featured-blog">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-label">From the Lab Notebook</p>
+          <h2 class="section-title">Latest Articles</h2>
+        </div>
+        <a href="/blog/" class="view-all-link">
+          View all <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+      <div class="blog-grid">
+        <!-- Blog Card 1 -->
+        <article class="card blog-card">
+          <div class="card-image" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-accent">Deep Learning</span>
+              <span class="tag tag-purple">Research</span>
+            </div>
+            <h3 class="card-title">Understanding Attention Mechanisms in Transformers</h3>
+            <p class="card-excerpt">A deep dive into how self-attention works, why it revolutionized NLP, and how to implement it from scratch.</p>
+            <div class="card-meta">
+              <span><i data-lucide="clock"></i> 8 min read</span>
+              <span><i data-lucide="calendar"></i> Jan 15, 2026</span>
+            </div>
+          </div>
+        </article>
+        <!-- Blog Card 2 -->
+        <article class="card blog-card">
+          <div class="card-image" style="background: linear-gradient(135deg, #4ECDC4, #44E5B5);"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-green">Creative Coding</span>
+            </div>
+            <h3 class="card-title">Generative Art with Neural Style Transfer</h3>
+            <p class="card-excerpt">Exploring the beautiful intersection of art and AI through neural style transfer techniques.</p>
+            <div class="card-meta">
+              <span><i data-lucide="clock"></i> 6 min read</span>
+              <span><i data-lucide="calendar"></i> Jan 8, 2026</span>
+            </div>
+          </div>
+        </article>
+        <!-- Blog Card 3 -->
+        <article class="card blog-card">
+          <div class="card-image" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);"></div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-purple">Computer Vision</span>
+              <span class="tag tag-default">Tutorial</span>
+            </div>
+            <h3 class="card-title">Building a Real-Time Object Detection Pipeline</h3>
+            <p class="card-excerpt">Step-by-step guide to building an efficient object detection system using YOLOv8.</p>
+            <div class="card-meta">
+              <span><i data-lucide="clock"></i> 12 min read</span>
+              <span><i data-lucide="calendar"></i> Dec 28, 2025</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section class="featured-projects">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Experiments & Projects</p>
+          <h2 class="section-title">Recent Work</h2>
+        </div>
+        <a href="/projects/" class="view-all-link">
+          View all <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+      <div class="projects-grid">
+        <!-- Project Card 1 -->
+        <article class="card project-card">
+          <div class="card-visual">
+            <div class="terminal-mockup">
+              <div class="terminal-dots">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+              </div>
+              <div class="terminal-line"><span class="prompt">$</span> python train.py --model transformer</div>
+              <div class="terminal-line">Loading dataset... &#9989;</div>
+              <div class="terminal-line">Epoch 1/50: loss=2.341, acc=0.67</div>
+              <div class="terminal-line">Epoch 2/50: loss=1.892, acc=0.74</div>
+              <div class="terminal-line">Epoch 3/50: loss=1.456, acc=0.81</div>
+              <div class="terminal-line"><span class="prompt">></span> Training complete. Best acc: 0.94</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Neural Style Transfer Engine</h3>
+            <p class="card-excerpt">A real-time style transfer system that transforms photos into artistic styles using deep neural networks.</p>
+            <div class="tech-stack">
+              <span class="tag tag-accent">PyTorch</span>
+              <span class="tag tag-green">Python</span>
+              <span class="tag tag-purple">CUDA</span>
+            </div>
+            <a href="#" class="github-link">
+              <i data-lucide="github"></i> View on GitHub
+            </a>
+          </div>
+        </article>
+        <!-- Project Card 2 -->
+        <article class="card project-card">
+          <div class="card-visual" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+            <div class="terminal-mockup" style="background: rgba(255,255,255,0.05);">
+              <div class="terminal-dots">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+              </div>
+              <div class="terminal-line" style="color: #60A5FA;">// Data Visualization Engine</div>
+              <div class="terminal-line" style="color: #FFE66D;">const viz = new DataViz();</div>
+              <div class="terminal-line" style="color: #4ECDC4;">viz.render(dataset, {</div>
+              <div class="terminal-line" style="color: #A78BFA;">&nbsp;&nbsp;type: 'neural-network',</div>
+              <div class="terminal-line" style="color: #FF6B6B;">&nbsp;&nbsp;animate: true</div>
+              <div class="terminal-line" style="color: #4ECDC4;">});</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Interactive Data Visualization Toolkit</h3>
+            <p class="card-excerpt">A WebGL-powered toolkit for creating beautiful, interactive data visualizations in the browser.</p>
+            <div class="tech-stack">
+              <span class="tag tag-yellow">JavaScript</span>
+              <span class="tag tag-default">Three.js</span>
+              <span class="tag tag-green">D3.js</span>
+            </div>
+            <a href="#" class="github-link">
+              <i data-lucide="github"></i> View on GitHub
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            neural<span class="logo-dot">.</span>lab
+          </div>
+          <p class="footer-tagline">Exploring the intersection of machine learning, creative coding, and visual art. Building beautiful tools for complex systems.</p>
+          <div class="footer-social">
+            <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
+            <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="mailto:shushank.brain@gmail.com" aria-label="Mail"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/projects/">Projects</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="#">Resources</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://github.com/shushankai" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://x.com/thisisshushank" target="_blank" rel="noopener">Twitter</a></li>
+            <li><a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:shushank.brain@gmail.com">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>More</h4>
+          <ul>
+            <li><a href="#">RSS Feed</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Uses</a></li>
+            <li><a href="#">Colophon</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 neural.lab. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
