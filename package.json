@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node src/js/build-notebooks.js && node src/js/build-blog.js",
     "dev": "vite",
+    "prebuild": "node src/js/build-notebooks.js && node src/js/build-blog.js",
     "build": "vite build",
     "preview": "vite preview"
   },

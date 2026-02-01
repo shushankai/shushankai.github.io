@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Understanding Attention Mechanisms - sushi.lab</title>
+  <title>Blog Post - sushi.lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog/" class="active">Blog</a>
+        <a href="/tutorials/">Tutorials</a>
         <a href="/projects/">Projects</a>
         <a href="/about/">About</a>
       </nav>
@@ -46,22 +47,19 @@
       <a href="/blog/" class="post-back-link" data-animate="fade-up">
         <i data-lucide="arrow-left"></i> Back to Blog
       </a>
-      <div class="post-tags" data-animate="fade-up" data-delay="100">
-        <span class="tag tag-accent">Deep Learning</span>
-        <span class="tag tag-purple">Research</span>
-        <span class="tag tag-default">Tutorial</span>
+      <div class="post-tags" id="post-tags" data-animate="fade-up" data-delay="100">
+        <!-- Populated by JS -->
       </div>
-      <h1 class="post-title" data-animate="fade-up" data-delay="200">Understanding Attention Mechanisms in Transformers</h1>
-      <p class="post-subtitle" data-animate="fade-up" data-delay="300">A comprehensive guide to self-attention, multi-head attention, and why transformers changed everything in deep learning.</p>
+      <h1 class="post-title" id="post-title" data-animate="fade-up" data-delay="200">Loading...</h1>
+      <p class="post-subtitle" id="post-subtitle" data-animate="fade-up" data-delay="300"></p>
       <div class="post-author-row" data-animate="fade-up" data-delay="400">
         <div class="post-avatar">
           <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;">SS</div>
         </div>
         <div class="post-author-info">
-          <span class="post-author-name">Shushank Singh</span>
-          <div class="post-author-meta">
-            <span><i data-lucide="calendar"></i> January 15, 2026</span>
-            <span><i data-lucide="clock"></i> 8 min read</span>
+          <span class="post-author-name" id="post-author">Shushank Singh</span>
+          <div class="post-author-meta" id="post-meta">
+            <!-- Populated by JS -->
           </div>
         </div>
       </div>
@@ -71,167 +69,41 @@
   <!-- Post Content Layout -->
   <div class="post-layout container">
     <!-- Main Article -->
-    <article class="article-body">
-      <p class="intro" data-animate="fade-up">
-        The Transformer architecture, introduced in the groundbreaking "Attention Is All You Need" paper,
-        fundamentally changed how we approach sequence modeling problems. At its core lies the attention
-        mechanism &mdash; a elegant solution that allows models to focus on relevant parts of the input
-        when producing output.
-      </p>
-
-      <h2 id="what-is-attention" data-animate="fade-up">What is Attention?</h2>
-      <p data-animate="fade-up">
-        In the context of neural networks, attention is a mechanism that allows the model to dynamically
-        focus on different parts of the input sequence when producing each element of the output. Think
-        of it like reading a sentence &mdash; when you're trying to understand a particular word, your brain
-        automatically pays more attention to the relevant context words.
-      </p>
-      <p data-animate="fade-up">
-        The key insight of the attention mechanism is that instead of compressing an entire input sequence
-        into a fixed-size vector, we can let the model learn which parts of the input are most relevant
-        for each output step.
-      </p>
-
-      <div class="callout callout-insight" data-animate="fade-up">
-        <div class="callout-title">
-          <i data-lucide="lightbulb"></i> Key Insight
-        </div>
-        <p class="callout-body">
-          Attention allows the model to create a weighted combination of all input representations,
-          where the weights are learned based on the relevance of each input to the current output.
-          This is fundamentally different from RNNs, which process sequences step by step.
-        </p>
-      </div>
-
-      <h2 id="self-attention" data-animate="fade-up">Self-Attention Mechanism</h2>
-      <p data-animate="fade-up">
-        Self-attention, also known as intra-attention, is the variant of attention used within the
-        Transformer. It relates different positions of a single sequence to compute a representation
-        of the same sequence. Each element in the sequence attends to all other elements, producing
-        a new representation that captures contextual relationships.
-      </p>
-      <p data-animate="fade-up">
-        The self-attention mechanism operates through three learned linear projections: Queries (Q),
-        Keys (K), and Values (V). These are computed from the input embeddings and used to calculate
-        attention scores.
-      </p>
-
-      <div class="code-block" data-animate="fade-up">
-        <div class="code-block-header">
-          <span class="code-block-lang">python</span>
-          <button class="code-copy-btn">
-            <i data-lucide="copy"></i> Copy
-          </button>
-        </div>
-        <pre><code><span class="keyword">import</span> <span class="variable">torch</span>
-<span class="keyword">import</span> <span class="variable">torch.nn</span> <span class="keyword">as</span> <span class="variable">nn</span>
-<span class="keyword">import</span> <span class="variable">math</span>
-
-<span class="keyword">class</span> <span class="function">SelfAttention</span>(nn.Module):
-    <span class="keyword">def</span> <span class="function">__init__</span>(self, embed_dim, num_heads):
-        <span class="function">super</span>().__init__()
-        self.num_heads = num_heads
-        self.head_dim = embed_dim // num_heads
-
-        self.W_q = nn.Linear(embed_dim, embed_dim)
-        self.W_k = nn.Linear(embed_dim, embed_dim)
-        self.W_v = nn.Linear(embed_dim, embed_dim)
-        self.W_o = nn.Linear(embed_dim, embed_dim)
-
-    <span class="keyword">def</span> <span class="function">forward</span>(self, x):
-        <span class="comment"># x shape: (batch, seq_len, embed_dim)</span>
-        Q = self.W_q(x)
-        K = self.W_k(x)
-        V = self.W_v(x)
-
-        <span class="comment"># Scaled dot-product attention</span>
-        scores = torch.matmul(Q, K.transpose(<span class="number">-2</span>, <span class="number">-1</span>))
-        scores = scores / math.sqrt(self.head_dim)
-        attn = torch.softmax(scores, dim=<span class="number">-1</span>)
-
-        <span class="keyword">return</span> self.W_o(torch.matmul(attn, V))</code></pre>
-      </div>
-
-      <h2 id="multi-head-attention" data-animate="fade-up">Multi-Head Attention</h2>
-      <p data-animate="fade-up">
-        Instead of performing a single attention function, multi-head attention runs multiple attention
-        operations in parallel. Each "head" can learn to attend to different types of information &mdash;
-        for example, one head might focus on syntactic relationships while another focuses on semantic ones.
-      </p>
-
-      <div class="callout callout-experiment" data-animate="fade-up">
-        <div class="callout-title">
-          <i data-lucide="flask-conical"></i> Experiment Result
-        </div>
-        <p class="callout-body">
-          In our experiments, using 8 attention heads consistently outperformed single-head attention
-          across all tested tasks. The individual heads learned distinct attention patterns, with some
-          focusing on local context and others on long-range dependencies.
-        </p>
-      </div>
-
-      <h2 id="practical-applications" data-animate="fade-up">Practical Applications</h2>
-      <p data-animate="fade-up">
-        The attention mechanism has found applications far beyond its original NLP domain. Today,
-        attention-based models are state-of-the-art in computer vision (ViT), speech recognition,
-        protein structure prediction (AlphaFold), and even reinforcement learning.
-      </p>
-      <p data-animate="fade-up">
-        The versatility of attention comes from its ability to model arbitrary relationships between
-        elements, without the inductive biases imposed by convolutional or recurrent architectures.
-        This makes it particularly powerful for tasks where the relationships between elements are
-        complex and varied.
-      </p>
-
-      <div class="callout callout-takeaway" data-animate="fade-up">
-        <div class="callout-title">
-          <i data-lucide="bookmark"></i> Takeaway
-        </div>
-        <p class="callout-body">
-          The attention mechanism is not just a technical innovation &mdash; it represents a fundamental
-          shift in how we think about sequence modeling. By allowing models to directly attend to any
-          part of the input, we've unlocked capabilities that were previously impossible.
-        </p>
-      </div>
-
-      <h2 id="whats-next" data-animate="fade-up">What's Next?</h2>
-      <p data-animate="fade-up">
-        Research in attention mechanisms continues to evolve rapidly. Efficient attention variants like
-        linear attention, sparse attention, and flash attention are making it possible to process
-        longer sequences with less computational cost. Meanwhile, new architectures are exploring
-        how to combine the strengths of attention with other approaches.
-      </p>
+    <article class="article-body" id="post-body">
+      <!-- Populated by JS -->
     </article>
 
     <!-- Sidebar -->
     <aside class="post-sidebar" data-animate="slide-left" data-delay="200">
-      <div class="toc-card">
+      <div class="toc-card" id="post-toc">
         <h3 class="toc-title"><i data-lucide="list"></i> Table of Contents</h3>
-        <nav class="toc-list">
-          <a href="#what-is-attention" class="toc-link active">What is Attention?</a>
-          <a href="#self-attention" class="toc-link">Self-Attention Mechanism</a>
-          <a href="#multi-head-attention" class="toc-link">Multi-Head Attention</a>
-          <a href="#practical-applications" class="toc-link">Practical Applications</a>
-          <a href="#whats-next" class="toc-link">What's Next?</a>
+        <nav class="toc-list" id="post-toc-list">
+          <!-- Populated by JS -->
         </nav>
       </div>
 
       <div class="share-card">
         <h3 class="share-card-title">Share this article</h3>
         <div class="share-icons">
-          <a href="#" class="share-icon" aria-label="Share on Twitter">
+          <a href="#" class="share-icon" id="share-twitter" aria-label="Share on Twitter">
             <i data-lucide="twitter"></i>
           </a>
-          <a href="#" class="share-icon" aria-label="Share on LinkedIn">
+          <a href="#" class="share-icon" id="share-linkedin" aria-label="Share on LinkedIn">
             <i data-lucide="linkedin"></i>
           </a>
-          <a href="#" class="share-icon" aria-label="Copy link">
+          <a href="#" class="share-icon" id="share-copy" aria-label="Copy link">
             <i data-lucide="link"></i>
           </a>
-          <a href="#" class="share-icon" aria-label="Share via email">
+          <a href="#" class="share-icon" id="share-email" aria-label="Share via email">
             <i data-lucide="mail"></i>
           </a>
         </div>
+      </div>
+
+      <div id="substack-card" style="display: none;">
+        <a href="#" id="substack-link" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center; gap: var(--space-2);">
+          <i data-lucide="external-link"></i> View on Substack
+        </a>
       </div>
 
       <div class="literary-quote" data-quotes='[
@@ -264,9 +136,9 @@
           <h4>Explore</h4>
           <ul>
             <li><a href="/blog/">Blog</a></li>
+            <li><a href="/tutorials/">Tutorials</a></li>
             <li><a href="/projects/">Projects</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="#">Resources</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -300,5 +172,109 @@
   </footer>
 
   <script type="module" src="/src/js/main.js"></script>
+  <script type="module">
+    const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
+
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+
+      if (!slug) {
+        window.location.href = '/blog/';
+        return;
+      }
+
+      try {
+        const res = await fetch(`/blog/_rendered/${slug}.json`);
+        if (!res.ok) throw new Error('Post not found');
+        const data = await res.json();
+        const { meta, content } = data;
+
+        // Update page title
+        document.title = `${meta.title} - sushi.lab`;
+
+        // Populate hero
+        document.getElementById('post-title').textContent = meta.title;
+        document.getElementById('post-subtitle').textContent = meta.description || '';
+
+        if (meta.creator) {
+          document.getElementById('post-author').textContent = meta.creator;
+        }
+
+        // Tags
+        const tagsEl = document.getElementById('post-tags');
+        tagsEl.innerHTML = (meta.tags || []).map((tag, i) =>
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${tag}</span>`
+        ).join('');
+
+        // Author meta
+        const dateStr = meta.date ? new Date(meta.date + 'T00:00:00').toLocaleDateString('en-US', {
+          month: 'long', day: 'numeric', year: 'numeric'
+        }) : '';
+        document.getElementById('post-meta').innerHTML = [
+          dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : '',
+          meta.readTime ? `<span><i data-lucide="clock"></i> ${meta.readTime}</span>` : ''
+        ].filter(Boolean).join('');
+
+        // Inject HTML content from Substack
+        const body = document.getElementById('post-body');
+        body.innerHTML = content || '<p style="color: var(--color-text-muted);">No content available.</p>';
+
+        // Style Substack HTML content to match site design
+        // Add classes to images
+        body.querySelectorAll('img').forEach(img => {
+          img.style.maxWidth = '100%';
+          img.style.borderRadius = 'var(--radius-md)';
+          img.style.marginBottom = 'var(--space-6)';
+        });
+
+        // Build TOC from h2 headings in the content
+        const tocList = document.getElementById('post-toc-list');
+        const h2s = body.querySelectorAll('h2');
+        if (h2s.length > 0) {
+          tocList.innerHTML = Array.from(h2s).map((h2, i) => {
+            const id = h2.id || 'section-' + h2.textContent.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+            h2.id = id;
+            return `<a href="#${id}" class="toc-link${i === 0 ? ' active' : ''}">${h2.textContent}</a>`;
+          }).join('');
+        } else {
+          document.getElementById('post-toc').style.display = 'none';
+        }
+
+        // Show "View on Substack" button
+        if (meta.link) {
+          const substackCard = document.getElementById('substack-card');
+          const substackLink = document.getElementById('substack-link');
+          substackLink.href = meta.link;
+          substackCard.style.display = 'block';
+        }
+
+        // Share links
+        const url = window.location.href;
+        const title = meta.title;
+        document.getElementById('share-twitter').href =
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        document.getElementById('share-linkedin').href =
+          `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        document.getElementById('share-email').href =
+          `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+        document.getElementById('share-copy').addEventListener('click', (e) => {
+          e.preventDefault();
+          navigator.clipboard.writeText(url);
+        });
+
+        // Re-init lucide icons
+        if (window.__lucideInit) window.__lucideInit();
+
+      } catch (err) {
+        document.getElementById('post-title').textContent = 'Post Not Found';
+        document.getElementById('post-subtitle').textContent = '';
+        document.getElementById('post-body').innerHTML =
+          `<p style="color: var(--color-text-muted);">Could not load this post. <a href="/blog/">Return to blog.</a></p>`;
+      }
+    }
+
+    loadPost();
+  </script>
 </body>
 </html>

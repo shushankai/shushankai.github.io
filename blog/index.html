@@ -22,6 +22,7 @@
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog/" class="active">Blog</a>
+        <a href="/tutorials/">Tutorials</a>
         <a href="/projects/">Projects</a>
         <a href="/about/">About</a>
       </nav>
@@ -43,13 +44,10 @@
       <div class="search-filter-row" data-animate="fade-up" data-delay="300">
         <div class="search-box">
           <i data-lucide="search"></i>
-          <input type="text" placeholder="Search articles...">
+          <input type="text" placeholder="Search articles..." id="blog-search">
         </div>
-        <div class="filter-pills">
-          <button class="filter-pill active">All</button>
-          <button class="filter-pill">Deep Learning</button>
-          <button class="filter-pill">NLP</button>
-          <button class="filter-pill">Computer Vision</button>
+        <div class="filter-pills" id="blog-filters">
+          <button class="filter-pill active" data-filter="all">All</button>
         </div>
       </div>
     </div>
@@ -58,74 +56,31 @@
   <!-- Blog Split Layout -->
   <section class="blog-split container">
     <!-- Left Sidebar -->
-    <div class="blog-sidebar" data-animate="slide-right" data-stagger>
-      <div class="sidebar-card active" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Understanding Attention Mechanisms</h3>
-          <p class="sidebar-card-desc">A deep dive into how self-attention works and why it matters.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #4ECDC4, #44E5B5);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Generative Art with Neural Style Transfer</h3>
-          <p class="sidebar-card-desc">Creating art at the intersection of AI and creativity.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Building Real-Time Object Detection</h3>
-          <p class="sidebar-card-desc">Step-by-step guide to efficient object detection with YOLOv8.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">The Math Behind Backpropagation</h3>
-          <p class="sidebar-card-desc">Understanding gradients and how neural networks learn.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #EC4899, #F472B6);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Diffusion Models Explained</h3>
-          <p class="sidebar-card-desc">How diffusion models generate images from noise.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Reinforcement Learning Fundamentals</h3>
-          <p class="sidebar-card-desc">Agents, rewards, and the exploration-exploitation tradeoff.</p>
-        </div>
-      </div>
+    <div class="blog-sidebar" id="blog-sidebar" data-animate="slide-right" data-stagger>
+      <!-- Populated by JS -->
     </div>
 
     <!-- Right Preview Panel -->
-    <div class="blog-preview blob-container" data-animate="slide-left">
+    <div class="blog-preview blob-container" id="blog-preview" data-animate="slide-left">
       <div class="blob blob-pink" data-parallax="-0.04"></div>
       <div class="blob blob-yellow" data-parallax="0.06"></div>
       <div class="blob blob-green" data-parallax="-0.05"></div>
       <div class="blob blob-purple" data-parallax="0.03"></div>
-      <div class="blog-preview-content">
-        <p class="blog-preview-label" data-animate="fade-up">Featured Article</p>
-        <h2 class="blog-preview-title" data-animate="fade-up" data-delay="100">Understanding Attention Mechanisms in Transformers</h2>
-        <p class="blog-preview-desc" data-animate="fade-up" data-delay="200">
-          A comprehensive deep dive into how self-attention works, why it revolutionized natural language processing,
-          and a step-by-step implementation guide from scratch. We explore the mathematical foundations, practical
-          applications, and the future of attention-based architectures.
-        </p>
-        <div class="blog-preview-meta" data-animate="fade-up" data-delay="300">
-          <span><i data-lucide="clock"></i> 8 min read</span>
-          <span><i data-lucide="calendar"></i> January 15, 2026</span>
-          <span><i data-lucide="tag"></i> Deep Learning</span>
-        </div>
-        <a href="/blog/post.html" class="btn btn-primary" style="margin-top: var(--space-4);" data-animate="fade-up" data-delay="400">
-          Read Article <i data-lucide="arrow-right"></i>
-        </a>
+      <div class="blog-preview-content" id="blog-preview-content">
+        <!-- Populated by JS -->
       </div>
+    </div>
+  </section>
+
+  <!-- Empty State -->
+  <section class="container" id="blog-empty" style="display: none; text-align: center; padding: var(--space-16) 0;">
+    <div style="max-width: 500px; margin: 0 auto;">
+      <i data-lucide="pen-line" style="width: 48px; height: 48px; color: var(--color-text-muted); margin-bottom: var(--space-6);"></i>
+      <h2 style="margin-bottom: var(--space-4); color: var(--color-text-heading);">Coming Soon</h2>
+      <p style="color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--space-6);">Blog posts from Substack will appear here once published. Subscribe on Substack to get notified.</p>
+      <a href="https://shushankrecentendeavors.substack.com" target="_blank" rel="noopener" class="btn btn-primary">
+        <i data-lucide="external-link"></i> Visit Substack
+      </a>
     </div>
   </section>
 
@@ -147,9 +102,9 @@
           <h4>Explore</h4>
           <ul>
             <li><a href="/blog/">Blog</a></li>
+            <li><a href="/tutorials/">Tutorials</a></li>
             <li><a href="/projects/">Projects</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="#">Resources</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -183,5 +138,142 @@
   </footer>
 
   <script type="module" src="/src/js/main.js"></script>
+  <script type="module">
+    const GRADIENT_COLORS = [
+      'linear-gradient(135deg, #FF6B6B, #FFE66D)',
+      'linear-gradient(135deg, #4ECDC4, #44E5B5)',
+      'linear-gradient(135deg, #7C3AED, #A78BFA)',
+      'linear-gradient(135deg, #F59E0B, #FBBF24)',
+      'linear-gradient(135deg, #EC4899, #F472B6)',
+      'linear-gradient(135deg, #3B82F6, #60A5FA)',
+      'linear-gradient(135deg, #059669, #4ECDC4)',
+    ];
+
+    const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
+
+    async function loadBlog() {
+      const sidebar = document.getElementById('blog-sidebar');
+      const previewContent = document.getElementById('blog-preview-content');
+      const blogSplit = document.querySelector('.blog-split');
+      const emptyState = document.getElementById('blog-empty');
+      const filtersContainer = document.getElementById('blog-filters');
+
+      let posts;
+      try {
+        const res = await fetch('/blog/_posts.json');
+        posts = await res.json();
+      } catch {
+        posts = [];
+      }
+
+      if (!posts.length) {
+        blogSplit.style.display = 'none';
+        emptyState.style.display = 'block';
+        if (window.__lucideInit) window.__lucideInit();
+        return;
+      }
+
+      // Build filter pills from unique tags
+      const allTags = [...new Set(posts.flatMap(p => p.tags || []))];
+      allTags.forEach(tag => {
+        const pill = document.createElement('button');
+        pill.className = 'filter-pill';
+        pill.dataset.filter = tag.toLowerCase();
+        pill.textContent = tag;
+        filtersContainer.appendChild(pill);
+      });
+
+      let activeFilter = 'all';
+      let searchQuery = '';
+      let selectedIndex = 0;
+
+      function getFilteredPosts() {
+        return posts.filter(p => {
+          const matchesFilter = activeFilter === 'all' ||
+            (p.tags || []).some(t => t.toLowerCase() === activeFilter);
+          const matchesSearch = !searchQuery ||
+            p.title.toLowerCase().includes(searchQuery) ||
+            (p.description || '').toLowerCase().includes(searchQuery);
+          return matchesFilter && matchesSearch;
+        });
+      }
+
+      function updatePreview(post) {
+        const dateStr = post.date ? new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
+          month: 'long', day: 'numeric', year: 'numeric'
+        }) : '';
+        const tags = (post.tags || []).map((t, i) =>
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${t}</span>`
+        ).join(' ');
+
+        previewContent.innerHTML = `
+          <p class="blog-preview-label">Featured Article</p>
+          <h2 class="blog-preview-title">${post.title}</h2>
+          <p class="blog-preview-desc">${post.description || ''}</p>
+          <div class="blog-preview-meta">
+            ${post.readTime ? `<span><i data-lucide="clock"></i> ${post.readTime}</span>` : ''}
+            ${dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : ''}
+            ${tags ? `<span>${tags}</span>` : ''}
+          </div>
+          <a href="/blog/post.html?slug=${post.slug}" class="btn btn-primary" style="margin-top: var(--space-4);">
+            Read Article <i data-lucide="arrow-right"></i>
+          </a>
+        `;
+        if (window.__lucideInit) window.__lucideInit();
+      }
+
+      function renderSidebar() {
+        const filtered = getFilteredPosts();
+        if (!filtered.length) {
+          sidebar.innerHTML = '<p style="color: var(--color-text-muted); padding: var(--space-4);">No posts match your search.</p>';
+          previewContent.innerHTML = '';
+          return;
+        }
+
+        selectedIndex = 0;
+        sidebar.innerHTML = filtered.map((post, i) => `
+          <div class="sidebar-card${i === 0 ? ' active' : ''}" data-index="${i}">
+            <div class="sidebar-card-thumb" style="background: ${post.coverImage ? `url(${post.coverImage}) center/cover` : GRADIENT_COLORS[i % GRADIENT_COLORS.length]};"></div>
+            <div class="sidebar-card-content">
+              <h3 class="sidebar-card-title">${post.title}</h3>
+              <p class="sidebar-card-desc">${post.description || ''}</p>
+            </div>
+          </div>
+        `).join('');
+
+        // Card click handlers
+        sidebar.querySelectorAll('.sidebar-card').forEach((card, i) => {
+          card.addEventListener('click', () => {
+            sidebar.querySelectorAll('.sidebar-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            selectedIndex = i;
+            updatePreview(filtered[i]);
+          });
+        });
+
+        updatePreview(filtered[0]);
+      }
+
+      // Filter pill clicks
+      filtersContainer.addEventListener('click', (e) => {
+        const pill = e.target.closest('.filter-pill');
+        if (!pill) return;
+        filtersContainer.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeFilter = pill.dataset.filter;
+        renderSidebar();
+      });
+
+      // Search input
+      document.getElementById('blog-search').addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderSidebar();
+      });
+
+      renderSidebar();
+    }
+
+    loadBlog();
+  </script>
 </body>
 </html>

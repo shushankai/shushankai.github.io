@@ -3,3 +3,12 @@ dist
 .DS_Store
 *.local
 brain-preview.html
+tutorials/_notebooks.json
+tutorials/_rendered/
+blog/_posts.json
+blog/_rendered/
+.playwright-mcp/
+.claude/
+Notes/
+.vite/
+.vscode/

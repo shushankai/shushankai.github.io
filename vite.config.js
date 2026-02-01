@@ -13,6 +13,8 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         blog: resolve(__dirname, 'blog/index.html'),
         blogPost: resolve(__dirname, 'blog/post.html'),
+        tutorials: resolve(__dirname, 'tutorials/index.html'),
+        tutorialView: resolve(__dirname, 'tutorials/view.html'),
         projects: resolve(__dirname, 'projects/index.html'),
         about: resolve(__dirname, 'about/index.html'),
       },

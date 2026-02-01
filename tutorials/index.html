@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials - sushi.lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/variables.css">
+  <link rel="stylesheet" href="/src/css/reset.css">
+  <link rel="stylesheet" href="/src/css/base.css">
+  <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/animations.css">
+  <link rel="stylesheet" href="/src/css/tutorials.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="header-logo">sushi<span class="logo-dot">.</span>lab</a>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/tutorials/" class="active">Tutorials</a>
+        <a href="/projects/">Projects</a>
+        <a href="/about/">About</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub">
+          <i data-lucide="github"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tutorials Hero -->
+  <section class="tutorials-hero" style="position: relative;">
+    <div class="three-canvas-container" data-particles="40"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <p class="section-label" data-animate="fade-up">Hands-on Learning</p>
+      <h1 class="section-title" data-animate="fade-up" data-delay="100">Tutorials</h1>
+      <p class="section-description" data-animate="fade-up" data-delay="200">Interactive Jupyter notebooks covering AI, machine learning, and scientific computing. Run the code, tweak the experiments, learn by doing.</p>
+      <div class="filter-pills" data-animate="fade-up" data-delay="300">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="beginner">Beginner</button>
+        <button class="filter-pill" data-filter="intermediate">Intermediate</button>
+        <button class="filter-pill" data-filter="advanced">Advanced</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tutorial Cards Grid -->
+  <section class="tutorials-grid-section">
+    <div class="container">
+      <div class="tutorials-grid" id="tutorials-grid" data-stagger>
+        <!-- Populated by JS -->
+      </div>
+      <div class="tutorials-empty" id="tutorials-empty" style="display: none;">
+        <p>No tutorials found. Check back soon!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">sushi<span class="logo-dot">.</span>lab</div>
+          <p class="footer-tagline">A living archive of explorations, experiments, and everything in between. Passionate about AI, ML, and pushing boundaries.</p>
+          <div class="footer-social">
+            <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
+            <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="mailto:shushank.brain@gmail.com" aria-label="Mail"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/tutorials/">Tutorials</a></li>
+            <li><a href="/projects/">Projects</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://github.com/shushankai" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://x.com/thisisshushank" target="_blank" rel="noopener">Twitter</a></li>
+            <li><a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:shushank.brain@gmail.com">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>More</h4>
+          <ul>
+            <li><a href="#">RSS Feed</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Uses</a></li>
+            <li><a href="#">Colophon</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 sushi.lab. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+  <script type="module">
+    // Load and render tutorial cards
+    async function loadTutorials() {
+      const grid = document.getElementById('tutorials-grid');
+      const empty = document.getElementById('tutorials-empty');
+
+      try {
+        const res = await fetch('/tutorials/_notebooks.json');
+        const tutorials = await res.json();
+
+        if (!tutorials.length) {
+          grid.style.display = 'none';
+          empty.style.display = 'block';
+          return;
+        }
+
+        let activeFilter = 'all';
+
+        function renderCards(filter) {
+          const filtered = filter === 'all'
+            ? tutorials
+            : tutorials.filter(t => t.difficulty.toLowerCase() === filter);
+
+          if (!filtered.length) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            return;
+          }
+
+          grid.style.display = '';
+          empty.style.display = 'none';
+          grid.innerHTML = filtered.map(t => {
+            const diffClass = t.difficulty ? `difficulty-${t.difficulty.toLowerCase()}` : '';
+            const tags = (t.tags || []).map(tag =>
+              `<span class="tutorial-card-tag">${tag}</span>`
+            ).join('');
+            const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+            return `
+              <article class="tutorial-card" data-animate="fade-up" data-difficulty="${(t.difficulty || '').toLowerCase()}">
+                <div class="tutorial-card-icon"><i data-lucide="book-open"></i></div>
+                <h3 class="tutorial-card-title">${t.title}</h3>
+                <p class="tutorial-card-desc">${t.description}</p>
+                <div class="tutorial-card-tags">${tags}</div>
+                <div class="tutorial-card-meta">
+                  ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${t.difficulty}</span>` : ''}
+                  ${t.duration ? `<span><i data-lucide="clock"></i> ${t.duration}</span>` : ''}
+                  ${dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : ''}
+                </div>
+                <a href="/tutorials/view.html?nb=${t.slug}" class="tutorial-card-cta">OPEN TUTORIAL <i data-lucide="arrow-right"></i></a>
+              </article>
+            `;
+          }).join('');
+
+          // Re-init lucide icons for new DOM
+          if (window.__lucideInit) window.__lucideInit();
+
+          // Trigger animations on dynamically added cards
+          requestAnimationFrame(() => {
+            grid.querySelectorAll('[data-animate]').forEach(el => {
+              el.classList.add('is-visible');
+            });
+          });
+        }
+
+        renderCards(activeFilter);
+
+        // Filter pills
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+          pill.addEventListener('click', () => {
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            activeFilter = pill.dataset.filter;
+            renderCards(activeFilter);
+          });
+        });
+
+      } catch (err) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+      }
+    }
+
+    loadTutorials();
+  </script>
+</body>
+</html>
