@@ -27,8 +27,8 @@
         <a href="/about/">About</a>
       </nav>
       <div class="header-actions">
-        <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub">
-          <i data-lucide="github"></i>
+        <a href="https://github.com/shushankai" target="_blank" rel="noopener" class="header-link">
+          <i data-lucide="github"></i> GitHub
         </a>
       </div>
     </div>
@@ -50,15 +50,28 @@
     </div>
   </section>
 
-  <!-- Tutorial Cards Grid -->
-  <section class="tutorials-grid-section">
-    <div class="container">
-      <div class="tutorials-grid" id="tutorials-grid" data-stagger>
+  <!-- Tutorials Split Layout -->
+  <section class="tutorials-split container">
+    <div class="tutorials-sidebar" id="tutorials-sidebar" data-animate="slide-right" data-stagger>
+      <!-- Populated by JS -->
+    </div>
+    <div class="tutorials-preview blob-container" id="tutorials-preview" data-animate="slide-left">
+      <div class="blob blob-pink" data-parallax="-0.04"></div>
+      <div class="blob blob-yellow" data-parallax="0.06"></div>
+      <div class="blob blob-green" data-parallax="-0.05"></div>
+      <div class="blob blob-purple" data-parallax="0.03"></div>
+      <div class="tutorials-preview-content" id="tutorials-preview-content">
         <!-- Populated by JS -->
       </div>
-      <div class="tutorials-empty" id="tutorials-empty" style="display: none;">
-        <p>No tutorials found. Check back soon!</p>
-      </div>
+    </div>
+  </section>
+
+  <!-- Empty State -->
+  <section class="container" id="tutorials-empty" style="display: none; text-align: center; padding: var(--space-16) 0;">
+    <div style="max-width: 500px; margin: 0 auto;">
+      <i data-lucide="book-open" style="width: 48px; height: 48px; color: var(--color-text-muted); margin-bottom: var(--space-6);"></i>
+      <h2 style="margin-bottom: var(--space-4); color: var(--color-text-heading);">No Tutorials Yet</h2>
+      <p style="color: var(--color-text-secondary); line-height: 1.7;">Tutorials will appear here once notebooks are added. Check back soon!</p>
     </div>
   </section>
 
@@ -117,86 +130,116 @@
 
   <script type="module" src="/src/js/main.js"></script>
   <script type="module">
-    // Load and render tutorial cards
-    async function loadTutorials() {
-      const grid = document.getElementById('tutorials-grid');
-      const empty = document.getElementById('tutorials-empty');
+    const GRADIENT_COLORS = [
+      'linear-gradient(135deg, #FF6B6B, #FFE66D)',
+      'linear-gradient(135deg, #4ECDC4, #44E5B5)',
+      'linear-gradient(135deg, #7C3AED, #A78BFA)',
+      'linear-gradient(135deg, #F59E0B, #FBBF24)',
+      'linear-gradient(135deg, #EC4899, #F472B6)',
+      'linear-gradient(135deg, #3B82F6, #60A5FA)',
+      'linear-gradient(135deg, #059669, #4ECDC4)',
+    ];
 
+    const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
+
+    async function loadTutorials() {
+      const sidebar = document.getElementById('tutorials-sidebar');
+      const previewContent = document.getElementById('tutorials-preview-content');
+      const splitSection = document.querySelector('.tutorials-split');
+      const emptyState = document.getElementById('tutorials-empty');
+
+      let tutorials;
       try {
         const res = await fetch('/tutorials/_notebooks.json');
-        const tutorials = await res.json();
+        tutorials = await res.json();
+      } catch {
+        tutorials = [];
+      }
 
-        if (!tutorials.length) {
-          grid.style.display = 'none';
-          empty.style.display = 'block';
+      if (!tutorials.length) {
+        splitSection.style.display = 'none';
+        emptyState.style.display = 'block';
+        if (window.__lucideInit) window.__lucideInit();
+        return;
+      }
+
+      let activeFilter = 'all';
+      let selectedIndex = 0;
+
+      function getFiltered() {
+        return activeFilter === 'all'
+          ? tutorials
+          : tutorials.filter(t => (t.difficulty || '').toLowerCase() === activeFilter);
+      }
+
+      function updatePreview(t) {
+        const diffClass = t.difficulty ? `difficulty-${t.difficulty.toLowerCase()}` : '';
+        const tags = (t.tags || []).map((tag, i) =>
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${tag}</span>`
+        ).join(' ');
+        const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', {
+          month: 'long', day: 'numeric', year: 'numeric'
+        }) : '';
+
+        previewContent.innerHTML = `
+          <p class="tutorials-preview-label">Tutorial</p>
+          <h2 class="tutorials-preview-title">${t.title}</h2>
+          <p class="tutorials-preview-desc">${t.description || ''}</p>
+          <div class="tutorials-preview-meta">
+            ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${t.difficulty}</span>` : ''}
+            ${t.duration ? `<span><i data-lucide="clock"></i> ${t.duration}</span>` : ''}
+            ${dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : ''}
+          </div>
+          <div class="tutorials-preview-tags">${tags}</div>
+          <a href="/tutorials/view.html?nb=${t.slug}" class="btn btn-primary" style="margin-top: var(--space-4);">
+            Open Tutorial <i data-lucide="arrow-right"></i>
+          </a>
+        `;
+        if (window.__lucideInit) window.__lucideInit();
+      }
+
+      function renderSidebar() {
+        const filtered = getFiltered();
+        if (!filtered.length) {
+          sidebar.innerHTML = '<p style="color: var(--color-text-muted); padding: var(--space-4);">No tutorials match this filter.</p>';
+          previewContent.innerHTML = '';
           return;
         }
 
-        let activeFilter = 'all';
+        selectedIndex = 0;
+        sidebar.innerHTML = filtered.map((t, i) => `
+          <div class="sidebar-card${i === 0 ? ' active' : ''}" data-index="${i}">
+            <div class="sidebar-card-thumb" style="background: ${GRADIENT_COLORS[i % GRADIENT_COLORS.length]};"></div>
+            <div class="sidebar-card-content">
+              <h3 class="sidebar-card-title">${t.title}</h3>
+              <p class="sidebar-card-desc">${t.description || ''}</p>
+            </div>
+          </div>
+        `).join('');
 
-        function renderCards(filter) {
-          const filtered = filter === 'all'
-            ? tutorials
-            : tutorials.filter(t => t.difficulty.toLowerCase() === filter);
-
-          if (!filtered.length) {
-            grid.style.display = 'none';
-            empty.style.display = 'block';
-            return;
-          }
-
-          grid.style.display = '';
-          empty.style.display = 'none';
-          grid.innerHTML = filtered.map(t => {
-            const diffClass = t.difficulty ? `difficulty-${t.difficulty.toLowerCase()}` : '';
-            const tags = (t.tags || []).map(tag =>
-              `<span class="tutorial-card-tag">${tag}</span>`
-            ).join('');
-            const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-
-            return `
-              <article class="tutorial-card" data-animate="fade-up" data-difficulty="${(t.difficulty || '').toLowerCase()}">
-                <div class="tutorial-card-icon"><i data-lucide="book-open"></i></div>
-                <h3 class="tutorial-card-title">${t.title}</h3>
-                <p class="tutorial-card-desc">${t.description}</p>
-                <div class="tutorial-card-tags">${tags}</div>
-                <div class="tutorial-card-meta">
-                  ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${t.difficulty}</span>` : ''}
-                  ${t.duration ? `<span><i data-lucide="clock"></i> ${t.duration}</span>` : ''}
-                  ${dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : ''}
-                </div>
-                <a href="/tutorials/view.html?nb=${t.slug}" class="tutorial-card-cta">OPEN TUTORIAL <i data-lucide="arrow-right"></i></a>
-              </article>
-            `;
-          }).join('');
-
-          // Re-init lucide icons for new DOM
-          if (window.__lucideInit) window.__lucideInit();
-
-          // Trigger animations on dynamically added cards
-          requestAnimationFrame(() => {
-            grid.querySelectorAll('[data-animate]').forEach(el => {
-              el.classList.add('is-visible');
-            });
-          });
-        }
-
-        renderCards(activeFilter);
-
-        // Filter pills
-        document.querySelectorAll('.filter-pill').forEach(pill => {
-          pill.addEventListener('click', () => {
-            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            activeFilter = pill.dataset.filter;
-            renderCards(activeFilter);
+        sidebar.querySelectorAll('.sidebar-card').forEach((card, i) => {
+          card.addEventListener('click', () => {
+            sidebar.querySelectorAll('.sidebar-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            selectedIndex = i;
+            updatePreview(filtered[i]);
           });
         });
 
-      } catch (err) {
-        grid.style.display = 'none';
-        empty.style.display = 'block';
+        updatePreview(filtered[0]);
       }
+
+      // Filter pill clicks
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeFilter = pill.dataset.filter;
+          renderSidebar();
+        });
+      });
+
+      renderSidebar();
     }
 
     loadTutorials();

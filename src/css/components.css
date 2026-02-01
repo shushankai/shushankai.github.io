@@ -3,13 +3,24 @@
   height: var(--header-height);
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
   background: #0A0A0A;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-rainbow);
+  opacity: 0.5;
 }
 
 .header .container {
@@ -35,13 +46,16 @@
 .header-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-10);
 }
 
 .header-nav a {
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
   font-weight: 400;
   color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   transition: color var(--transition-fast);
   position: relative;
 }
@@ -49,56 +63,37 @@
 .header-nav a:hover,
 .header-nav a.active {
   color: #FFFFFF;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-6);
 }
 
-.header-actions button,
-.header-actions a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
+.header-actions .header-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 400;
   color: #9CA3AF;
-  transition: all var(--transition-fast);
-  position: relative;
-  overflow: hidden;
-  z-index: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.header-actions button::before,
-.header-actions a::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4);
-  opacity: 0;
-  transition: opacity var(--transition-fast);
-}
-
-.header-actions button:hover::before,
-.header-actions a:hover::before {
-  opacity: 1;
-}
-
-.header-actions button:hover,
-.header-actions a:hover {
+.header-actions .header-link:hover {
   color: #FFFFFF;
 }
 
-.header-actions svg {
-  width: 20px;
-  height: 20px;
+.header-actions .header-link svg {
+  width: 16px;
+  height: 16px;
 }
+
 
 /* ========== FOOTER ========== */
 .footer {
@@ -906,6 +901,9 @@
   .header-nav a {
     font-size: var(--text-2xl);
     color: #D1D5DB;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-body);
   }
 
   .header-nav a:hover,
@@ -915,6 +913,10 @@
 
   .header-actions {
     margin-right: var(--space-3);
+  }
+
+  .header-actions .header-link {
+    display: none;
   }
 }
 

@@ -27,8 +27,8 @@
         <a href="/about/">About</a>
       </nav>
       <div class="header-actions">
-        <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub">
-          <i data-lucide="github"></i>
+        <a href="https://github.com/shushankai" target="_blank" rel="noopener" class="header-link">
+          <i data-lucide="github"></i> GitHub
         </a>
       </div>
     </div>
@@ -39,33 +39,10 @@
     <div class="three-canvas-container" data-particles="80"></div>
     <div class="container" style="position: relative; z-index: 1;">
       <div class="hero-content">
-        <p class="hero-greeting mono" data-animate="fade-up">// Hello, World!</p>
-        <h1 class="hero-name" data-animate="fade-up" data-delay="100">Shushank<br>Singh</h1>
-        <div class="hero-role" data-animate="fade-up" data-delay="200">
-          <span class="dash">&mdash;</span>
-          ML Engineer & Creative Coder
-          <span class="sparkle">&#10024;</span>
-        </div>
-        <p class="hero-bio" data-animate="fade-up" data-delay="300">
-          Welcome to my corner of the internet. I'm passionate about artificial intelligence,
-          machine learning, and building things that push the boundaries of what's possible.
-        </p>
-        <ul class="hero-checklist" data-animate="fade-up" data-delay="400">
-          <li>
-            <span class="check-icon"><i data-lucide="check"></i></span>
-            Artificial Intelligence & Machine Learning
-          </li>
-          <li>
-            <span class="check-icon"><i data-lucide="check"></i></span>
-            AI Research & Technical Deep Dives
-          </li>
-          <li>
-            <span class="check-icon"><i data-lucide="check"></i></span>
-            Experiments & Pushing Boundaries
-          </li>
-        </ul>
-        <div class="hero-wave" data-animate="fade-up" data-delay="500">&#128075;</div>
-        <div class="hero-cta" data-animate="fade-up" data-delay="600">
+        <p class="hero-greeting mono" data-animate="fade-up">yo!</p>
+        <h1 class="hero-name" data-animate="fade-up" data-delay="100">Shushank Singh</h1>
+        <p class="hero-role" data-animate="fade-up" data-delay="200">ML Engineer & Creative Coder</p>
+        <div class="hero-cta" data-animate="fade-up" data-delay="300">
           <a href="/projects/" class="btn btn-primary">
             <i data-lucide="flask-conical"></i>
             View Projects
@@ -103,39 +80,64 @@
           View all <i data-lucide="arrow-right"></i>
         </a>
       </div>
-      <div class="dark-card-grid cols-3" data-stagger>
+      <div class="dark-card-grid cols-2" data-stagger>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="brain"></i></div>
-          <h3 class="dark-card-title">Understanding Attention Mechanisms</h3>
-          <p class="dark-card-desc mono">A deep dive into how self-attention works and why it revolutionized NLP.</p>
+          <div class="dark-card-icon"><i data-lucide="database"></i></div>
+          <h3 class="dark-card-title">Deploying High-Availability PostgreSQL on AKS with Streaming Replicas</h3>
+          <p class="dark-card-desc mono">A production-grade walkthrough of running PostgreSQL with streaming replication on Azure Kubernetes Service.</p>
           <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Deep Learning</li>
-            <li><i data-lucide="check"></i> Research</li>
-            <li><i data-lucide="check"></i> 8 min read</li>
+            <li><i data-lucide="check"></i> DevOps</li>
+            <li><i data-lucide="check"></i> Kubernetes</li>
           </ul>
-          <a href="/blog/post.html" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <a href="/blog/post.html?slug=deploying-high-availability-postgresql-on-aks-with-streaming-replicas" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
         </article>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="palette"></i></div>
-          <h3 class="dark-card-title">Generative Art with Neural Style Transfer</h3>
-          <p class="dark-card-desc mono">Exploring the intersection of art and AI through style transfer techniques.</p>
+          <div class="dark-card-icon"><i data-lucide="zap"></i></div>
+          <h3 class="dark-card-title">Everything I Learned About Event-Driven Architecture</h3>
+          <p class="dark-card-desc mono">Lessons from building event-driven systems — patterns, pitfalls, and practical advice.</p>
           <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Creative Coding</li>
-            <li><i data-lucide="check"></i> Tutorial</li>
-            <li><i data-lucide="check"></i> 6 min read</li>
+            <li><i data-lucide="check"></i> Architecture</li>
+            <li><i data-lucide="check"></i> Systems</li>
           </ul>
-          <a href="/blog/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <a href="/blog/post.html?slug=everything-i-learned-about-event-driven-architecture" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tutorials (Dark Card Grid) -->
+  <section class="dark-section">
+    <div class="container">
+      <div class="section-header dark-section-header" data-animate="fade-up">
+        <div>
+          <p class="section-label">Hands-on Learning</p>
+          <h2 class="section-title">Tutorials</h2>
+        </div>
+        <a href="/tutorials/" class="view-all-link">
+          View all <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+      <div class="dark-card-grid cols-2" data-stagger>
+        <article class="dark-card" data-animate="fade-up">
+          <div class="dark-card-icon"><i data-lucide="book-open"></i></div>
+          <h3 class="dark-card-title">Getting Started with NumPy</h3>
+          <p class="dark-card-desc mono">A beginner-friendly introduction to NumPy arrays, operations, and scientific computing fundamentals.</p>
+          <ul class="dark-card-features">
+            <li><i data-lucide="check"></i> Python</li>
+            <li><i data-lucide="check"></i> NumPy</li>
+            <li><i data-lucide="check"></i> Beginner</li>
+          </ul>
+          <a href="/tutorials/view.html?nb=getting-started-with-numpy" class="dark-card-cta">OPEN TUTORIAL <i data-lucide="arrow-right"></i></a>
         </article>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="eye"></i></div>
-          <h3 class="dark-card-title">Building Real-Time Object Detection</h3>
-          <p class="dark-card-desc mono">Step-by-step guide to efficient object detection using YOLOv8.</p>
+          <div class="dark-card-icon"><i data-lucide="book-open"></i></div>
+          <h3 class="dark-card-title">Modeling With NMF And SVD</h3>
+          <p class="dark-card-desc mono">Explore matrix factorization techniques for dimensionality reduction and topic modeling.</p>
           <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Computer Vision</li>
-            <li><i data-lucide="check"></i> YOLOv8</li>
-            <li><i data-lucide="check"></i> 12 min read</li>
+            <li><i data-lucide="check"></i> Linear Algebra</li>
+            <li><i data-lucide="check"></i> ML</li>
           </ul>
-          <a href="/blog/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <a href="/tutorials/view.html?nb=Modeling-with-NMF-and-SVD" class="dark-card-cta">OPEN TUTORIAL <i data-lucide="arrow-right"></i></a>
         </article>
       </div>
     </div>
