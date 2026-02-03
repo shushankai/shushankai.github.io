@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>Projects - sushi.lab</title>
   <meta name="description" content="Projects — Explorations, experiments, and builds pushing the boundaries of what's possible with AI and technology.">
   <meta name="author" content="Shushank Singh">
@@ -54,103 +54,36 @@
       <h1 class="section-title" data-animate="fade-up" data-delay="100">Projects</h1>
       <p class="section-description" data-animate="fade-up" data-delay="200">Explorations, experiments, and builds pushing the boundaries of what's possible with AI and technology.</p>
       <div class="filter-pills" data-animate="fade-up" data-delay="300">
-        <button class="filter-pill active">All</button>
-        <button class="filter-pill">Machine Learning</button>
-        <button class="filter-pill">Tools</button>
-        <button class="filter-pill">Visualization</button>
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="machine learning">Machine Learning</button>
+        <button class="filter-pill" data-filter="tools">Tools</button>
+        <button class="filter-pill" data-filter="visualization">Visualization</button>
       </div>
     </div>
   </section>
 
-  <!-- Literary Quote -->
-  <div class="literary-quote container" data-animate="fade-up" data-quotes='[
-    {"text":"The best way to predict the future is to invent it.","author":"Alan Kay"},
-    {"text":"Talk is cheap. Show me the code.","author":"Linus Torvalds"},
-    {"text":"First, solve the problem. Then, write the code.","author":"John Johnson"},
-    {"text":"Code is like humor. When you have to explain it, it\u2019s bad.","author":"Cory House"}
-  ]'>
-    <blockquote></blockquote><span class="quote-cursor"></span>
-    <cite></cite>
-  </div>
-
   <!-- Projects Split Layout -->
   <section class="projects-split container">
-    <!-- Left Sidebar -->
-    <div class="projects-sidebar" data-animate="slide-right" data-stagger>
-      <div class="sidebar-card active-teal" data-animate="fade-up">
-        <div class="sidebar-card-thumb gradient-teal"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Neural Style Transfer Engine</h3>
-          <p class="sidebar-card-desc">Real-time style transfer using deep neural networks.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb gradient-purple"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Interactive Data Viz Toolkit</h3>
-          <p class="sidebar-card-desc">WebGL-powered data visualization library.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb gradient-orange"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">ML Pipeline Orchestrator</h3>
-          <p class="sidebar-card-desc">Automated ML workflow management tool.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb gradient-blue"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Generative Music with RNNs</h3>
-          <p class="sidebar-card-desc">AI-powered music composition using recurrent networks.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb gradient-pink"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Sentiment Analysis Dashboard</h3>
-          <p class="sidebar-card-desc">Real-time NLP-powered sentiment tracker.</p>
-        </div>
-      </div>
-      <div class="sidebar-card" data-animate="fade-up">
-        <div class="sidebar-card-thumb" style="background: linear-gradient(135deg, #059669, #4ECDC4);"></div>
-        <div class="sidebar-card-content">
-          <h3 class="sidebar-card-title">Pose Estimation Playground</h3>
-          <p class="sidebar-card-desc">Browser-based human pose estimation with MediaPipe.</p>
-        </div>
+    <div class="projects-sidebar" id="projects-sidebar" data-animate="slide-right" data-stagger>
+      <!-- Populated by JS -->
+    </div>
+    <div class="projects-preview blob-container" id="projects-preview" data-animate="slide-left">
+      <div class="blob blob-pink" data-parallax="-0.04" aria-hidden="true"></div>
+      <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
+      <div class="blob blob-green" data-parallax="-0.05" aria-hidden="true"></div>
+      <div class="blob blob-purple" data-parallax="0.03" aria-hidden="true"></div>
+      <div class="projects-preview-content" id="projects-preview-content">
+        <!-- Populated by JS -->
       </div>
     </div>
+  </section>
 
-    <!-- Right Preview Panel -->
-    <div class="projects-preview blob-container" data-animate="slide-left">
-      <div class="blob blob-green" data-parallax="-0.04" aria-hidden="true"></div>
-      <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
-      <div class="blob blob-pink" data-parallax="-0.05" aria-hidden="true"></div>
-      <div class="blob blob-purple" data-parallax="0.03" aria-hidden="true"></div>
-      <div class="projects-preview-content">
-        <p class="projects-preview-label" data-animate="fade-up">Featured Project</p>
-        <h2 class="projects-preview-title" data-animate="fade-up" data-delay="100">Neural Style Transfer Engine</h2>
-        <p class="projects-preview-desc" data-animate="fade-up" data-delay="200">
-          A real-time style transfer system that transforms photographs into artistic styles using deep
-          neural networks. Built with PyTorch and optimized for GPU acceleration, it supports multiple
-          artistic styles and can process images in under 100ms.
-        </p>
-        <div class="projects-preview-tech" data-animate="fade-up" data-delay="300">
-          <span class="tag tag-accent">PyTorch</span>
-          <span class="tag tag-green">Python</span>
-          <span class="tag tag-purple">CUDA</span>
-          <span class="tag tag-yellow">FastAPI</span>
-          <span class="tag tag-default">Docker</span>
-        </div>
-        <div class="projects-preview-actions" data-animate="fade-up" data-delay="400">
-          <a href="#" class="btn btn-primary">
-            <i data-lucide="github"></i> View Code
-          </a>
-          <a href="#" class="btn btn-outline">
-            <i data-lucide="external-link"></i> Live Demo
-          </a>
-        </div>
-      </div>
+  <!-- Empty State -->
+  <section class="container" id="projects-empty" style="display: none; text-align: center; padding: var(--space-16) 0;">
+    <div style="max-width: 500px; margin: 0 auto;">
+      <i data-lucide="folder-open" style="width: 48px; height: 48px; color: var(--color-text-muted); margin-bottom: var(--space-6);"></i>
+      <h2 style="margin-bottom: var(--space-4); color: var(--color-text-heading);">No Projects Yet</h2>
+      <p style="color: var(--color-text-secondary); line-height: 1.7;">Projects will appear here soon. Check back later!</p>
     </div>
   </section>
 
@@ -208,5 +141,169 @@
   </footer>
 
   <script type="module" src="/src/js/main.js"></script>
+  <script type="module">
+    const PROJECTS = [
+      {
+        title: 'Neural Style Transfer Engine',
+        description: 'A real-time style transfer system that transforms photographs into artistic styles using deep neural networks. Built with PyTorch and optimized for GPU acceleration.',
+        category: 'Machine Learning',
+        tags: ['PyTorch', 'Python', 'CUDA', 'FastAPI', 'Docker'],
+        github: '#',
+        demo: '#',
+      },
+      {
+        title: 'Interactive Data Viz Toolkit',
+        description: 'WebGL-powered data visualization library for creating interactive, high-performance charts and graphs in the browser.',
+        category: 'Visualization',
+        tags: ['WebGL', 'JavaScript', 'D3.js', 'Canvas'],
+        github: '#',
+        demo: '#',
+      },
+      {
+        title: 'ML Pipeline Orchestrator',
+        description: 'Automated ML workflow management tool for scheduling, monitoring, and versioning machine learning pipelines.',
+        category: 'Tools',
+        tags: ['Python', 'Docker', 'Kubernetes', 'MLflow'],
+        github: '#',
+      },
+      {
+        title: 'Generative Music with RNNs',
+        description: 'AI-powered music composition using recurrent neural networks trained on classical and jazz datasets.',
+        category: 'Machine Learning',
+        tags: ['TensorFlow', 'Python', 'MIDI', 'Music21'],
+        github: '#',
+        demo: '#',
+      },
+      {
+        title: 'Sentiment Analysis Dashboard',
+        description: 'Real-time NLP-powered sentiment tracker for analyzing social media and news feeds.',
+        category: 'Machine Learning',
+        tags: ['NLP', 'React', 'FastAPI', 'Transformers'],
+        github: '#',
+        demo: '#',
+      },
+      {
+        title: 'Pose Estimation Playground',
+        description: 'Browser-based human pose estimation with MediaPipe for real-time skeletal tracking.',
+        category: 'Visualization',
+        tags: ['MediaPipe', 'TensorFlow.js', 'WebRTC', 'Canvas'],
+        github: '#',
+        demo: '#',
+      },
+    ];
+
+    const GRADIENT_COLORS = [
+      'linear-gradient(135deg, #FF6B6B, #FFE66D)',
+      'linear-gradient(135deg, #4ECDC4, #44E5B5)',
+      'linear-gradient(135deg, #7C3AED, #A78BFA)',
+      'linear-gradient(135deg, #F59E0B, #FBBF24)',
+      'linear-gradient(135deg, #EC4899, #F472B6)',
+      'linear-gradient(135deg, #3B82F6, #60A5FA)',
+      'linear-gradient(135deg, #059669, #4ECDC4)',
+    ];
+
+    const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
+
+    /** Escape HTML entities to prevent XSS in dynamic content */
+    function esc(str) {
+      const el = document.createElement('span');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+
+    async function loadProjects() {
+      const sidebar = document.getElementById('projects-sidebar');
+      const previewContent = document.getElementById('projects-preview-content');
+      const splitSection = document.querySelector('.projects-split');
+      const emptyState = document.getElementById('projects-empty');
+
+      if (!PROJECTS.length) {
+        splitSection.style.display = 'none';
+        emptyState.style.display = 'block';
+        if (window.__lucideInit) window.__lucideInit();
+        return;
+      }
+
+      let activeFilter = 'all';
+      let selectedIndex = 0;
+
+      function getFiltered() {
+        return activeFilter === 'all'
+          ? PROJECTS
+          : PROJECTS.filter(p => p.category.toLowerCase() === activeFilter);
+      }
+
+      function updatePreview(p) {
+        const tags = (p.tags || []).map((tag, i) =>
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
+        ).join(' ');
+
+        const demoBtn = p.demo
+          ? `<a href="${esc(p.demo)}" class="btn btn-outline"><i data-lucide="external-link"></i> Live Demo</a>`
+          : '';
+
+        previewContent.innerHTML = `
+          <p class="projects-preview-label">Featured Project</p>
+          <h2 class="projects-preview-title">${esc(p.title)}</h2>
+          <p class="projects-preview-desc">${esc(p.description)}</p>
+          <div class="projects-preview-tech">${tags}</div>
+          <div class="projects-preview-actions">
+            <a href="${esc(p.github)}" class="btn btn-primary"><i data-lucide="github"></i> View Code</a>
+            ${demoBtn}
+          </div>
+        `;
+        if (window.__lucideInit) window.__lucideInit();
+      }
+
+      function renderSidebar() {
+        const filtered = getFiltered();
+        if (!filtered.length) {
+          sidebar.innerHTML = '<p style="color: var(--color-text-muted); padding: var(--space-4);">No projects match this filter.</p>';
+          previewContent.innerHTML = '';
+          return;
+        }
+
+        selectedIndex = 0;
+        sidebar.innerHTML = filtered.map((p, i) => `
+          <div class="sidebar-card${i === 0 ? ' active' : ''}" data-index="${i}">
+            <div class="sidebar-card-thumb" style="background: ${GRADIENT_COLORS[i % GRADIENT_COLORS.length]};"></div>
+            <div class="sidebar-card-content">
+              <h3 class="sidebar-card-title">${esc(p.title)}</h3>
+              <p class="sidebar-card-desc">${esc(p.description)}</p>
+            </div>
+          </div>
+        `).join('');
+
+        sidebar.querySelectorAll('.sidebar-card').forEach((card, i) => {
+          card.addEventListener('click', () => {
+            sidebar.querySelectorAll('.sidebar-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            selectedIndex = i;
+            updatePreview(filtered[i]);
+          });
+        });
+
+        updatePreview(filtered[0]);
+      }
+
+      // Filter pill clicks
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeFilter = pill.dataset.filter;
+          renderSidebar();
+        });
+      });
+
+      renderSidebar();
+    }
+
+    loadProjects().catch(err => {
+      console.error('[sushi.lab] Failed to load projects:', err);
+      const content = document.getElementById('projects-preview-content');
+      if (content) content.innerHTML = '<p style="color: var(--color-text-muted);">Failed to load projects. Please try refreshing the page.</p>';
+    });
+  </script>
 </body>
 </html>

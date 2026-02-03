@@ -34,10 +34,10 @@ Vite is configured with 7 HTML entry points in `vite.config.js`:
 |-------|------|
 | `index.html` | Home — centered hero ("yo!" + name + subtitle + CTAs) over Three.js gradient, Latest Articles (2 real posts), Tutorials (2 cards), Recent Work (2 projects) |
 | `about/index.html` | About |
-| `blog/index.html` | Blog listing — split layout (sidebar + preview panel with blobs), search, filter pills |
+| `blog/index.html` | Blog listing — centered hero, filter pills, search box, split layout (sidebar + preview panel with blobs) |
 | `blog/post.html` | Blog post template (reading progress, TOC). Subtitle uses HTML entity decoding via temporary DOM element. |
-| `projects/index.html` | Projects |
-| `tutorials/index.html` | Tutorials listing — split layout (sidebar + preview panel with blobs), filter pills by difficulty |
+| `projects/index.html` | Projects listing — centered hero, filter pills (ML/Tools/Viz), split layout (sidebar + preview panel with blobs), inline JS with project data |
+| `tutorials/index.html` | Tutorials listing — centered hero, filter pills by difficulty, split layout (sidebar + preview panel with blobs) |
 | `tutorials/view.html` | Jupyter notebook viewer — sidebar has TOC only (no Notebook Info card) |
 
 Each page imports `src/js/main.js` (shared) plus page-specific CSS. Vite code-splits per entry. Three.js is isolated into its own chunk via `manualChunks` in `vite.config.js`.
@@ -85,7 +85,7 @@ Blog posts and tutorials are generated at build time, not authored as static HTM
 
 ### Literary Quote System
 
-The `.literary-quote` component uses `data-quotes` JSON attributes for rotating quotes. JS wraps content in `.terminal-chrome` (terminal UI). On full-width pages (those with `.container` parent — home, about, projects), `injectCyberpunkBackdrop()` adds a grid of animated background terminals. Blog sidebar instances are excluded.
+The `.literary-quote` component uses `data-quotes` JSON attributes for rotating quotes. JS wraps content in `.terminal-chrome` (terminal UI). On full-width pages (those with `.container` parent — home, about), `injectCyberpunkBackdrop()` adds a grid of animated background terminals. Blog sidebar instances are excluded. Projects page no longer has a literary quote section.
 
 ### Header
 
@@ -103,18 +103,20 @@ Adjacent `.dark-section + .dark-section` collapses top padding via `padding-top:
 
 ### Split Layout Pattern
 
-Both the blog index (`blog/index.html`) and tutorials index (`tutorials/index.html`) use the same split layout pattern:
-- **Left sidebar** (320px) — clickable `.sidebar-card` items with gradient thumbnails
-- **Right preview panel** — `.blob-container` with parallax blobs, showing selected item details + CTA
-- Inline `<script type="module">` fetches JSON data, renders sidebar, handles card clicks to update preview. All dynamic content is HTML-escaped via `esc()` helper. Async loaders have `.catch()` error boundaries with user-friendly messages.
+All three listing pages — blog (`blog/index.html`), tutorials (`tutorials/index.html`), and projects (`projects/index.html`) — share the same unified UI pattern:
+- **Centered hero** with Three.js canvas, section label/title/description, and centered filter pills
+- **Left sidebar** (320px) — clickable `.sidebar-card` items with gradient thumbnails, dynamically populated by JS
+- **Right preview panel** — `.blob-container` with parallax blobs (pink/yellow/green/purple order), showing selected item details + CTA
+- Inline `<script type="module">` fetches JSON data (blog/tutorials) or uses inline data (projects), renders sidebar, handles card clicks to update preview. All dynamic content is HTML-escaped via `esc()` helper. Async loaders have `.catch()` error boundaries with user-friendly messages.
 - Filter pills filter the sidebar list and auto-select the first visible card
+- Blog additionally has a search box below filter pills for text search
 - Responsive: at 768px collapses to single column (preview on top, sidebar below as 2-col grid)
 
 ## Security
 
 - **Content Security Policy**: All 7 HTML files include a `<meta http-equiv="Content-Security-Policy">` tag. Pages with inline scripts use `'unsafe-inline'` for `script-src`.
 - **DOMPurify**: All HTML content from external sources (Substack RSS, Jupyter notebook outputs) is sanitized at build time (`build-blog.js`, `build-notebooks.js`) and at render time (`notebook-renderer.js`).
-- **HTML escaping**: Inline scripts in blog/index, blog/post, and tutorials/index use a DOM-based `esc()` helper for all dynamic text interpolation.
+- **HTML escaping**: Inline scripts in blog/index, blog/post, tutorials/index, and projects/index use a DOM-based `esc()` helper for all dynamic text interpolation.
 - **Slug validation**: `blog/post.html` and `notebook-renderer.js` validate URL parameters against `/^[a-zA-Z0-9_-]+$/` before fetching data.
 - **Event delegation**: No inline `onclick` handlers. Code copy uses `data-action="copy-code"` with event delegation.
 
@@ -129,9 +131,9 @@ Both the blog index (`blog/index.html`) and tutorials index (`tutorials/index.ht
 
 - **Design tokens**: Always use CSS custom properties from `variables.css`. See `DESIGN_RULES.md` for the complete reference.
 - **Fonts**: Space Grotesk (body), Space Mono (mono/code/labels/nav). Loaded from Google Fonts (weights 400–700, no 300).
-- **Responsive breakpoints**: 1200px (tablet), 768px (mobile), 640px (projects sidebar single-col), 480px (small mobile). Mobile nav activates at 768px.
+- **Responsive breakpoints**: 1200px (tablet), 768px (mobile), 480px (small mobile). Mobile nav activates at 768px.
 - **Animations**: Use `data-animate` attributes, not inline JS. Scroll reveals fire once via IntersectionObserver. Easing: `cubic-bezier(0.16, 1, 0.3, 1)`. Stagger delays use 60ms intervals (not 100ms) to prevent late-appearing items.
-- **Overflow prevention**: `body` has `overflow-x: hidden` in `base.css` to prevent horizontal scrollbar from `100vw` elements (which include scrollbar width). All preview panels and article bodies use `overflow-wrap: break-word`, `word-break: break-word`, and `min-width: 0` on grid children to prevent horizontal overflow on mobile.
+- **Overflow prevention**: Both `html` (in `reset.css`) and `body` (in `base.css`) have `overflow-x: hidden` to prevent horizontal scrollbar from `100vw` elements (which include scrollbar width). All preview panels and article bodies use `overflow-wrap: break-word`, `word-break: break-word`, and `min-width: 0` on grid children to prevent horizontal overflow on mobile.
 - **TOC sidebar**: Uses a minimal left-border style (`border-left: 2px solid`) with plain text links, no card box. Title is hidden. Active link is bold with heading color.
 - **Custom cursor**: SVG data-URI cursors in `components.css`. Disabled on touch devices.
 - **CSS section markers**: Each section in CSS files is delimited with `/* ========== SECTION NAME ========== */` comments.

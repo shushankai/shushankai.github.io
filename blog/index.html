@@ -51,15 +51,15 @@
     <div class="three-canvas-container" data-particles="40"></div>
     <div class="container" style="position: relative; z-index: 1;">
       <p class="section-label" data-animate="fade-up">The Lab Notebook</p>
-      <h1 class="section-title" data-animate="fade-up" data-delay="100">Collections</h1>
+      <h1 class="section-title" data-animate="fade-up" data-delay="100">Blog</h1>
       <p class="section-description" data-animate="fade-up" data-delay="200">Thoughts on AI research, technical deep dives, and insights from my journey in the world of technology.</p>
-      <div class="search-filter-row" data-animate="fade-up" data-delay="300">
+      <div class="filter-pills" id="blog-filters" data-animate="fade-up" data-delay="300">
+        <button class="filter-pill active" data-filter="all">All</button>
+      </div>
+      <div class="blog-search-row" data-animate="fade-up" data-delay="400">
         <div class="search-box">
           <i data-lucide="search"></i>
           <input type="text" placeholder="Search articles..." id="blog-search" aria-label="Search articles">
-        </div>
-        <div class="filter-pills" id="blog-filters">
-          <button class="filter-pill active" data-filter="all">All</button>
         </div>
       </div>
     </div>
