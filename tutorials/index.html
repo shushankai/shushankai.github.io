@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>Tutorials - sushi.lab</title>
+  <meta name="description" content="Tutorials — Interactive Jupyter notebooks covering AI, machine learning, and scientific computing.">
+  <meta name="author" content="Shushank Singh">
+  <link rel="canonical" href="https://shushankai.github.io/tutorials/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shushankai.github.io/tutorials/">
+  <meta property="og:title" content="Tutorials — sushi.lab">
+  <meta property="og:description" content="Interactive Jupyter notebooks covering AI, machine learning, and scientific computing.">
+  <meta property="og:site_name" content="sushi.lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thisisshushank">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
@@ -56,10 +68,10 @@
       <!-- Populated by JS -->
     </div>
     <div class="tutorials-preview blob-container" id="tutorials-preview" data-animate="slide-left">
-      <div class="blob blob-pink" data-parallax="-0.04"></div>
-      <div class="blob blob-yellow" data-parallax="0.06"></div>
-      <div class="blob blob-green" data-parallax="-0.05"></div>
-      <div class="blob blob-purple" data-parallax="0.03"></div>
+      <div class="blob blob-pink" data-parallax="-0.04" aria-hidden="true"></div>
+      <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
+      <div class="blob blob-green" data-parallax="-0.05" aria-hidden="true"></div>
+      <div class="blob blob-purple" data-parallax="0.03" aria-hidden="true"></div>
       <div class="tutorials-preview-content" id="tutorials-preview-content">
         <!-- Populated by JS -->
       </div>
@@ -142,6 +154,13 @@
 
     const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
 
+    /** Escape HTML entities to prevent XSS in dynamic content */
+    function esc(str) {
+      const el = document.createElement('span');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+
     async function loadTutorials() {
       const sidebar = document.getElementById('tutorials-sidebar');
       const previewContent = document.getElementById('tutorials-preview-content');
@@ -173,9 +192,9 @@
       }
 
       function updatePreview(t) {
-        const diffClass = t.difficulty ? `difficulty-${t.difficulty.toLowerCase()}` : '';
+        const diffClass = t.difficulty ? `difficulty-${esc(t.difficulty.toLowerCase())}` : '';
         const tags = (t.tags || []).map((tag, i) =>
-          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${tag}</span>`
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
         ).join(' ');
         const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', {
           month: 'long', day: 'numeric', year: 'numeric'
@@ -183,15 +202,15 @@
 
         previewContent.innerHTML = `
           <p class="tutorials-preview-label">Tutorial</p>
-          <h2 class="tutorials-preview-title">${t.title}</h2>
-          <p class="tutorials-preview-desc">${t.description || ''}</p>
+          <h2 class="tutorials-preview-title">${esc(t.title)}</h2>
+          <p class="tutorials-preview-desc">${esc(t.description || '')}</p>
           <div class="tutorials-preview-meta">
-            ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${t.difficulty}</span>` : ''}
-            ${t.duration ? `<span><i data-lucide="clock"></i> ${t.duration}</span>` : ''}
-            ${dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : ''}
+            ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${esc(t.difficulty)}</span>` : ''}
+            ${t.duration ? `<span><i data-lucide="clock"></i> ${esc(t.duration)}</span>` : ''}
+            ${dateStr ? `<span><i data-lucide="calendar"></i> ${esc(dateStr)}</span>` : ''}
           </div>
           <div class="tutorials-preview-tags">${tags}</div>
-          <a href="/tutorials/view.html?nb=${t.slug}" class="btn btn-primary" style="margin-top: var(--space-4);">
+          <a href="/tutorials/view.html?nb=${encodeURIComponent(t.slug)}" class="btn btn-primary" style="margin-top: var(--space-4);">
             Open Tutorial <i data-lucide="arrow-right"></i>
           </a>
         `;
@@ -211,8 +230,8 @@
           <div class="sidebar-card${i === 0 ? ' active' : ''}" data-index="${i}">
             <div class="sidebar-card-thumb" style="background: ${GRADIENT_COLORS[i % GRADIENT_COLORS.length]};"></div>
             <div class="sidebar-card-content">
-              <h3 class="sidebar-card-title">${t.title}</h3>
-              <p class="sidebar-card-desc">${t.description || ''}</p>
+              <h3 class="sidebar-card-title">${esc(t.title)}</h3>
+              <p class="sidebar-card-desc">${esc(t.description || '')}</p>
             </div>
           </div>
         `).join('');
@@ -242,7 +261,11 @@
       renderSidebar();
     }
 
-    loadTutorials();
+    loadTutorials().catch(err => {
+      console.error('[sushi.lab] Failed to load tutorials:', err);
+      const content = document.getElementById('tutorials-preview-content');
+      if (content) content.innerHTML = '<p style="color: var(--color-text-muted);">Failed to load tutorials. Please try refreshing the page.</p>';
+    });
   </script>
 </body>
 </html>

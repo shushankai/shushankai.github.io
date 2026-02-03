@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>Blog - sushi.lab</title>
+  <meta name="description" content="Blog — Thoughts on AI research, technical deep dives, and insights from the world of technology.">
+  <meta name="author" content="Shushank Singh">
+  <link rel="canonical" href="https://shushankai.github.io/blog/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shushankai.github.io/blog/">
+  <meta property="og:title" content="Blog — sushi.lab">
+  <meta property="og:description" content="Thoughts on AI research, technical deep dives, and insights from the world of technology.">
+  <meta property="og:site_name" content="sushi.lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thisisshushank">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
@@ -44,7 +56,7 @@
       <div class="search-filter-row" data-animate="fade-up" data-delay="300">
         <div class="search-box">
           <i data-lucide="search"></i>
-          <input type="text" placeholder="Search articles..." id="blog-search">
+          <input type="text" placeholder="Search articles..." id="blog-search" aria-label="Search articles">
         </div>
         <div class="filter-pills" id="blog-filters">
           <button class="filter-pill active" data-filter="all">All</button>
@@ -62,10 +74,10 @@
 
     <!-- Right Preview Panel -->
     <div class="blog-preview blob-container" id="blog-preview" data-animate="slide-left">
-      <div class="blob blob-pink" data-parallax="-0.04"></div>
-      <div class="blob blob-yellow" data-parallax="0.06"></div>
-      <div class="blob blob-green" data-parallax="-0.05"></div>
-      <div class="blob blob-purple" data-parallax="0.03"></div>
+      <div class="blob blob-pink" data-parallax="-0.04" aria-hidden="true"></div>
+      <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
+      <div class="blob blob-green" data-parallax="-0.05" aria-hidden="true"></div>
+      <div class="blob blob-purple" data-parallax="0.03" aria-hidden="true"></div>
       <div class="blog-preview-content" id="blog-preview-content">
         <!-- Populated by JS -->
       </div>
@@ -151,6 +163,13 @@
 
     const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
 
+    /** Escape HTML entities to prevent XSS in dynamic content */
+    function esc(str) {
+      const el = document.createElement('span');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+
     async function loadBlog() {
       const sidebar = document.getElementById('blog-sidebar');
       const previewContent = document.getElementById('blog-preview-content');
@@ -203,19 +222,19 @@
           month: 'long', day: 'numeric', year: 'numeric'
         }) : '';
         const tags = (post.tags || []).map((t, i) =>
-          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${t}</span>`
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(t)}</span>`
         ).join(' ');
 
         previewContent.innerHTML = `
           <p class="blog-preview-label">Featured Article</p>
-          <h2 class="blog-preview-title">${post.title}</h2>
-          <p class="blog-preview-desc">${post.description || ''}</p>
+          <h2 class="blog-preview-title">${esc(post.title)}</h2>
+          <p class="blog-preview-desc">${esc(post.description || '')}</p>
           <div class="blog-preview-meta">
-            ${post.readTime ? `<span><i data-lucide="clock"></i> ${post.readTime}</span>` : ''}
-            ${dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : ''}
+            ${post.readTime ? `<span><i data-lucide="clock"></i> ${esc(post.readTime)}</span>` : ''}
+            ${dateStr ? `<span><i data-lucide="calendar"></i> ${esc(dateStr)}</span>` : ''}
             ${tags ? `<span>${tags}</span>` : ''}
           </div>
-          <a href="/blog/post.html?slug=${post.slug}" class="btn btn-primary" style="margin-top: var(--space-4);">
+          <a href="/blog/post.html?slug=${encodeURIComponent(post.slug)}" class="btn btn-primary" style="margin-top: var(--space-4);">
             Read Article <i data-lucide="arrow-right"></i>
           </a>
         `;
@@ -233,10 +252,10 @@
         selectedIndex = 0;
         sidebar.innerHTML = filtered.map((post, i) => `
           <div class="sidebar-card${i === 0 ? ' active' : ''}" data-index="${i}">
-            <div class="sidebar-card-thumb" style="background: ${post.coverImage ? `url(${post.coverImage}) center/cover` : GRADIENT_COLORS[i % GRADIENT_COLORS.length]};"></div>
+            <div class="sidebar-card-thumb" style="background: ${post.coverImage ? `url(${encodeURI(post.coverImage)}) center/cover` : GRADIENT_COLORS[i % GRADIENT_COLORS.length]};"></div>
             <div class="sidebar-card-content">
-              <h3 class="sidebar-card-title">${post.title}</h3>
-              <p class="sidebar-card-desc">${post.description || ''}</p>
+              <h3 class="sidebar-card-title">${esc(post.title)}</h3>
+              <p class="sidebar-card-desc">${esc(post.description || '')}</p>
             </div>
           </div>
         `).join('');
@@ -273,7 +292,11 @@
       renderSidebar();
     }
 
-    loadBlog();
+    loadBlog().catch(err => {
+      console.error('[sushi.lab] Failed to load blog:', err);
+      const content = document.getElementById('blog-preview-content');
+      if (content) content.innerHTML = '<p style="color: var(--color-text-muted);">Failed to load blog posts. Please try refreshing the page.</p>';
+    });
   </script>
 </body>
 </html>

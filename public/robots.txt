@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shushankai.github.io/sitemap.xml

@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>Blog Post - sushi.lab</title>
+  <meta name="description" content="Blog post on sushi.lab — AI research, technical deep dives, and insights.">
+  <meta name="author" content="Shushank Singh">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="sushi.lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thisisshushank">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
@@ -40,9 +48,9 @@
   <!-- Post Hero -->
   <section class="post-hero blob-container" style="position: relative;">
     <div class="three-canvas-container" data-particles="40"></div>
-    <div class="blob blob-pink" data-parallax="-0.04"></div>
-    <div class="blob blob-yellow" data-parallax="0.06"></div>
-    <div class="blob blob-green" data-parallax="-0.03"></div>
+    <div class="blob blob-pink" data-parallax="-0.04" aria-hidden="true"></div>
+    <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
+    <div class="blob blob-green" data-parallax="-0.03" aria-hidden="true"></div>
     <div class="container post-hero-content">
       <a href="/blog/" class="post-back-link" data-animate="fade-up">
         <i data-lucide="arrow-left"></i> Back to Blog
@@ -175,11 +183,19 @@
   <script type="module">
     const TAG_CLASSES = ['tag-accent', 'tag-purple', 'tag-green', 'tag-yellow', 'tag-default'];
 
+    /** Escape HTML entities to prevent XSS in dynamic content */
+    function esc(str) {
+      const el = document.createElement('span');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+
     async function loadPost() {
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('slug');
 
-      if (!slug) {
+      // Validate slug format
+      if (!slug || !/^[a-zA-Z0-9_-]+$/.test(slug)) {
         window.location.href = '/blog/';
         return;
       }
@@ -193,6 +209,16 @@
         // Update page title
         document.title = `${meta.title} - sushi.lab`;
 
+        // Update dynamic meta tags for SEO
+        const descMeta = document.querySelector('meta[name="description"]');
+        if (descMeta) descMeta.content = meta.description || meta.title;
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (!ogTitle) { const m = document.createElement('meta'); m.setAttribute('property', 'og:title'); m.content = meta.title; document.head.appendChild(m); }
+        else ogTitle.content = meta.title;
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (!ogDesc) { const m = document.createElement('meta'); m.setAttribute('property', 'og:description'); m.content = meta.description || ''; document.head.appendChild(m); }
+        else ogDesc.content = meta.description || '';
+
         // Populate hero
         document.getElementById('post-title').textContent = meta.title;
         const subtitleTmp = document.createElement('span');
@@ -203,10 +229,10 @@
           document.getElementById('post-author').textContent = meta.creator;
         }
 
-        // Tags
+        // Tags (escaped)
         const tagsEl = document.getElementById('post-tags');
         tagsEl.innerHTML = (meta.tags || []).map((tag, i) =>
-          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${tag}</span>`
+          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
         ).join('');
 
         // Author meta
@@ -214,20 +240,21 @@
           month: 'long', day: 'numeric', year: 'numeric'
         }) : '';
         document.getElementById('post-meta').innerHTML = [
-          dateStr ? `<span><i data-lucide="calendar"></i> ${dateStr}</span>` : '',
-          meta.readTime ? `<span><i data-lucide="clock"></i> ${meta.readTime}</span>` : ''
+          dateStr ? `<span><i data-lucide="calendar"></i> ${esc(dateStr)}</span>` : '',
+          meta.readTime ? `<span><i data-lucide="clock"></i> ${esc(meta.readTime)}</span>` : ''
         ].filter(Boolean).join('');
 
-        // Inject HTML content from Substack
+        // Inject HTML content from Substack (already sanitized by build-blog.js)
         const body = document.getElementById('post-body');
         body.innerHTML = content || '<p style="color: var(--color-text-muted);">No content available.</p>';
 
-        // Style Substack HTML content to match site design
-        // Add classes to images
+        // Style Substack HTML content to match site design + lazy load images
         body.querySelectorAll('img').forEach(img => {
           img.style.maxWidth = '100%';
           img.style.borderRadius = 'var(--radius-md)';
           img.style.marginBottom = 'var(--space-6)';
+          img.loading = 'lazy';
+          img.decoding = 'async';
         });
 
         // Build TOC from h2 headings in the content
@@ -237,7 +264,7 @@
           tocList.innerHTML = Array.from(h2s).map((h2, i) => {
             const id = h2.id || 'section-' + h2.textContent.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
             h2.id = id;
-            return `<a href="#${id}" class="toc-link${i === 0 ? ' active' : ''}">${h2.textContent}</a>`;
+            return `<a href="#${esc(id)}" class="toc-link${i === 0 ? ' active' : ''}">${esc(h2.textContent)}</a>`;
           }).join('');
         } else {
           document.getElementById('post-toc').style.display = 'none';
@@ -262,8 +289,25 @@
           `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
         document.getElementById('share-copy').addEventListener('click', (e) => {
           e.preventDefault();
-          navigator.clipboard.writeText(url);
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(url);
+          }
         });
+
+        // Inject BlogPosting JSON-LD structured data
+        const ld = document.createElement('script');
+        ld.type = 'application/ld+json';
+        ld.textContent = JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: meta.title,
+          description: meta.description || '',
+          datePublished: meta.date || '',
+          author: { '@type': 'Person', name: meta.creator || 'Shushank Singh' },
+          publisher: { '@type': 'Person', name: 'Shushank Singh' },
+          url: url
+        });
+        document.head.appendChild(ld);
 
         // Re-init lucide icons
         if (window.__lucideInit) window.__lucideInit();
@@ -276,7 +320,11 @@
       }
     }
 
-    loadPost();
+    loadPost().catch(err => {
+      console.error('[sushi.lab] Failed to load post:', err);
+      document.getElementById('post-body').innerHTML =
+        '<p style="color: var(--color-text-muted);">An error occurred loading this post. Please try refreshing the page.</p>';
+    });
   </script>
 </body>
 </html>

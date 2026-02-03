@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>Projects - sushi.lab</title>
+  <meta name="description" content="Projects — Explorations, experiments, and builds pushing the boundaries of what's possible with AI and technology.">
+  <meta name="author" content="Shushank Singh">
+  <link rel="canonical" href="https://shushankai.github.io/projects/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shushankai.github.io/projects/">
+  <meta property="og:title" content="Projects — sushi.lab">
+  <meta property="og:description" content="Explorations, experiments, and builds pushing the boundaries of what's possible with AI and technology.">
+  <meta property="og:site_name" content="sushi.lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thisisshushank">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
@@ -111,10 +123,10 @@
 
     <!-- Right Preview Panel -->
     <div class="projects-preview blob-container" data-animate="slide-left">
-      <div class="blob blob-green" data-parallax="-0.04"></div>
-      <div class="blob blob-yellow" data-parallax="0.06"></div>
-      <div class="blob blob-pink" data-parallax="-0.05"></div>
-      <div class="blob blob-purple" data-parallax="0.03"></div>
+      <div class="blob blob-green" data-parallax="-0.04" aria-hidden="true"></div>
+      <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
+      <div class="blob blob-pink" data-parallax="-0.05" aria-hidden="true"></div>
+      <div class="blob blob-purple" data-parallax="0.03" aria-hidden="true"></div>
       <div class="projects-preview-content">
         <p class="projects-preview-label" data-animate="fade-up">Featured Project</p>
         <h2 class="projects-preview-title" data-animate="fade-up" data-delay="100">Neural Style Transfer Engine</h2>

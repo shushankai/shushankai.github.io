@@ -8,6 +8,7 @@ export default defineConfig({
     },
   },
   build: {
+    sourcemap: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
@@ -17,6 +18,11 @@ export default defineConfig({
         tutorialView: resolve(__dirname, 'tutorials/view.html'),
         projects: resolve(__dirname, 'projects/index.html'),
         about: resolve(__dirname, 'about/index.html'),
+      },
+      output: {
+        manualChunks: {
+          three: ['three'],
+        },
       },
     },
   },

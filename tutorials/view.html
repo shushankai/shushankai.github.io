@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>Tutorial - sushi.lab</title>
+  <meta name="description" content="Interactive tutorial on sushi.lab — hands-on learning with Jupyter notebooks.">
+  <meta name="author" content="Shushank Singh">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="sushi.lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thisisshushank">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/variables.css">
   <link rel="stylesheet" href="/src/css/reset.css">
   <link rel="stylesheet" href="/src/css/base.css">
@@ -41,9 +49,9 @@
   <!-- Tutorial Hero -->
   <section class="tutorial-hero blob-container" style="position: relative;">
     <div class="three-canvas-container" data-particles="40"></div>
-    <div class="blob blob-pink" data-parallax="-0.04"></div>
-    <div class="blob blob-yellow" data-parallax="0.06"></div>
-    <div class="blob blob-green" data-parallax="-0.03"></div>
+    <div class="blob blob-pink" data-parallax="-0.04" aria-hidden="true"></div>
+    <div class="blob blob-yellow" data-parallax="0.06" aria-hidden="true"></div>
+    <div class="blob blob-green" data-parallax="-0.03" aria-hidden="true"></div>
     <div class="container tutorial-hero-content">
       <a href="/tutorials/" class="tutorial-back-link" data-animate="fade-up">
         <i data-lucide="arrow-left"></i> Back to Tutorials
