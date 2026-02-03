@@ -32,10 +32,10 @@ Vite is configured with 7 HTML entry points in `vite.config.js`:
 | `index.html` | Home — centered hero ("yo!" + name + subtitle + CTAs) over Three.js gradient, Latest Articles (2 real posts), Tutorials (2 cards), Recent Work (2 projects) |
 | `about/index.html` | About |
 | `blog/index.html` | Blog listing — split layout (sidebar + preview panel with blobs), search, filter pills |
-| `blog/post.html` | Blog post template (reading progress, TOC) |
+| `blog/post.html` | Blog post template (reading progress, TOC). Subtitle uses HTML entity decoding via temporary DOM element. |
 | `projects/index.html` | Projects |
 | `tutorials/index.html` | Tutorials listing — split layout (sidebar + preview panel with blobs), filter pills by difficulty |
-| `tutorials/view.html` | Jupyter notebook viewer |
+| `tutorials/view.html` | Jupyter notebook viewer — sidebar has TOC only (no Notebook Info card) |
 
 Each page imports `src/js/main.js` (shared) plus page-specific CSS. Vite code-splits per entry.
 
@@ -55,7 +55,7 @@ Files are imported in this order — each layer builds on the previous:
 `src/js/main.js` is the app entry point. On DOMContentLoaded it initializes:
 - Lucide icons (`data-lucide` attributes → SVGs, re-init via `window.__lucideInit()`)
 - Mobile hamburger nav (dynamically created at 768px)
-- Scroll animations (IntersectionObserver, `data-animate`/`data-delay`/`data-stagger`)
+- Scroll animations (IntersectionObserver, `data-animate`/`data-delay`/`data-stagger`). Stagger containers (`data-stagger`) have a dedicated parent observer with `rootMargin: '0px 0px 80px 0px'` that reveals all children together to prevent late-appearing items.
 - Parallax blobs (`data-parallax` attribute)
 - Header hide/show on scroll
 - Literary quote rotation — typewriter + glitch transition effect inside terminal chrome wrappers
@@ -63,7 +63,7 @@ Files are imported in this order — each layer builds on the previous:
 
 `src/js/three-setup.js` — Three.js shader-based fluid gradient with simplex noise, domain warping, and mouse tracking. Runs on `.three-canvas-container` elements.
 
-`src/js/notebook-renderer.js` — Client-side Markdown→HTML renderer for Jupyter notebook cells.
+`src/js/notebook-renderer.js` — Client-side Markdown→HTML renderer for Jupyter notebook cells. Guards against optional sidebar elements (e.g., `tutorial-info-list`) that may not exist in the HTML.
 
 ### Content Pipeline
 
@@ -103,8 +103,10 @@ Both the blog index (`blog/index.html`) and tutorials index (`tutorials/index.ht
 
 - **Design tokens**: Always use CSS custom properties from `variables.css`. See `DESIGN_RULES.md` for the complete reference.
 - **Fonts**: Space Grotesk (body), Space Mono (mono/code/labels/nav). Loaded from Google Fonts.
-- **Responsive breakpoints**: 1200px (tablet), 768px (mobile), 480px (small mobile). Mobile nav activates at 768px.
-- **Animations**: Use `data-animate` attributes, not inline JS. Scroll reveals fire once via IntersectionObserver. Easing: `cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Responsive breakpoints**: 1200px (tablet), 768px (mobile), 640px (projects sidebar single-col), 480px (small mobile). Mobile nav activates at 768px.
+- **Animations**: Use `data-animate` attributes, not inline JS. Scroll reveals fire once via IntersectionObserver. Easing: `cubic-bezier(0.16, 1, 0.3, 1)`. Stagger delays use 60ms intervals (not 100ms) to prevent late-appearing items.
+- **Overflow prevention**: All preview panels and article bodies use `overflow-wrap: break-word`, `word-break: break-word`, and `min-width: 0` on grid children to prevent horizontal overflow on mobile.
+- **TOC sidebar**: Uses a minimal left-border style (`border-left: 2px solid`) with plain text links, no card box. Title is hidden. Active link is bold with heading color.
 - **Custom cursor**: SVG data-URI cursors in `components.css`. Disabled on touch devices.
 - **CSS section markers**: Each section in CSS files is delimited with `/* ========== SECTION NAME ========== */` comments.
 - **Dark sections**: Background `#0A0A0A`, card borders `#222`, text `#9CA3AF`/`#D1D5DB`.
