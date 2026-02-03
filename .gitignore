@@ -5,8 +5,6 @@ dist
 brain-preview.html
 public/tutorials/_notebooks.json
 public/tutorials/_rendered/
-public/blog/_posts.json
-public/blog/_rendered/
 public/sitemap.xml
 .playwright-mcp/
 .claude/

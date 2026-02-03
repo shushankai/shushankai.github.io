@@ -199,8 +199,12 @@ async function build() {
     xml = await fetchURL(SUBSTACK_FEED_URL);
   } catch (err) {
     console.warn(`  Could not fetch RSS feed: ${err.message}`);
-    console.log('  Writing empty index.');
-    writeFileSync(OUTPUT_INDEX, '[]');
+    if (existsSync(OUTPUT_INDEX)) {
+      console.log('  Keeping existing _posts.json (fetch failed, using cached data).');
+    } else {
+      console.log('  Writing empty index.');
+      writeFileSync(OUTPUT_INDEX, '[]');
+    }
     return;
   }
 

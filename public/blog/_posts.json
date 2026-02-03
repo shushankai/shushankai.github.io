@@ -1,0 +1,24 @@
+[
+  {
+    "slug": "deploying-high-availability-postgresql-on-aks-with-streaming-replicas",
+    "title": "Deploying High-Availability PostgreSQL on AKS with Streaming Replicas",
+    "description": "A production-ready guide to running PostgreSQL on Azure Kubernetes Service using CloudNativePG &#8212; from zero to failover-tested cluster.",
+    "date": "2026-01-31",
+    "link": "https://shushankrecentendeavors.substack.com/p/deploying-high-availability-postgresql",
+    "creator": "Shushank recent endeavors",
+    "tags": [],
+    "readTime": "15 min read",
+    "coverImage": ""
+  },
+  {
+    "slug": "everything-i-learned-about-event-driven-architecture",
+    "title": "Everything I Learned About Event-Driven Architecture",
+    "description": "The patterns, the pitfalls, the diagrams nobody showed me, and the 2 AM lessons that changed how I build software.",
+    "date": "2026-01-31",
+    "link": "https://shushankrecentendeavors.substack.com/p/everything-i-learned-about-event",
+    "creator": "Shushank recent endeavors",
+    "tags": [],
+    "readTime": "16 min read",
+    "coverImage": ""
+  }
+]
