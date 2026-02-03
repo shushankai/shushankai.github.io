@@ -244,14 +244,16 @@ async function init() {
       document.getElementById('tutorial-toc').style.display = 'none';
     }
 
-    // Sidebar info
+    // Sidebar info (optional — element may not exist)
     const infoList = document.getElementById('tutorial-info-list');
-    infoList.innerHTML = [
-      meta.difficulty ? `<li><i data-lucide="signal"></i> ${meta.difficulty}</li>` : '',
-      meta.duration ? `<li><i data-lucide="clock"></i> ${meta.duration}</li>` : '',
-      `<li><i data-lucide="code"></i> ${cells.length} cells</li>`,
-      dateStr ? `<li><i data-lucide="calendar"></i> ${dateStr}</li>` : ''
-    ].filter(Boolean).join('');
+    if (infoList) {
+      infoList.innerHTML = [
+        meta.difficulty ? `<li><i data-lucide="signal"></i> ${meta.difficulty}</li>` : '',
+        meta.duration ? `<li><i data-lucide="clock"></i> ${meta.duration}</li>` : '',
+        `<li><i data-lucide="code"></i> ${cells.length} cells</li>`,
+        dateStr ? `<li><i data-lucide="calendar"></i> ${dateStr}</li>` : ''
+      ].filter(Boolean).join('');
+    }
 
     // Re-init lucide icons for all new DOM elements
     if (window.__lucideInit) window.__lucideInit();

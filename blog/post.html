@@ -195,7 +195,9 @@
 
         // Populate hero
         document.getElementById('post-title').textContent = meta.title;
-        document.getElementById('post-subtitle').textContent = meta.description || '';
+        const subtitleTmp = document.createElement('span');
+        subtitleTmp.innerHTML = meta.description || '';
+        document.getElementById('post-subtitle').textContent = subtitleTmp.textContent;
 
         if (meta.creator) {
           document.getElementById('post-author').textContent = meta.creator;

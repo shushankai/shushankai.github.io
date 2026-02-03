@@ -760,6 +760,13 @@
 }
 
 /* Responsive: cyberpunk backdrop */
+@media (max-width: 1024px) {
+  .literary-quote.cyberpunk-bg {
+    min-height: 360px;
+    padding: var(--space-16) 0;
+  }
+}
+
 @media (max-width: 768px) {
   .cyberpunk-backdrop {
     display: none;

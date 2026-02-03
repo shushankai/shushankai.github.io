@@ -49,6 +49,7 @@
   padding: var(--space-12);
   min-height: 500px;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .tutorials-preview .blob {
@@ -105,6 +106,8 @@
   color: var(--color-text-heading);
   margin-bottom: var(--space-4);
   line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .tutorials-preview-desc {
@@ -113,6 +116,8 @@
   line-height: 1.7;
   margin-bottom: var(--space-6);
   max-width: 600px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .tutorials-preview-meta {
@@ -540,12 +545,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3);
+    min-width: 0;
   }
 
   .tutorials-preview {
     order: 1;
     min-height: auto;
     padding: var(--space-8);
+    min-width: 0;
   }
 
   .tutorial-layout {
@@ -573,6 +580,11 @@
 @media (max-width: 480px) {
   .tutorials-sidebar {
     grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+
+  .tutorials-sidebar .sidebar-card {
+    min-width: 0;
   }
 
   .tutorials-preview {

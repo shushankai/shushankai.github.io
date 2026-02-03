@@ -114,6 +114,26 @@ function initScrollAnimations() {
 
   animatedElements.forEach(el => observer.observe(el));
 
+  // For staggered containers, also observe the parent so all children
+  // get revealed together (prevents last children from staying invisible
+  // if they're just outside the observer's rootMargin)
+  const staggerParents = document.querySelectorAll('[data-stagger]');
+  const staggerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-animate]').forEach(child => {
+            child.classList.add('is-visible');
+            observer.unobserve(child);
+          });
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.01, rootMargin: '0px 0px 80px 0px' }
+  );
+  staggerParents.forEach(el => staggerObserver.observe(el));
+
   // Also observe rainbow dividers
   const dividers = document.querySelectorAll('.rainbow-divider');
   const dividerObserver = new IntersectionObserver(
