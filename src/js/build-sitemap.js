@@ -65,7 +65,7 @@ STATIC_PAGES.forEach(path => {
 });
 
 // Blog post slugs
-const posts = readJsonSafe(resolve(ROOT, 'blog/_posts.json'));
+const posts = readJsonSafe(resolve(ROOT, 'public/blog/_posts.json'));
 posts.forEach(post => {
   if (post.slug) {
     urls.push(`${BASE_URL}/blog/post.html?slug=${encodeURIComponent(post.slug)}`);
@@ -73,7 +73,7 @@ posts.forEach(post => {
 });
 
 // Tutorial slugs
-const tutorials = readJsonSafe(resolve(ROOT, 'tutorials/_notebooks.json'));
+const tutorials = readJsonSafe(resolve(ROOT, 'public/tutorials/_notebooks.json'));
 tutorials.forEach(t => {
   if (t.slug) {
     urls.push(`${BASE_URL}/tutorials/view.html?nb=${encodeURIComponent(t.slug)}`);

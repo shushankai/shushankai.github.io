@@ -3,10 +3,11 @@ dist
 .DS_Store
 *.local
 brain-preview.html
-tutorials/_notebooks.json
-tutorials/_rendered/
-blog/_posts.json
-blog/_rendered/
+public/tutorials/_notebooks.json
+public/tutorials/_rendered/
+public/blog/_posts.json
+public/blog/_rendered/
+public/sitemap.xml
 .playwright-mcp/
 .claude/
 Notes/

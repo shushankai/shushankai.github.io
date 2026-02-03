@@ -26,8 +26,8 @@ const __dirname = dirname(__filename);
 const ROOT = join(__dirname, '..', '..');
 
 const SUBSTACK_FEED_URL = 'https://shushankrecentendeavors.substack.com/feed';
-const OUTPUT_INDEX = join(ROOT, 'blog', '_posts.json');
-const OUTPUT_RENDERED = join(ROOT, 'blog', '_rendered');
+const OUTPUT_INDEX = join(ROOT, 'public', 'blog', '_posts.json');
+const OUTPUT_RENDERED = join(ROOT, 'public', 'blog', '_rendered');
 
 // Ensure output directory exists
 if (!existsSync(OUTPUT_RENDERED)) {

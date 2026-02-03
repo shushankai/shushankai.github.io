@@ -34,8 +34,8 @@ const __dirname = dirname(__filename);
 const ROOT = join(__dirname, '..', '..');
 
 const NOTEBOOKS_DIR = join(ROOT, 'tutorials', 'notebooks');
-const OUTPUT_INDEX = join(ROOT, 'tutorials', '_notebooks.json');
-const OUTPUT_RENDERED = join(ROOT, 'tutorials', '_rendered');
+const OUTPUT_INDEX = join(ROOT, 'public', 'tutorials', '_notebooks.json');
+const OUTPUT_RENDERED = join(ROOT, 'public', 'tutorials', '_rendered');
 
 // Ensure output directories exist
 if (!existsSync(OUTPUT_RENDERED)) {
