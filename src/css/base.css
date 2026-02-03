@@ -4,6 +4,7 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg-white);
   padding-top: var(--header-height);
+  overflow-x: hidden; /* Prevent horizontal scroll from 100vw elements */
 }
 
 h1, h2, h3, h4, h5, h6 {

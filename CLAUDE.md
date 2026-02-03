@@ -105,7 +105,7 @@ Both the blog index (`blog/index.html`) and tutorials index (`tutorials/index.ht
 - **Fonts**: Space Grotesk (body), Space Mono (mono/code/labels/nav). Loaded from Google Fonts.
 - **Responsive breakpoints**: 1200px (tablet), 768px (mobile), 640px (projects sidebar single-col), 480px (small mobile). Mobile nav activates at 768px.
 - **Animations**: Use `data-animate` attributes, not inline JS. Scroll reveals fire once via IntersectionObserver. Easing: `cubic-bezier(0.16, 1, 0.3, 1)`. Stagger delays use 60ms intervals (not 100ms) to prevent late-appearing items.
-- **Overflow prevention**: All preview panels and article bodies use `overflow-wrap: break-word`, `word-break: break-word`, and `min-width: 0` on grid children to prevent horizontal overflow on mobile.
+- **Overflow prevention**: `body` has `overflow-x: hidden` in `base.css` to prevent horizontal scrollbar from `100vw` elements (which include scrollbar width). All preview panels and article bodies use `overflow-wrap: break-word`, `word-break: break-word`, and `min-width: 0` on grid children to prevent horizontal overflow on mobile.
 - **TOC sidebar**: Uses a minimal left-border style (`border-left: 2px solid`) with plain text links, no card box. Title is hidden. Active link is bold with heading color.
 - **Custom cursor**: SVG data-URI cursors in `components.css`. Disabled on touch devices.
 - **CSS section markers**: Each section in CSS files is delimited with `/* ========== SECTION NAME ========== */` comments.

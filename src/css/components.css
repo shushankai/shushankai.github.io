@@ -666,11 +666,15 @@
 /* ========== CYBERPUNK BACKDROP (full-width instances only) ========== */
 .literary-quote.cyberpunk-bg {
   width: 100vw;
+  max-width: none;
   margin-left: calc(50% - 50vw);
+  padding-left: 0;
+  padding-right: 0;
   position: relative;
   overflow: hidden;
   background: #050508;
-  padding: var(--space-20) 0;
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
   isolation: isolate;
   min-height: 480px;
 }
