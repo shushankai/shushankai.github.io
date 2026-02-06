@@ -32,7 +32,7 @@
   /* Layout */
   --max-width: 1440px;
   --padding-x: 80px;
-  --header-height: 80px;
+  --header-height: 60px;
 
   /* Typography */
   --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -63,6 +63,7 @@
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
+  --space-28: 7.5rem;
 
   /* Border radius */
   --radius-sm: 4px;
@@ -97,12 +98,13 @@
 @media (max-width: 768px) {
   :root {
     --padding-x: 24px;
-    --header-height: 64px;
+    --header-height: 52px;
     --text-6xl: 2.5rem;
     --text-5xl: 2rem;
     --text-4xl: 1.75rem;
     --text-3xl: 1.5rem;
     --space-24: 4rem;
+    --space-28: 5rem;
     --space-20: 3.5rem;
     --space-16: 3rem;
   }
@@ -116,6 +118,7 @@
     --text-4xl: 1.5rem;
     --text-3xl: 1.25rem;
     --space-24: 3rem;
+    --space-28: 3.5rem;
     --space-20: 2.5rem;
     --space-16: 2rem;
     --space-12: 2rem;
