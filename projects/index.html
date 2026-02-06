@@ -51,14 +51,19 @@
   <section class="projects-hero" style="position: relative;">
     <div class="three-canvas-container" data-particles="40"></div>
     <div class="container" style="position: relative; z-index: 1;">
-      <p class="section-label" data-animate="fade-up">Experiments & Builds</p>
-      <h1 class="section-title" data-animate="fade-up" data-delay="100">Projects</h1>
-      <p class="section-description" data-animate="fade-up" data-delay="200">Explorations, experiments, and builds pushing the boundaries of what's possible with AI and technology.</p>
-      <div class="filter-pills" data-animate="fade-up" data-delay="300">
-        <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="machine learning">Machine Learning</button>
-        <button class="filter-pill" data-filter="tools">Tools</button>
-        <button class="filter-pill" data-filter="visualization">Visualization</button>
+      <div class="page-hero-block-group" data-animate="fade-up">
+        <h1 class="page-hero-title"><span class="hero-line-1">Experiments & Builds</span></h1>
+        <p class="page-hero-label">Projects</p>
+      </div>
+      <div class="hero-bio-area" data-animate="fade-up" data-delay="100">
+        <div class="hero-connector projects-connector" aria-hidden="true"></div>
+        <p class="section-description">Explorations, experiments, and builds pushing the boundaries of what's possible with AI and technology.</p>
+      </div>
+      <div class="search-row" data-animate="fade-up" data-delay="300">
+        <div class="search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search projects..." id="projects-search" aria-label="Search projects">
+        </div>
       </div>
     </div>
   </section>
@@ -92,45 +97,46 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">sushi<span class="logo-dot">.</span>lab</div>
-          <p class="footer-tagline">A living archive of explorations, experiments, and everything in between. Passionate about AI, ML, and pushing boundaries.</p>
-          <div class="footer-social">
-            <a href="https://github.com/shushankai" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github"></i></a>
-            <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-            <a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-            <a href="mailto:shushank.brain@gmail.com" aria-label="Mail"><i data-lucide="mail"></i></a>
+        <div class="footer-col">
+          <div class="footer-col-title">sushi.lab</div>
+          <div class="footer-sub-group">
+            <p class="footer-sub-label">//About</p>
+            <p style="color: #9CA3AF; font-size: var(--text-sm); line-height: 1.6; max-width: 300px;">A living archive of explorations, experiments, and everything in between.</p>
           </div>
         </div>
-        <div class="footer-column">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/tutorials/">Tutorials</a></li>
-            <li><a href="/projects/">Projects</a></li>
-            <li><a href="/about/">About</a></li>
-          </ul>
+        <div class="footer-col">
+          <div class="footer-col-title">Navigate</div>
+          <div class="footer-sub-group">
+            <p class="footer-sub-label">//Pages</p>
+            <ul>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/tutorials/">Tutorials</a></li>
+              <li><a href="/projects/">Projects</a></li>
+              <li><a href="/about/">About</a></li>
+            </ul>
+          </div>
+          <div class="footer-sub-group">
+            <p class="footer-sub-label">//More</p>
+            <ul>
+              <li><a href="#">RSS Feed</a></li>
+              <li><a href="#">Newsletter</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="footer-column">
-          <h4>Connect</h4>
-          <ul>
-            <li><a href="https://github.com/shushankai" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://x.com/thisisshushank" target="_blank" rel="noopener">Twitter</a></li>
-            <li><a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="mailto:shushank.brain@gmail.com">Email</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>More</h4>
-          <ul>
-            <li><a href="#">RSS Feed</a></li>
-            <li><a href="#">Newsletter</a></li>
-            <li><a href="#">Uses</a></li>
-            <li><a href="#">Colophon</a></li>
-          </ul>
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <div class="footer-sub-group">
+            <p class="footer-sub-label">//Social</p>
+            <ul>
+              <li><a href="https://github.com/shushankai" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://x.com/thisisshushank" target="_blank" rel="noopener">Twitter</a></li>
+              <li><a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="mailto:shushank.brain@gmail.com">Email</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="footer-divider"></div>
+      <div class="footer-brand-watermark" aria-hidden="true">sushi.lab</div>
       <div class="footer-bottom">
         <p class="footer-copyright">&copy; 2026 sushi.lab. All rights reserved.</p>
         <div class="footer-bottom-links">
@@ -138,7 +144,6 @@
           <a href="#">Terms</a>
         </div>
       </div>
-      <div class="footer-brand-watermark" aria-hidden="true">sushi.lab</div>
     </div>
   </footer>
 
@@ -227,12 +232,18 @@
       }
 
       let activeFilter = 'all';
+      let searchQuery = '';
       let selectedIndex = 0;
 
       function getFiltered() {
-        return activeFilter === 'all'
-          ? PROJECTS
-          : PROJECTS.filter(p => p.category.toLowerCase() === activeFilter);
+        return PROJECTS.filter(p => {
+          const matchesFilter = activeFilter === 'all' ||
+            p.category.toLowerCase() === activeFilter;
+          const matchesSearch = !searchQuery ||
+            p.title.toLowerCase().includes(searchQuery) ||
+            (p.description || '').toLowerCase().includes(searchQuery);
+          return matchesFilter && matchesSearch;
+        });
       }
 
       function updatePreview(p) {
@@ -296,6 +307,12 @@
           activeFilter = pill.dataset.filter;
           renderSidebar();
         });
+      });
+
+      // Search input
+      document.getElementById('projects-search').addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderSidebar();
       });
 
       renderSidebar();

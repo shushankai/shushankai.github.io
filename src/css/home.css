@@ -152,7 +152,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
@@ -186,7 +186,7 @@
 .dark-card-grid {
   display: grid;
   border: 1px solid #222;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
@@ -285,16 +285,18 @@
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #FFFFFF;
-  padding: 10px 20px;
-  border: 1px solid #333;
-  border-radius: var(--radius-full);
+  padding: 12px 24px;
+  background: #5B21B6;
+  border: none;
+  border-radius: 0;
   transition: all var(--transition-fast);
 }
 
 .dark-card-cta:hover {
-  border-color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.05);
+  background: #6D28D9;
+  box-shadow: 0 4px 20px rgba(91, 33, 182, 0.4);
 }
 
 .dark-card-cta svg {
@@ -307,7 +309,7 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   background: var(--gradient-accent);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   margin-bottom: var(--space-5);
 }
 
@@ -342,7 +344,7 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   border: 1px solid #222;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -374,7 +376,7 @@
   display: inline-block;
   padding: 4px 12px;
   border: 1px solid #333;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: #9CA3AF;
@@ -435,13 +437,12 @@
 }
 
 .btn-outline-dark {
-  background: transparent;
-  color: #FFFFFF;
-  border: 1.5px solid #444;
+  background: #E8E4D9;
+  color: #1A1A1A;
 }
 
 .btn-outline-dark:hover {
-  border-color: #FFFFFF;
+  background: #F5F1E6;
   transform: translateY(-1px);
 }
 
