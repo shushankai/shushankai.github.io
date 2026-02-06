@@ -26,6 +26,9 @@ export function initScrollAnimations() {
   const animatedElements = document.querySelectorAll('[data-animate]');
   if (animatedElements.length === 0) return;
 
+  // Signal CSS that JS has initialized — disables the 1.5s reveal fallback
+  document.documentElement.classList.add('animations-ready');
+
   // Fallback: show all elements immediately if IntersectionObserver is unavailable
   if (!('IntersectionObserver' in window)) {
     animatedElements.forEach(el => el.classList.add('is-visible'));
@@ -45,6 +48,19 @@ export function initScrollAnimations() {
   );
 
   animatedElements.forEach(el => observer.observe(el));
+
+  // Safety net: after a frame, reveal any elements already in the viewport
+  // that the IntersectionObserver may have missed on initial load
+  requestAnimationFrame(() => {
+    animatedElements.forEach(el => {
+      if (el.classList.contains('is-visible')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('is-visible');
+        observer.unobserve(el);
+      }
+    });
+  });
 
   // Stagger containers: observe parent so all children reveal together
   // (prevents last children from staying invisible if outside rootMargin)

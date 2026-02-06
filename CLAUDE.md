@@ -33,9 +33,9 @@ Vite is configured with 7 HTML entry points in `vite.config.js`:
 | Entry | Page |
 |-------|------|
 | `index.html` | Home — centered hero ("yo!" + name + subtitle + CTAs) over Three.js gradient, Latest Articles (2 real posts), Tutorials (2 cards), Recent Work (2 projects) |
-| `about/index.html` | About |
+| `about/index.html` | About — hero, Career Arc (Three.js DNA helix + prose), tech stack marquee, art inspirations, current interests, learning philosophy |
 | `blog/index.html` | Blog listing — centered hero, filter pills, search box, split layout (sidebar + preview panel with blobs) |
-| `blog/post.html` | Blog post template (reading progress, TOC). Subtitle uses HTML entity decoding via temporary DOM element. |
+| `blog/post.html` | Blog post — dark editorial hero (dotted grid bg, L-connector, author row), sticky TOC sidebar, dark theme article body. Subtitle uses HTML entity decoding via temporary DOM element. |
 | `projects/index.html` | Projects listing — centered hero, filter pills (ML/Tools/Viz), split layout (sidebar + preview panel with blobs), inline JS with project data |
 | `tutorials/index.html` | Tutorials listing — centered hero, filter pills by difficulty, split layout (sidebar + preview panel with blobs) |
 | `tutorials/view.html` | Jupyter notebook viewer — sidebar has TOC only (no Notebook Info card) |
@@ -49,7 +49,7 @@ Files are imported in this order — each layer builds on the previous:
 1. **`variables.css`** — All design tokens (colors, spacing, typography, radii, shadows, transitions). This is the single source of truth for the design system. See `DESIGN_RULES.md` for the full reference.
 2. **`reset.css`** — Box-sizing, margin resets
 3. **`base.css`** — Global typography, `.container`, `.section`, utility classes
-4. **`components.css`** — Shared components: header, footer, buttons, cards, tags, blobs, search, sidebar cards, literary quotes (terminal-style), cyberpunk backdrop, custom cursor, mobile nav, `:focus-visible` accessibility styles
+4. **`components.css`** — Shared components: header, footer (3-column grid with `//` prefixed mono labels, vertical border separators), buttons (glow line effects), cards, tags, blobs, search, sidebar cards, literary quotes (terminal-style), cyberpunk backdrop, custom cursor, mobile nav, `:focus-visible` accessibility styles
 5. **`animations.css`** — Scroll-triggered animations (`data-animate`), hover effects, `prefers-reduced-motion` support
 6. **Page-specific CSS** — Each page has its own file with responsive overrides at the bottom
 
@@ -59,12 +59,13 @@ Files are imported in this order — each layer builds on the previous:
 
 | Module | Exports | Description |
 |--------|---------|-------------|
-| `main.js` | — | Entry point. Lucide icons, sidebar cards, blob floating, code copy (with clipboard fallback), global error handlers. Lazy-loads `three-setup.js` only when `.three-canvas-container` exists. |
+| `main.js` | — | Entry point. Lucide icons, sidebar cards, blob floating, code copy (with clipboard fallback), global error handlers. Lazy-loads `three-setup.js` when `.three-canvas-container` exists and `dna-helix.js` when `#dna-canvas` exists. |
 | `navigation.js` | `initMobileNav()` | Mobile hamburger nav (created at 768px). Escape key closes nav. |
 | `scroll-effects.js` | `initScrollAnimations()`, `initParallaxBlobs()`, `initHeaderScroll()`, `initReadingProgress()`, `initTocHighlight()`, `initSmoothScroll()` | All scroll-related behaviors. IntersectionObserver with fallback for older browsers. Named constants: `HEADER_HIDE_THRESHOLD`, `SCROLL_OFFSET`, `TOC_ACTIVE_OFFSET`. |
 | `quote-system.js` | `initQuoteRotation()` | Typewriter + glitch quote rotation in terminal chrome. Named constants: `TYPEWRITER_SPEED_MS`, `QUOTE_HOLD_MS`. |
 | `cyberpunk-backdrop.js` | `injectCyberpunkBackdrop()` | Grid of animated mini-terminals behind quote sections (full-width pages only). Pauses when tab is hidden (`visibilitychange`). Reduced terminal count on mobile (15 vs 30). Named constants: `CYBERPUNK_UPDATE_MS`, `DESKTOP_TERMINAL_COUNT`, `MOBILE_TERMINAL_COUNT`. |
 | `three-setup.js` | `initThreeScene()` | Three.js shader-based fluid gradient with simplex noise, domain warping, and mouse tracking. WebGL detection with graceful fallback. Uses named imports (tree-shaken). Named constants: `TIME_INCREMENT`, `MOUSE_LERP_SPEED`. |
+| `dna-helix.js` | `initDnaHelix()` | Three.js 3D DNA double helix for the about page Career Arc section. White spheres (`MeshStandardMaterial`) connected by thin white rungs. Transparent renderer so CSS dotted-grid background shows through. Dynamically sizes pair count to fill container height. Slow Y-axis rotation (`0.003 rad/frame`). Pauses when tab hidden. Respects `prefers-reduced-motion`. Named constants: `HELIX_RADIUS`, `TWIST_PER_STEP`, `ROTATION_SPEED`. |
 | `notebook-renderer.js` | — (self-executing) | Client-side Markdown→HTML renderer for Jupyter notebook cells. DOMPurify sanitization. Event delegation for code copy (no inline onclick). Slug validation. |
 | `utils.js` | `escapeHtml()`, `sanitizeUrl()`, `validateSlug()` | Shared security utilities for XSS prevention and input validation. |
 
@@ -86,6 +87,18 @@ Blog posts and tutorials are generated at build time, not authored as static HTM
 ### Literary Quote System
 
 The `.literary-quote` component uses `data-quotes` JSON attributes for rotating quotes. JS wraps content in `.terminal-chrome` (terminal UI). On full-width pages (those with `.container` parent — home, about), `injectCyberpunkBackdrop()` adds a grid of animated background terminals. Blog sidebar instances are excluded. Projects page no longer has a literary quote section.
+
+### Blog Post Dark Theme
+
+`blog/post.html` uses a dark editorial layout with comprehensive `body:has(.post-hero)` overrides in `blog.css`: dotted grid background, white headings, `#D1D5DB` body text, dark code blocks, dark blockquotes, and dark table styles. The hero has an L-connector (`.post-connector`) linking title to the author bio area. The sidebar (`.post-sidebar`) is `position: sticky` with `max-height` and `overflow-y: auto`.
+
+### About Page Career Arc
+
+Two-column grid: left side has a Three.js DNA helix (`dna-helix.js`, lazy-loaded into `#dna-canvas`), right side has a large title, L-connector, and monospace prose paragraphs. The DNA canvas uses a transparent renderer so the page's dotted grid background shows through. Below is a scrolling tech stack marquee with centered "Tech Stack" title.
+
+### Footer
+
+3-column grid with vertical border separators. Column 1: brand + `//About` tagline. Column 2: `//Pages` and `//More` nav links. Column 3: `//Social` links. All monospace, `//` prefixed labels. Responsive: 2-col at 768px, single column at 480px. Footer HTML is duplicated across all 7 pages.
 
 ### Header
 

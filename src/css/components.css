@@ -63,14 +63,20 @@
   color: #9CA3AF;
   text-transform: none;
   letter-spacing: 0.02em;
-  transition: color var(--transition-fast);
+  padding: 6px 12px;
+  transition: color var(--transition-fast), background var(--transition-fast);
   position: relative;
 }
 
-.header-nav a:hover,
-.header-nav a.active {
-  color: #FFFFFF;
+.header-nav a:hover {
+  color: #0A0A0A;
+  background: #FFFFFF;
   font-weight: 700;
+}
+
+.header-nav a.active {
+  color: #9CA3AF;
+  font-weight: 400;
 }
 
 .header-actions {
@@ -163,11 +169,16 @@
   color: #D1D5DB;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  transition: color var(--transition-fast);
+  display: block;
+  padding: 6px 10px;
+  margin: 0 -10px;
+  width: 200px;
+  transition: color var(--transition-fast), background var(--transition-fast);
 }
 
 .footer-sub-group a:hover {
-  color: #FFFFFF;
+  color: #0A0A0A;
+  background: #FFFFFF;
 }
 
 .footer-brand-watermark {
@@ -209,11 +220,13 @@
   color: #6B7280;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  transition: color var(--transition-fast);
+  padding: 4px 8px;
+  transition: color var(--transition-fast), background var(--transition-fast);
 }
 
 .footer-bottom-links a:hover {
-  color: #D1D5DB;
+  color: #0A0A0A;
+  background: #FFFFFF;
 }
 
 /* ========== BUTTONS ========== */
@@ -235,9 +248,11 @@
   position: relative;
 }
 
-/* Glow lines on button edges — warm left, cool right */
-.btn::before,
-.btn::after {
+/* Glow lines on all outline/white button edges — warm left, cool right */
+.btn-outline::before,
+.btn-outline::after,
+.btn-outline-dark::before,
+.btn-outline-dark::after {
   content: '';
   position: absolute;
   top: 0;
@@ -246,13 +261,15 @@
   border-radius: 1.5px;
 }
 
-.btn::before {
+.btn-outline::before,
+.btn-outline-dark::before {
   left: -3px;
   background: linear-gradient(180deg, #FF3333, #FFD700, #FF6B35);
   box-shadow: 0 0 6px rgba(255, 51, 51, 0.5), 0 0 6px rgba(255, 215, 0, 0.3);
 }
 
-.btn::after {
+.btn-outline::after,
+.btn-outline-dark::after {
   right: -3px;
   background: linear-gradient(180deg, #3399FF, #00CC66, #00CED1);
   box-shadow: 0 0 6px rgba(51, 153, 255, 0.5), 0 0 6px rgba(0, 204, 102, 0.3);
@@ -1009,9 +1026,14 @@
     font-family: var(--font-body);
   }
 
-  .header-nav a:hover,
+  .header-nav a:hover {
+    color: #0A0A0A;
+    background: #FFFFFF;
+  }
+
   .header-nav a.active {
-    color: #FFFFFF;
+    color: #D1D5DB;
+    background: transparent;
   }
 
   .header-actions {
