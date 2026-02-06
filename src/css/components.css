@@ -35,8 +35,15 @@
   align-items: center;
   gap: 0;
   font-weight: 700;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: #FFFFFF;
+}
+
+.header-logo-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 .header-logo .logo-dot {
@@ -50,12 +57,12 @@
 }
 
 .header-nav a {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 400;
   color: #9CA3AF;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-transform: none;
+  letter-spacing: 0.02em;
   transition: color var(--transition-fast);
   position: relative;
 }
@@ -73,12 +80,12 @@
 }
 
 .header-actions .header-link {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 400;
   color: #9CA3AF;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-transform: none;
+  letter-spacing: 0.02em;
   transition: color var(--transition-fast);
   display: inline-flex;
   align-items: center;
@@ -97,7 +104,7 @@
 
 /* ========== FOOTER ========== */
 .footer {
-  background: var(--color-bg-dark);
+  background: #0A0A0A;
   color: #FFFFFF;
   padding: var(--space-16) 0 var(--space-8);
 }
@@ -159,7 +166,7 @@
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4);
+  background: var(--color-accent);
   opacity: 0;
   transition: opacity var(--transition-fast);
 }
@@ -235,6 +242,18 @@
 
 .footer-bottom-links a:hover {
   color: #D1D5DB;
+}
+
+.footer-brand-watermark {
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  opacity: 0.08;
+  text-align: center;
+  line-height: 1;
+  margin-top: var(--space-8);
+  user-select: none;
+  pointer-events: none;
 }
 
 /* ========== BUTTONS ========== */
@@ -444,7 +463,7 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.5;
+  opacity: 0.3;
   pointer-events: none;
 }
 
