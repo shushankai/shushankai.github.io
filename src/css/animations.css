@@ -163,15 +163,15 @@
 }
 
 .blob-animated:nth-child(odd) {
-  animation: blob-float-1 8s ease-in-out infinite;
+  animation: blob-float-1 12s ease-in-out infinite;
 }
 
 .blob-animated:nth-child(even) {
-  animation: blob-float-2 10s ease-in-out infinite;
+  animation: blob-float-2 16s ease-in-out infinite;
 }
 
 .blob-animated:nth-child(3n) {
-  animation: blob-float-3 12s ease-in-out infinite;
+  animation: blob-float-3 20s ease-in-out infinite;
 }
 
 /* ========== READING PROGRESS BAR ANIMATION ========== */

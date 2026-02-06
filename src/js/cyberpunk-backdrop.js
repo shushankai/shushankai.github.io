@@ -9,13 +9,13 @@
  */
 
 /** How often terminal lines update, in milliseconds */
-const CYBERPUNK_UPDATE_MS = 250;
+const CYBERPUNK_UPDATE_MS = 500;
 
 /** Number of terminals on desktop */
-const DESKTOP_TERMINAL_COUNT = 30;
+const DESKTOP_TERMINAL_COUNT = 15;
 
 /** Number of terminals on mobile (reduced for performance) */
-const MOBILE_TERMINAL_COUNT = 15;
+const MOBILE_TERMINAL_COUNT = 8;
 
 /**
  * Inject the cyberpunk backdrop into a literary-quote element.
@@ -135,7 +135,7 @@ export function injectCyberpunkBackdrop(el) {
       const x = rr(-2, 98);
       const y = rr(-5, 90);
       const rot = rr(-3.5, 3.5);
-      const opacity = rr(0.35, 0.7);
+      const opacity = rr(0.2, 0.4);
       const z = Math.floor(rr(0, 10));
       placements.push({ w, x, y, rot, opacity, z });
     }
@@ -204,7 +204,7 @@ export function injectCyberpunkBackdrop(el) {
     state.phase = 'active';
 
     const newX = rr(-2, 98), newY = rr(-5, 90), newRot = rr(-3.5, 3.5);
-    const newOp = rr(0.35, 0.7);
+    const newOp = rr(0.2, 0.4);
     state.el.style.left = newX + '%';
     state.el.style.top = newY + '%';
     state.el.style.transform = `rotate(${newRot}deg)`;
