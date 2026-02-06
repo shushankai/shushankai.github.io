@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self';">
   <title>About - sushi.lab</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="About Shushank Singh — ML Engineer passionate about AI, machine learning, and building things that push the boundaries of what's possible.">
   <meta name="author" content="Shushank Singh">
   <link rel="canonical" href="https://shushankai.github.io/about/">
@@ -51,29 +52,25 @@
     <div class="three-canvas-container" data-particles="40"></div>
     <div class="container" style="position: relative; z-index: 1;">
       <div class="about-hero-text">
-        <p class="about-hero-label" data-animate="fade-up">About Me</p>
-        <h1 class="about-hero-title" data-animate="fade-up" data-delay="100">Shushank Singh</h1>
-        <p class="about-hero-bio" data-animate="fade-up" data-delay="200">
-          Welcome to my corner of the internet. This is a living archive of my explorations,
-          experiments, and everything in between. I'm passionate about artificial intelligence,
-          machine learning, and building things that push the boundaries of what's possible.
-        </p>
-        <p class="about-hero-bio" data-animate="fade-up" data-delay="300">
-          Here you'll find my thoughts on AI research, technical deep dives, project write-ups,
-          and insights from my journey in the world of technology.
-        </p>
-        <div class="about-social-row" data-animate="fade-up" data-delay="400">
-          <a href="https://github.com/shushankai" target="_blank" rel="noopener" class="about-social-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
-          <a href="https://x.com/thisisshushank" target="_blank" rel="noopener" class="about-social-icon" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-          <a href="https://www.linkedin.com/in/shushank-singh-251943201" target="_blank" rel="noopener" class="about-social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-          <a href="mailto:shushank.brain@gmail.com" class="about-social-icon" aria-label="Mail"><i data-lucide="mail"></i></a>
+        <div class="hero-block-group" data-animate="fade-up">
+          <h1 class="about-hero-title"><span class="hero-line-1">Shushank</span><br><span class="hero-line-2">Singh</span></h1>
+          <p class="about-hero-label">About Me</p>
+        </div>
+        <div class="hero-bio-area" data-animate="fade-up" data-delay="200">
+          <div class="hero-connector" aria-hidden="true"></div>
+          <p class="about-hero-bio">
+            Welcome to my corner of the internet. This is a living archive of my explorations,
+            experiments, and everything in between. I'm passionate about artificial intelligence,
+            machine learning, and building things that push the boundaries of what's possible.
+          </p>
+          <p class="about-hero-bio">
+            Here you'll find my thoughts on AI research, technical deep dives, project write-ups,
+            and insights from my journey in the world of technology.
+          </p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Rainbow Divider -->
-  <div class="rainbow-divider container"></div>
 
   <!-- Art Inspirations -->
   <section class="art-section">
@@ -236,12 +233,13 @@
       </div>
       <div class="philosophy-grid">
         <div data-animate="slide-right">
-          <div class="philosophy-quote">
-            <blockquote>
-              We can only see a short distance ahead, but we can see plenty there that needs to be done.
-            </blockquote>
-            <cite>&mdash; Alan Turing</cite>
-          </div>
+          <blockquote class="about-quote" data-animate="fade-up">
+            <svg class="about-quote-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M14 28c-3.3 0-6-2.7-6-6 0-6.6 5.4-12 12-12v4c-4.4 0-8 3.6-8 8h2c3.3 0 6 2.7 6 6s-2.7 6-6 6zm20 0c-3.3 0-6-2.7-6-6 0-6.6 5.4-12 12-12v4c-4.4 0-8 3.6-8 8h2c3.3 0 6 2.7 6 6s-2.7 6-6 6z" fill="currentColor"/>
+            </svg>
+            <p class="about-quote-text">We can only see a short distance ahead, but we can see plenty there that needs to be done.</p>
+            <cite class="about-quote-cite">&mdash; Alan Turing</cite>
+          </blockquote>
           <p class="philosophy-text">
             I believe in learning by doing. Every project, no matter how small, is an opportunity
             to deepen understanding and discover something unexpected. The most valuable insights
