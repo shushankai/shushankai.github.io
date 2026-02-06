@@ -100,6 +100,20 @@ document.addEventListener('DOMContentLoaded', () => {
         heroCanvas.style.display = 'none';
       });
   }
+
+  // Lazy-load DNA helix when its container exists on the page
+  const dnaCanvas = document.getElementById('dna-canvas');
+  if (dnaCanvas) {
+    import('./dna-helix.js')
+      .then(({ initDnaHelix }) => {
+        if (!initDnaHelix(dnaCanvas)) {
+          dnaCanvas.style.display = 'none';
+        }
+      })
+      .catch(() => {
+        dnaCanvas.style.display = 'none';
+      });
+  }
 });
 
 // ========== BLOB FLOATING ANIMATION ==========

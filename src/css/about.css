@@ -54,105 +54,64 @@ body:has(.about-hero) {
 }
 
 /* ========== BACKGROUND SECTION ========== */
-.background-section {
+/* ========== CAREER ARC ========== */
+.career-arc-section {
   padding: var(--space-24) 0;
 }
 
-.background-section .section-label {
-  color: var(--color-accent);
-}
-
-.background-section .section-title {
-  color: #FFFFFF;
-}
-
-.background-section .section-header {
-  margin-bottom: var(--space-12);
-}
-
-.background-grid {
+.career-arc-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.4fr;
   gap: var(--space-16);
-  align-items: start;
+  align-items: stretch;
 }
 
-.background-column-title {
+.career-arc-visual {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--text-lg);
-  font-weight: 600;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.dna-canvas-container {
+  width: 100%;
+  min-height: 300px;
+}
+
+.career-arc-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: var(--space-8);
+  line-height: 1.2;
+  margin-bottom: var(--space-6);
 }
 
-.background-column-title svg {
-  width: 20px;
-  height: 20px;
-  color: var(--color-accent);
-}
-
-.timeline {
+.career-arc-bio {
   position: relative;
-  padding-left: var(--space-8);
-  border-left: 2px solid #222;
+  padding-left: 82px;
 }
 
-.timeline-item {
-  position: relative;
-  padding-bottom: var(--space-8);
-}
-
-.timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-.timeline-marker {
+.career-arc-connector {
   position: absolute;
-  left: calc(-1 * var(--space-8) - 5px);
-  top: 4px;
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-  border: 2px solid #0A0A0A;
+  left: 0;
+  top: -36px;
+  width: 70px;
+  height: calc(36px + 0.9em);
+  border-left: 2px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
 }
 
-.timeline-date {
+.career-arc-bio p {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: #9CA3AF;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--space-2);
-}
-
-.timeline-title {
-  font-size: var(--text-base);
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: var(--space-1);
-}
-
-.timeline-org {
-  font-size: var(--text-sm);
-  color: var(--color-accent);
-  margin-bottom: var(--space-1);
-}
-
-.timeline-location {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: #6B7280;
-  margin-bottom: var(--space-3);
-}
-
-.timeline-desc {
   font-size: var(--text-sm);
   color: #9CA3AF;
-  line-height: 1.7;
+  line-height: 1.8;
+  margin-bottom: var(--space-5);
 }
+
+.career-arc-bio p:last-child {
+  margin-bottom: 0;
+}
+
 
 /* ========== ART INSPIRATIONS ========== */
 .art-section {
@@ -431,30 +390,21 @@ body:has(.about-hero) {
 /* ========== TECH STACK MARQUEE ========== */
 .stack-section {
   background: #0A0A0A;
-  padding: var(--space-16) 0;
+  padding: var(--space-12) 0 var(--space-16);
   overflow: hidden;
-}
-
-.stack-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: #9CA3AF;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  text-align: center;
-  margin-top: var(--space-16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .stack-marquee {
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  margin-bottom: var(--space-10);
 }
 
 .stack-track {
   display: flex;
   width: max-content;
-  gap: var(--space-12);
+  gap: var(--space-16);
   animation: stack-scroll 35s linear infinite;
 }
 
@@ -463,27 +413,26 @@ body:has(.about-hero) {
   align-items: center;
   gap: var(--space-3);
   font-family: var(--font-mono);
-  font-size: var(--text-2xl);
+  font-size: var(--text-lg);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.35);
   white-space: nowrap;
   letter-spacing: 0.02em;
   flex-shrink: 0;
-  transition: color var(--transition-fast);
-}
-
-.stack-item:hover {
-  color: #FFFFFF;
 }
 
 .stack-icon {
   display: block;
-  opacity: 0.85;
-  transition: opacity var(--transition-fast);
+  opacity: 0.35;
 }
 
-.stack-item:hover .stack-icon {
-  opacity: 1;
+.stack-title {
+  font-family: var(--font-body);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+  letter-spacing: -0.01em;
 }
 
 @keyframes stack-scroll {
@@ -492,6 +441,7 @@ body:has(.about-hero) {
 }
 
 /* ========== RESPONSIVE: ABOUT ========== */
+
 @media (max-width: 768px) {
   .about-hero-title {
     font-size: clamp(2rem, 8vw, 2.8rem);
@@ -502,10 +452,6 @@ body:has(.about-hero) {
     gap: var(--space-6);
   }
 
-  .background-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-10);
-  }
 
   .interests-grid {
     grid-template-columns: 1fr;
@@ -521,6 +467,26 @@ body:has(.about-hero) {
     font-size: var(--text-lg);
   }
 
+  .career-arc-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .career-arc-visual {
+    order: -1;
+  }
+
+  .dna-canvas-container {
+    min-height: 350px;
+  }
+
+  .career-arc-bio {
+    padding-left: 0;
+  }
+
+  .career-arc-connector {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {

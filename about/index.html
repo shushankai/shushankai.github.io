@@ -37,7 +37,7 @@
         <a href="/blog/">Blog</a>
         <a href="/tutorials/">Tutorials</a>
         <a href="/projects/">Projects</a>
-        <a href="/about/" class="active">About</a>
+        <a href="/about/">About</a>
       </nav>
       <div class="header-actions">
         <a href="https://github.com/shushankai" target="_blank" rel="noopener" class="header-link">
@@ -70,71 +70,21 @@
     </div>
   </section>
 
-  <!-- Background -->
-  <section class="background-section dark-section">
+  <!-- Career Arc -->
+  <section class="career-arc-section dark-section">
     <div class="container">
-      <div class="section-header" data-animate="fade-up">
-        <div>
-          <p class="section-label">Background</p>
-          <h2 class="section-title">Experience & Education</h2>
+      <div class="career-arc-layout">
+        <div class="career-arc-visual" data-animate="fade-up" aria-hidden="true">
+          <div class="dna-canvas-container" id="dna-canvas"></div>
         </div>
-      </div>
-      <div class="background-grid">
-        <!-- Experience -->
-        <div class="background-column" data-animate="fade-up">
-          <h3 class="background-column-title"><i data-lucide="briefcase"></i> Experience</h3>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <p class="timeline-date">June 2025 &mdash; Present</p>
-                <h4 class="timeline-title">AIML Engineer</h4>
-                <p class="timeline-org">HTC Global Services</p>
-                <p class="timeline-location">Bengaluru, Karnataka, India</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <p class="timeline-date">February 2022 &mdash; February 2025</p>
-                <h4 class="timeline-title">Machine Learning Engineer</h4>
-                <p class="timeline-org">SwiftAnt</p>
-                <p class="timeline-location">Hosur, Tamil Nadu, India</p>
-                <p class="timeline-desc">Focused on Retrieval-Augmented Generation for document intelligence, engineered high-availability PostgreSQL services, optimized SQL procedures for data reporting, and managed CI/CD pipelines for streamlined deployments.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Education & Certifications -->
-        <div class="background-column" data-animate="fade-up" data-delay="100">
-          <h3 class="background-column-title"><i data-lucide="graduation-cap"></i> Education</h3>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <p class="timeline-date">April 2023 &mdash; April 2025</p>
-                <h4 class="timeline-title">Master's in AI & Machine Learning</h4>
-                <p class="timeline-org">BITS Pilani</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <p class="timeline-date">2017 &mdash; 2021</p>
-                <h4 class="timeline-title">B.Tech, Computer Science</h4>
-                <p class="timeline-org">United Institute of Technology</p>
-              </div>
-            </div>
-          </div>
-          <h3 class="background-column-title" style="margin-top: var(--space-10);"><i data-lucide="award"></i> Certifications</h3>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <h4 class="timeline-title">TensorFlow Developer Certificate</h4>
-                <p class="timeline-org">Google</p>
-              </div>
-            </div>
+        <div class="career-arc-text" data-animate="fade-up" data-delay="100">
+          <h2 class="career-arc-title">Career Arc</h2>
+          <div class="career-arc-bio">
+            <div class="career-arc-connector" aria-hidden="true"></div>
+            <p>An AIML Engineer currently at HTC Global Services in Bengaluru, with a career rooted in building intelligent systems from the ground up. The journey began with a B.Tech in Computer Science from United Institute of Technology, followed by three years as a Machine Learning Engineer at SwiftAnt, where the focus was on Retrieval-Augmented Generation for document intelligence, engineering high-availability PostgreSQL services, optimizing SQL procedures for enterprise data reporting, and managing CI/CD pipelines for production deployments.</p>
+            <p>In parallel, a Master's in AI &amp; Machine Learning from BITS Pilani deepened the theoretical foundations across deep learning, natural language processing, and computer vision. A Google TensorFlow Developer Certificate further solidified hands-on expertise in building and deploying production-grade ML models.</p>
+            <p>The work sits at the intersection of research and engineering &mdash; taking ideas from papers and turning them into reliable, scalable systems. Core competencies span the full ML lifecycle: from data pipelines and model training with PyTorch and TensorFlow, to containerized deployments on Kubernetes and AWS.</p>
+            <p>Beyond the day job, this site serves as a living archive of explorations &mdash; blog posts, tutorials built from Jupyter notebooks, and project write-ups that document the process of learning in public.</p>
           </div>
         </div>
       </div>
@@ -143,7 +93,7 @@
 
   <section class="stack-section">
     <div class="stack-marquee">
-      <div class="stack-track">
+      <div class="stack-track" aria-hidden="true">
         <span class="stack-item"><img src="https://cdn.simpleicons.org/python/white" alt="" class="stack-icon" width="32" height="32">Python</span>
         <span class="stack-item"><img src="https://cdn.simpleicons.org/pytorch/white" alt="" class="stack-icon" width="32" height="32">PyTorch</span>
         <span class="stack-item"><img src="https://cdn.simpleicons.org/tensorflow/white" alt="" class="stack-icon" width="32" height="32">TensorFlow</span>
@@ -183,6 +133,7 @@
         <span class="stack-item" aria-hidden="true"><img src="/icons/vscode.svg" alt="" class="stack-icon" width="32" height="32">VS Code</span>
       </div>
     </div>
+    <h2 class="stack-title">Tech Stack</h2>
   </section>
 
   <!-- Art Inspirations -->
