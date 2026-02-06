@@ -16,7 +16,6 @@ import {
   initTocHighlight,
   initSmoothScroll,
 } from './scroll-effects.js';
-import { initQuoteRotation } from './quote-system.js';
 
 // ========== GLOBAL ERROR HANDLERS ==========
 
@@ -85,8 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initTocHighlight();
   initBlobFloating();
-  initQuoteRotation();
-
   // Lazy-load Three.js only when a canvas container exists on the page
   const heroCanvas = document.querySelector('.three-canvas-container');
   if (heroCanvas) {

@@ -30,7 +30,7 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="/" class="header-logo">sushi<span class="logo-dot">.</span>lab</a>
+      <a href="/" class="header-logo"><img src="/logo.svg" alt="" class="header-logo-icon" width="24" height="24">sushi<span class="logo-dot">.</span>lab</a>
       <nav class="header-nav">
         <a href="/" class="active">Home</a>
         <a href="/blog/">Blog</a>
@@ -66,19 +66,27 @@
         </div>
       </div>
     </div>
+    <div class="hero-scroll-indicator" data-animate="fade-in" data-delay="600">
+      <svg class="apple-mouse-icon" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="21" height="37" rx="10.5" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="1.5" x2="12" y2="16" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+      </svg>
+      <span>scroll</span>
+    </div>
   </section>
 
-  <!-- Literary Quote -->
-  <div class="literary-quote container" data-animate="fade-up" data-quotes='[
-    {"text":"The purpose of computation is insight, not numbers.","author":"Richard Hamming"},
-    {"text":"Any sufficiently advanced technology is indistinguishable from magic.","author":"Arthur C. Clarke"},
-    {"text":"The computer was born to solve problems that did not exist before.","author":"Bill Gates"},
-    {"text":"Simplicity is the ultimate sophistication.","author":"Leonardo da Vinci"},
-    {"text":"The only way to do great work is to love what you do.","author":"Steve Jobs"}
-  ]'>
-    <blockquote></blockquote><span class="quote-cursor"></span>
-    <cite></cite>
-  </div>
+  <!-- Quote Section -->
+  <section class="dark-section quote-section">
+    <div class="container">
+      <blockquote class="hero-quote" data-animate="fade-up">
+        <svg class="hero-quote-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M14 28c-3.3 0-6-2.7-6-6 0-6.6 5.4-12 12-12v4c-4.4 0-8 3.6-8 8h2c3.3 0 6 2.7 6 6s-2.7 6-6 6zm20 0c-3.3 0-6-2.7-6-6 0-6.6 5.4-12 12-12v4c-4.4 0-8 3.6-8 8h2c3.3 0 6 2.7 6 6s-2.7 6-6 6z" fill="currentColor"/>
+        </svg>
+        <p class="hero-quote-text">The best way to predict the future is to build it — one experiment at a time.</p>
+        <cite class="hero-quote-cite">— the lab philosophy</cite>
+      </blockquote>
+    </div>
+  </section>
 
   <!-- Latest Articles (Dark Card Grid) -->
   <section class="dark-section">
@@ -92,26 +100,26 @@
           View all <i data-lucide="arrow-right"></i>
         </a>
       </div>
-      <div class="dark-card-grid cols-2" data-stagger>
+      <div class="dark-card-grid cols-featured" data-stagger>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="database"></i></div>
+          <div class="dark-card-image" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);"></div>
           <h3 class="dark-card-title">Deploying High-Availability PostgreSQL on AKS with Streaming Replicas</h3>
           <p class="dark-card-desc mono">A production-grade walkthrough of running PostgreSQL with streaming replication on Azure Kubernetes Service.</p>
-          <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> DevOps</li>
-            <li><i data-lucide="check"></i> Kubernetes</li>
-          </ul>
-          <a href="/blog/post.html?slug=deploying-high-availability-postgresql-on-aks-with-streaming-replicas" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <div class="dark-card-tags">
+            <span class="dark-card-tag">DevOps</span>
+            <span class="dark-card-tag">Kubernetes</span>
+          </div>
+          <a href="/blog/post.html?slug=deploying-high-availability-postgresql-on-aks-with-streaming-replicas" class="dark-card-link">Read article</a>
         </article>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="zap"></i></div>
+          <div class="dark-card-image" style="background: linear-gradient(135deg, #4ECDC4, #44E5B5);"></div>
           <h3 class="dark-card-title">Everything I Learned About Event-Driven Architecture</h3>
           <p class="dark-card-desc mono">Lessons from building event-driven systems — patterns, pitfalls, and practical advice.</p>
-          <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Architecture</li>
-            <li><i data-lucide="check"></i> Systems</li>
-          </ul>
-          <a href="/blog/post.html?slug=everything-i-learned-about-event-driven-architecture" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <div class="dark-card-tags">
+            <span class="dark-card-tag">Architecture</span>
+            <span class="dark-card-tag">Systems</span>
+          </div>
+          <a href="/blog/post.html?slug=everything-i-learned-about-event-driven-architecture" class="dark-card-link">Read article</a>
         </article>
       </div>
     </div>
@@ -129,27 +137,27 @@
           View all <i data-lucide="arrow-right"></i>
         </a>
       </div>
-      <div class="dark-card-grid cols-2" data-stagger>
+      <div class="dark-card-grid cols-featured" data-stagger>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="book-open"></i></div>
+          <div class="dark-card-image" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);"></div>
           <h3 class="dark-card-title">Getting Started with NumPy</h3>
           <p class="dark-card-desc mono">A beginner-friendly introduction to NumPy arrays, operations, and scientific computing fundamentals.</p>
-          <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Python</li>
-            <li><i data-lucide="check"></i> NumPy</li>
-            <li><i data-lucide="check"></i> Beginner</li>
-          </ul>
-          <a href="/tutorials/view.html?nb=getting-started-with-numpy" class="dark-card-cta">OPEN TUTORIAL <i data-lucide="arrow-right"></i></a>
+          <div class="dark-card-tags">
+            <span class="dark-card-tag">Python</span>
+            <span class="dark-card-tag">NumPy</span>
+            <span class="dark-card-tag">Beginner</span>
+          </div>
+          <a href="/tutorials/view.html?nb=getting-started-with-numpy" class="dark-card-link">Open tutorial</a>
         </article>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="book-open"></i></div>
+          <div class="dark-card-image" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);"></div>
           <h3 class="dark-card-title">Modeling With NMF And SVD</h3>
           <p class="dark-card-desc mono">Explore matrix factorization techniques for dimensionality reduction and topic modeling.</p>
-          <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Linear Algebra</li>
-            <li><i data-lucide="check"></i> ML</li>
-          </ul>
-          <a href="/tutorials/view.html?nb=Modeling-with-NMF-and-SVD" class="dark-card-cta">OPEN TUTORIAL <i data-lucide="arrow-right"></i></a>
+          <div class="dark-card-tags">
+            <span class="dark-card-tag">Linear Algebra</span>
+            <span class="dark-card-tag">ML</span>
+          </div>
+          <a href="/tutorials/view.html?nb=Modeling-with-NMF-and-SVD" class="dark-card-link">Open tutorial</a>
         </article>
       </div>
     </div>
@@ -167,29 +175,43 @@
           View all <i data-lucide="arrow-right"></i>
         </a>
       </div>
-      <div class="dark-card-grid cols-2" data-stagger>
+      <div class="dark-card-grid cols-featured" data-stagger>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="cpu"></i></div>
+          <div class="dark-card-image" style="background: linear-gradient(135deg, #EC4899, #F472B6);"></div>
           <h3 class="dark-card-title">Neural Style Transfer Engine</h3>
           <p class="dark-card-desc mono">A real-time style transfer system using deep neural networks and GPU acceleration.</p>
-          <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> PyTorch</li>
-            <li><i data-lucide="check"></i> CUDA</li>
-            <li><i data-lucide="check"></i> Real-time</li>
-          </ul>
-          <a href="/projects/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <div class="dark-card-tags">
+            <span class="dark-card-tag">PyTorch</span>
+            <span class="dark-card-tag">CUDA</span>
+            <span class="dark-card-tag">Real-time</span>
+          </div>
+          <a href="/projects/" class="dark-card-link">View project</a>
         </article>
         <article class="dark-card" data-animate="fade-up">
-          <div class="dark-card-icon"><i data-lucide="bar-chart-3"></i></div>
+          <div class="dark-card-image" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);"></div>
           <h3 class="dark-card-title">Interactive Data Viz Toolkit</h3>
           <p class="dark-card-desc mono">A WebGL-powered toolkit for creating beautiful, interactive data visualizations.</p>
-          <ul class="dark-card-features">
-            <li><i data-lucide="check"></i> Three.js</li>
-            <li><i data-lucide="check"></i> D3.js</li>
-            <li><i data-lucide="check"></i> WebGL</li>
-          </ul>
-          <a href="/projects/" class="dark-card-cta">LEARN MORE <i data-lucide="arrow-right"></i></a>
+          <div class="dark-card-tags">
+            <span class="dark-card-tag">Three.js</span>
+            <span class="dark-card-tag">D3.js</span>
+            <span class="dark-card-tag">WebGL</span>
+          </div>
+          <a href="/projects/" class="dark-card-link">View project</a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="dark-section cta-section">
+    <div class="container">
+      <div class="cta-content" data-animate="fade-up">
+        <h2 class="cta-heading">Want to collaborate?</h2>
+        <p class="cta-subtitle">Always open to interesting conversations about AI, machine learning, and creative technology.</p>
+        <div class="cta-buttons">
+          <a href="mailto:shushank.brain@gmail.com" class="btn btn-accent">Get in Touch</a>
+          <a href="https://github.com/shushankai" target="_blank" rel="noopener" class="btn btn-outline-dark">GitHub</a>
+        </div>
       </div>
     </div>
   </section>
@@ -246,6 +268,7 @@
           <a href="#">Terms</a>
         </div>
       </div>
+      <div class="footer-brand-watermark" aria-hidden="true">sushi.lab</div>
     </div>
   </footer>
 
