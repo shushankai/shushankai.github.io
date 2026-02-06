@@ -317,6 +317,69 @@
   line-height: 1.6;
 }
 
+/* ========== TECH STACK MARQUEE ========== */
+.stack-section {
+  background: #0A0A0A;
+  padding: var(--space-16) 0;
+  overflow: hidden;
+}
+
+.stack-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: var(--space-16);
+}
+
+.stack-marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.stack-track {
+  display: flex;
+  width: max-content;
+  gap: var(--space-12);
+  animation: stack-scroll 35s linear infinite;
+}
+
+.stack-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+
+.stack-item:hover {
+  color: #FFFFFF;
+}
+
+.stack-icon {
+  display: block;
+  opacity: 0.85;
+  transition: opacity var(--transition-fast);
+}
+
+.stack-item:hover .stack-icon {
+  opacity: 1;
+}
+
+@keyframes stack-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ========== RESPONSIVE: ABOUT ========== */
 @media (max-width: 768px) {
   .about-hero-title {
@@ -341,6 +404,7 @@
   .philosophy-quote blockquote {
     font-size: var(--text-lg);
   }
+
 }
 
 @media (max-width: 480px) {
@@ -355,4 +419,5 @@
   .about-social-row {
     flex-wrap: wrap;
   }
+
 }
