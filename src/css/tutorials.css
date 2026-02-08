@@ -632,9 +632,27 @@ body:has(.tutorials-hero) .tag {
   .tutorials-split {
     grid-template-columns: 280px 1fr;
   }
+
+  .tutorial-layout {
+    grid-template-columns: 1fr 220px;
+    gap: var(--space-8);
+  }
 }
 
 @media (max-width: 768px) {
+  .tutorials-hero {
+    min-height: auto;
+    padding: calc(var(--header-height) + var(--space-12)) 0 var(--space-12);
+  }
+
+  .tutorials-hero .hero-bio-area {
+    padding-left: 0;
+  }
+
+  .tutorials-connector {
+    display: none;
+  }
+
   .tutorials-split {
     grid-template-columns: 1fr;
     gap: var(--space-6);
@@ -653,6 +671,26 @@ body:has(.tutorials-hero) .tag {
     min-height: auto;
     padding: var(--space-8);
     min-width: 0;
+  }
+
+  .tutorials-preview .blob-pink {
+    width: 180px;
+    height: 180px;
+  }
+
+  .tutorials-preview .blob-yellow {
+    width: 140px;
+    height: 140px;
+  }
+
+  .tutorials-preview .blob-green {
+    width: 160px;
+    height: 160px;
+  }
+
+  .tutorials-preview .blob-purple {
+    width: 120px;
+    height: 120px;
   }
 
   .tutorial-layout {
@@ -675,6 +713,17 @@ body:has(.tutorials-hero) .tag {
   .tutorials-hero .filter-pills {
     flex-wrap: wrap;
   }
+
+  .nb-output {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-xs);
+  }
+
+  .nb-output-html th,
+  .nb-output-html td {
+    padding: 6px 8px;
+    font-size: var(--text-xs);
+  }
 }
 
 @media (max-width: 480px) {
@@ -693,5 +742,13 @@ body:has(.tutorials-hero) .tag {
 
   .tutorials-preview-title {
     font-size: var(--text-2xl);
+  }
+
+  .tutorials-preview-desc {
+    font-size: var(--text-sm);
+  }
+
+  .tutorial-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
 }

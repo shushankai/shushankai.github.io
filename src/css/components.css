@@ -172,7 +172,7 @@
   display: block;
   padding: 6px 10px;
   margin: 0 -10px;
-  width: 200px;
+  max-width: 200px;
   transition: color var(--transition-fast), background var(--transition-fast);
 }
 
@@ -1066,6 +1066,10 @@
     gap: var(--space-4);
     text-align: center;
   }
+
+  .footer-sub-group a {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1085,6 +1089,10 @@
 
   .footer-col:last-child {
     border-bottom: none;
+  }
+
+  .footer-col-title {
+    font-size: var(--text-base);
   }
 }
 
@@ -1109,6 +1117,30 @@
   .filter-pill {
     flex-shrink: 0;
   }
+
+  .terminal-chrome {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-pill {
+    padding: 6px 14px;
+    font-size: var(--text-xs);
+  }
+
+  .search-box {
+    padding: 10px 16px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: var(--text-xs);
+  }
+
+  .section-label {
+    font-size: var(--text-xs);
+  }
 }
 
 /* ========== RESPONSIVE: SIDEBAR CARDS ========== */
@@ -1116,6 +1148,13 @@
   .sidebar-card-thumb {
     width: 60px;
     height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-card-thumb {
+    width: 50px;
+    height: 40px;
   }
 }
 
@@ -1132,6 +1171,23 @@
 
   .literary-quote blockquote {
     font-size: var(--text-sm);
+  }
+}
+
+/* ========== RESPONSIVE: PAGE HERO ========== */
+@media (max-width: 768px) {
+  .page-hero-label {
+    font-size: var(--text-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-hero-title .hero-line-1 {
+    transform: rotate(0deg);
+  }
+
+  .page-hero-label {
+    transform: rotate(0deg);
   }
 }
 

@@ -538,7 +538,44 @@
     height: 100svh;
   }
 
+  .dark-section {
+    padding: var(--space-16) 0;
+  }
+
+  .dark-section + .dark-section {
+    padding-top: 0;
+  }
+
   .dark-card {
-    padding: 24px 20px;
+    padding: 20px 16px;
+  }
+
+  .dark-card-title {
+    font-size: var(--text-base);
+  }
+
+  .dark-card-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta-heading {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .cta-subtitle {
+    font-size: var(--text-base);
+  }
+
+  .quote-section {
+    padding: var(--space-16) 0;
+  }
+
+  .hero-quote-text {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
   }
 }

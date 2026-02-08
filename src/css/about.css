@@ -457,6 +457,26 @@ body:has(.about-hero) {
 
 /* ========== RESPONSIVE: ABOUT ========== */
 
+@media (max-width: 1200px) {
+  .career-arc-layout {
+    gap: var(--space-8);
+  }
+
+  .art-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .interests-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .philosophy-grid {
+    gap: var(--space-8);
+  }
+}
+
 @media (max-width: 768px) {
   .about-hero-title {
     font-size: clamp(2rem, 8vw, 2.8rem);
@@ -502,19 +522,79 @@ body:has(.about-hero) {
   .career-arc-connector {
     display: none;
   }
+
+  .about-hero .hero-bio-area {
+    padding-left: 0;
+  }
+
+  .about-connector {
+    display: none;
+  }
+
+  .stack-item {
+    font-size: var(--text-base);
+    gap: var(--space-2);
+  }
+
+  .stack-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .stack-track {
+    gap: var(--space-10);
+  }
 }
 
 @media (max-width: 480px) {
   .about-hero {
-    padding: var(--space-12) 0;
+    padding: calc(var(--header-height) + var(--space-8)) 0 var(--space-8);
+    min-height: auto;
   }
 
   .art-grid {
     grid-template-columns: 1fr;
   }
 
+  .art-card-body {
+    padding: var(--space-4);
+  }
+
   .about-social-row {
     flex-wrap: wrap;
   }
 
+  .interest-card {
+    padding: var(--space-6);
+  }
+
+  .stack-marquee {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  .stack-item {
+    font-size: var(--text-sm);
+  }
+
+  .stack-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .stack-track {
+    gap: var(--space-8);
+  }
+
+  .stack-title {
+    font-size: var(--text-lg);
+  }
+
+  .philosophy-grid {
+    gap: var(--space-6);
+  }
+
+  .career-arc-bio p {
+    font-size: var(--text-xs);
+  }
 }

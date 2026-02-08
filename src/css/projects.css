@@ -241,6 +241,19 @@ body:has(.projects-hero) .tag {
 }
 
 @media (max-width: 768px) {
+  .projects-hero {
+    min-height: auto;
+    padding: calc(var(--header-height) + var(--space-12)) 0 var(--space-12);
+  }
+
+  .projects-hero .hero-bio-area {
+    padding-left: 0;
+  }
+
+  .projects-connector {
+    display: none;
+  }
+
   .projects-hero .filter-pills {
     flex-wrap: wrap;
   }
@@ -263,6 +276,26 @@ body:has(.projects-hero) .tag {
     min-height: auto;
     padding: var(--space-8);
     min-width: 0;
+  }
+
+  .projects-preview .blob-pink {
+    width: 180px;
+    height: 180px;
+  }
+
+  .projects-preview .blob-yellow {
+    width: 140px;
+    height: 140px;
+  }
+
+  .projects-preview .blob-green {
+    width: 160px;
+    height: 160px;
+  }
+
+  .projects-preview .blob-purple {
+    width: 120px;
+    height: 120px;
   }
 
   .projects-preview-actions {
@@ -292,5 +325,9 @@ body:has(.projects-hero) .tag {
 
   .projects-preview-title {
     font-size: var(--text-2xl);
+  }
+
+  .projects-preview-desc {
+    font-size: var(--text-sm);
   }
 }
