@@ -92,7 +92,7 @@ body:has(.about-hero) {
 
 .career-arc-connector {
   position: absolute;
-  left: 0;
+  left: 4px;
   top: -36px;
   width: 70px;
   height: calc(36px + 0.9em);
