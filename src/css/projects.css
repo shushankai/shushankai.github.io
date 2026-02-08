@@ -5,10 +5,6 @@ body:has(.projects-hero) {
   background-size: 24px 24px;
 }
 
-body.has-interactive-grid:has(.projects-hero) {
-  background-image: none;
-}
-
 /* ========== PROJECTS PAGE ========== */
 .projects-hero {
   background: var(--color-bg-white);

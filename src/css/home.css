@@ -162,10 +162,6 @@
   z-index: 0;
 }
 
-body.has-interactive-grid .dark-section::before {
-  background-image: none;
-}
-
 .dark-section > .container {
   position: relative;
   z-index: 1;
