@@ -101,6 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
+  // Lazy-load interactive grid on dark-background pages
+  const hasDarkBg = document.querySelector('.dark-section, .about-hero, .blog-hero, .post-hero, .tutorials-hero, .projects-hero');
+  if (hasDarkBg) {
+    import('./interactive-grid.js')
+      .then(({ initInteractiveGrid }) => {
+        initInteractiveGrid();
+      })
+      .catch(() => {
+        // Interactive grid failed — static CSS dots remain as fallback
+      });
+  }
+
   // Lazy-load DNA helix when its container exists on the page
   const dnaCanvas = document.getElementById('dna-canvas');
   if (dnaCanvas) {
