@@ -205,7 +205,7 @@ html:not(.animations-ready) [data-animate] {
 .rainbow-divider {
   background: var(--gradient-rainbow);
   height: 3px;
-  border-radius: 2px;
+  border-radius: 0;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);

@@ -189,9 +189,31 @@
 
 .dark-card-grid {
   display: grid;
-  border: 1px solid #222;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+  border: 1px solid #333;
+  border-radius: 0;
+  position: relative;
+}
+
+/* Corner L-brackets — outer framing marks at each corner */
+.dark-card-grid::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    /* Top-left L-bracket: ┌ */
+    linear-gradient(#333, #333) left 0 top 0 / 1px 16px no-repeat,
+    linear-gradient(#333, #333) left 0 top 0 / 16px 1px no-repeat,
+    /* Top-right L-bracket: ┐ */
+    linear-gradient(#333, #333) right 0 top 0 / 1px 16px no-repeat,
+    linear-gradient(#333, #333) right 0 top 0 / 16px 1px no-repeat,
+    /* Bottom-left L-bracket: └ */
+    linear-gradient(#333, #333) left 0 bottom 0 / 1px 16px no-repeat,
+    linear-gradient(#333, #333) left 0 bottom 0 / 16px 1px no-repeat,
+    /* Bottom-right L-bracket: ┘ */
+    linear-gradient(#333, #333) right 0 bottom 0 / 1px 16px no-repeat,
+    linear-gradient(#333, #333) right 0 bottom 0 / 16px 1px no-repeat;
 }
 
 .dark-card-grid.cols-3 {
@@ -204,8 +226,8 @@
 
 .dark-card {
   padding: 48px 40px;
-  border-right: 1px solid #222;
-  border-bottom: 1px solid #222;
+  border-right: 1px solid #333;
+  border-bottom: 1px solid #333;
   transition: background var(--transition-base);
 }
 
@@ -313,7 +335,7 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   background: var(--gradient-accent);
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   margin-bottom: var(--space-5);
 }
 
@@ -347,8 +369,8 @@
   gap: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  border: 1px solid #222;
-  border-radius: var(--radius-sm);
+  border: 1px solid #333;
+  border-radius: 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -402,7 +424,7 @@
 }
 
 .dark-card-link:hover {
-  color: #FF8A8A;
+  color: #8AACFF;
 }
 
 .dark-card-link:hover::after {
@@ -488,7 +510,7 @@
   .dark-card-grid.cols-2 .dark-card:nth-last-child(-n+2),
   .dark-card-grid.cols-featured .dark-card:nth-last-child(-n+2),
   .dark-card-grid.cols-asymmetric .dark-card:nth-last-child(-n+2) {
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #333;
   }
 
   .dark-card:last-child {
@@ -510,7 +532,7 @@
   .dark-card-carousel .dark-card {
     min-width: 100%;
     border-right: none;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #333;
   }
 
   .dark-card-carousel .dark-card:last-child {
