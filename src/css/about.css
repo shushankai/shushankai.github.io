@@ -392,6 +392,7 @@ body:has(.about-hero) {
   background: #0A0A0A;
   padding: var(--space-12) 0 var(--space-16);
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
