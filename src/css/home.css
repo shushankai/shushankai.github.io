@@ -232,7 +232,11 @@
 }
 
 .dark-card:hover {
-  background: #111;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(139, 92, 246, 0.15), transparent 60%),
+    radial-gradient(ellipse at 95% 40%, rgba(236, 72, 153, 0.12), transparent 50%),
+    radial-gradient(ellipse at 75% 5%, rgba(251, 146, 60, 0.08), transparent 45%),
+    #0A0A0A;
 }
 
 /* Remove right border on last column */
