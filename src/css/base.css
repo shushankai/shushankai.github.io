@@ -65,6 +65,8 @@ code, pre {
   font-size: var(--text-lg);
   color: var(--color-text-secondary);
   max-width: 600px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .gradient-text {
