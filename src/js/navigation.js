@@ -34,12 +34,14 @@ export function initMobileNav() {
     nav.classList.remove('nav-open');
     toggle.classList.remove('active');
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
   }
 
   toggle.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('nav-open');
     toggle.classList.toggle('active', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.documentElement.style.overflow = isOpen ? 'hidden' : '';
   });
 
   // Close nav when clicking a link
