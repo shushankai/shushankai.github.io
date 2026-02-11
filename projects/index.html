@@ -246,26 +246,38 @@
         });
       }
 
+      let isFirstPreviewRender = true;
       function updatePreview(p) {
-        const tags = (p.tags || []).map((tag, i) =>
-          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
-        ).join(' ');
+        const renderContent = () => {
+          const tags = (p.tags || []).map((tag, i) =>
+            `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
+          ).join(' ');
 
-        const demoBtn = p.demo
-          ? `<a href="${esc(p.demo)}" class="btn btn-outline"><i data-lucide="external-link"></i> Live Demo</a>`
-          : '';
+          const demoBtn = p.demo
+            ? `<a href="${esc(p.demo)}" class="btn btn-outline"><i data-lucide="external-link"></i> Live Demo</a>`
+            : '';
 
-        previewContent.innerHTML = `
-          <p class="projects-preview-label">Featured Project</p>
-          <h2 class="projects-preview-title">${esc(p.title)}</h2>
-          <p class="projects-preview-desc">${esc(p.description)}</p>
-          <div class="projects-preview-tech">${tags}</div>
-          <div class="projects-preview-actions">
-            <a href="${esc(p.github)}" class="btn btn-primary"><i data-lucide="github"></i> View Code</a>
-            ${demoBtn}
-          </div>
-        `;
-        if (window.__lucideInit) window.__lucideInit();
+          previewContent.innerHTML = `
+            <p class="projects-preview-label">Featured Project</p>
+            <h2 class="projects-preview-title">${esc(p.title)}</h2>
+            <p class="projects-preview-desc">${esc(p.description)}</p>
+            <div class="projects-preview-tech">${tags}</div>
+            <div class="projects-preview-actions">
+              <a href="${esc(p.github)}" class="btn btn-primary"><i data-lucide="github"></i> View Code</a>
+              ${demoBtn}
+            </div>
+          `;
+          if (window.__lucideInit) window.__lucideInit();
+          previewContent.classList.remove('preview-fading');
+        };
+
+        if (isFirstPreviewRender) {
+          isFirstPreviewRender = false;
+          renderContent();
+          return;
+        }
+        previewContent.classList.add('preview-fading');
+        setTimeout(renderContent, 200);
       }
 
       function renderSidebar() {

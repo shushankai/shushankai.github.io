@@ -283,6 +283,16 @@ body:has(.post-hero) {
   color: white;
 }
 
+@keyframes copy-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.code-copy-btn.copied {
+  animation: copy-pulse 0.5s ease-out;
+}
+
 .code-copy-btn svg {
   width: 14px;
   height: 14px;
@@ -356,6 +366,20 @@ body:has(.post-hero) {
   color: var(--color-text-muted);
   transition: color var(--transition-fast);
   line-height: 1.5;
+  position: relative;
+}
+
+.toc-link::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-6) - 2px);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--transition-fast);
 }
 
 .toc-link:hover {
@@ -365,6 +389,10 @@ body:has(.post-hero) {
 .toc-link.active {
   color: var(--color-text-heading);
   font-weight: 600;
+}
+
+.toc-link.active::before {
+  transform: scaleY(1);
 }
 
 /* Share card */
@@ -403,6 +431,12 @@ body:has(.post-hero) {
 .share-icon:hover {
   background: var(--color-text-heading);
   color: white;
+  transform: translateY(-2px);
+}
+
+.share-icon:active {
+  transform: translateY(0) scale(0.92);
+  transition-duration: 80ms;
 }
 
 .share-icon svg {

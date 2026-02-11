@@ -163,7 +163,11 @@ document.addEventListener('click', (e) => {
   const onSuccess = () => {
     const original = copyBtn.innerHTML;
     copyBtn.textContent = 'Copied!';
-    setTimeout(() => { copyBtn.innerHTML = original; }, 2000);
+    copyBtn.classList.add('copied');
+    setTimeout(() => {
+      copyBtn.innerHTML = original;
+      copyBtn.classList.remove('copied');
+    }, 2000);
   };
 
   // Use Clipboard API if available, fall back to execCommand
