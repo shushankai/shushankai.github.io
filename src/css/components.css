@@ -173,12 +173,13 @@
   padding: 6px 10px;
   margin: 0 -10px;
   max-width: 200px;
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-sub-group a:hover {
   color: #0A0A0A;
   background: #FFFFFF;
+  transform: translateX(3px);
 }
 
 .footer-brand-watermark {
@@ -221,12 +222,13 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 4px 8px;
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-bottom-links a:hover {
   color: #0A0A0A;
   background: #FFFFFF;
+  transform: translateX(3px);
 }
 
 /* ========== BUTTONS ========== */
@@ -399,6 +401,11 @@
   font-size: var(--text-xs);
   font-weight: 500;
   font-family: var(--font-mono);
+  transition: transform var(--transition-fast);
+}
+
+.tag:hover {
+  transform: translateY(-1px);
 }
 
 .tag-default {
@@ -448,6 +455,11 @@
 .filter-pill:hover {
   border-color: var(--color-text-heading);
   color: var(--color-text-heading);
+}
+
+.filter-pill:active {
+  transform: scale(0.95);
+  transition-duration: 80ms;
 }
 
 .filter-pill.active {
@@ -525,6 +537,11 @@
 
 .search-box input::placeholder {
   color: var(--color-text-muted);
+}
+
+.search-box:focus-within {
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
+  transition: box-shadow var(--transition-fast);
 }
 
 .search-row {
@@ -906,6 +923,7 @@
 .sidebar-card:hover {
   border-color: var(--color-text-muted);
   box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
 }
 
 .sidebar-card.active {
@@ -926,6 +944,11 @@
   border-radius: var(--radius-sm);
   background: var(--gradient-accent);
   flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.sidebar-card:hover .sidebar-card-thumb {
+  transform: scale(1.05);
 }
 
 .sidebar-card-content {
@@ -1022,6 +1045,7 @@ body:has(:is(.blog-hero, .tutorials-hero, .projects-hero)) .sidebar-card {
 body:has(:is(.blog-hero, .tutorials-hero, .projects-hero)) .sidebar-card:hover {
   border-color: #444;
   background: #111;
+  transform: translateX(4px);
 }
 
 body:has(:is(.blog-hero, .tutorials-hero, .projects-hero)) .sidebar-card.active {
@@ -1138,6 +1162,11 @@ body:has(:is(.blog-hero, .tutorials-hero, .projects-hero)) .tag {
 :is(.blog-preview-content, .tutorials-preview-content, .projects-preview-content) {
   position: relative;
   z-index: 2;
+  transition: opacity var(--transition-base) ease;
+}
+
+:is(.blog-preview-content, .tutorials-preview-content, .projects-preview-content).preview-fading {
+  opacity: 0;
 }
 
 :is(.blog-preview-label, .tutorials-preview-label, .projects-preview-label) {

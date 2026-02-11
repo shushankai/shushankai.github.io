@@ -372,6 +372,11 @@ body:has(.about-hero) {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.principle:hover .principle-number {
+  transform: scale(1.1);
 }
 
 .principle-content h4 {
@@ -439,6 +444,14 @@ body:has(.about-hero) {
 @keyframes stack-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+.stack-marquee:hover .stack-track {
+  animation-play-state: paused;
+}
+
+.stack-marquee-reverse:hover .stack-track-reverse {
+  animation-play-state: paused;
 }
 
 .stack-marquee-reverse {

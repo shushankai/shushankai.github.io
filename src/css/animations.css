@@ -231,4 +231,35 @@ html:not(.animations-ready) [data-animate] {
   .header {
     transition: none !important;
   }
+
+  /* Micro-interaction overrides */
+  .sidebar-card:hover,
+  .sidebar-card:hover .sidebar-card-thumb,
+  .tag:hover,
+  .filter-pill:active,
+  .footer-sub-group a:hover,
+  .footer-bottom-links a:hover,
+  .share-icon:hover,
+  .share-icon:active,
+  .dark-card:hover .dark-card-icon svg,
+  .view-all-link:hover svg,
+  .principle:hover .principle-number {
+    transform: none !important;
+  }
+
+  .toc-link::before {
+    transition: none !important;
+  }
+
+  .code-copy-btn.copied {
+    animation: none !important;
+  }
+
+  :is(.blog-preview-content, .tutorials-preview-content, .projects-preview-content) {
+    transition: none !important;
+  }
+
+  :is(.blog-preview-content, .tutorials-preview-content, .projects-preview-content).preview-fading {
+    opacity: 1 !important;
+  }
 }

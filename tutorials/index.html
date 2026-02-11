@@ -204,30 +204,42 @@
         });
       }
 
+      let isFirstPreviewRender = true;
       function updatePreview(t) {
-        const diffClass = t.difficulty ? `difficulty-${esc(t.difficulty.toLowerCase())}` : '';
-        const tags = (t.tags || []).map((tag, i) =>
-          `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
-        ).join(' ');
-        const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', {
-          month: 'long', day: 'numeric', year: 'numeric'
-        }) : '';
+        const renderContent = () => {
+          const diffClass = t.difficulty ? `difficulty-${esc(t.difficulty.toLowerCase())}` : '';
+          const tags = (t.tags || []).map((tag, i) =>
+            `<span class="tag ${TAG_CLASSES[i % TAG_CLASSES.length]}">${esc(tag)}</span>`
+          ).join(' ');
+          const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', {
+            month: 'long', day: 'numeric', year: 'numeric'
+          }) : '';
 
-        previewContent.innerHTML = `
-          <p class="tutorials-preview-label">Tutorial</p>
-          <h2 class="tutorials-preview-title">${esc(t.title)}</h2>
-          <p class="tutorials-preview-desc">${esc(t.description || '')}</p>
-          <div class="tutorials-preview-meta">
-            ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${esc(t.difficulty)}</span>` : ''}
-            ${t.duration ? `<span><i data-lucide="clock"></i> ${esc(t.duration)}</span>` : ''}
-            ${dateStr ? `<span><i data-lucide="calendar"></i> ${esc(dateStr)}</span>` : ''}
-          </div>
-          <div class="tutorials-preview-tags">${tags}</div>
-          <a href="/tutorials/view.html?nb=${encodeURIComponent(t.slug)}" class="btn btn-primary" style="margin-top: var(--space-4);">
-            Open Tutorial <i data-lucide="arrow-right"></i>
-          </a>
-        `;
-        if (window.__lucideInit) window.__lucideInit();
+          previewContent.innerHTML = `
+            <p class="tutorials-preview-label">Tutorial</p>
+            <h2 class="tutorials-preview-title">${esc(t.title)}</h2>
+            <p class="tutorials-preview-desc">${esc(t.description || '')}</p>
+            <div class="tutorials-preview-meta">
+              ${t.difficulty ? `<span class="difficulty-badge ${diffClass}">${esc(t.difficulty)}</span>` : ''}
+              ${t.duration ? `<span><i data-lucide="clock"></i> ${esc(t.duration)}</span>` : ''}
+              ${dateStr ? `<span><i data-lucide="calendar"></i> ${esc(dateStr)}</span>` : ''}
+            </div>
+            <div class="tutorials-preview-tags">${tags}</div>
+            <a href="/tutorials/view.html?nb=${encodeURIComponent(t.slug)}" class="btn btn-primary" style="margin-top: var(--space-4);">
+              Open Tutorial <i data-lucide="arrow-right"></i>
+            </a>
+          `;
+          if (window.__lucideInit) window.__lucideInit();
+          previewContent.classList.remove('preview-fading');
+        };
+
+        if (isFirstPreviewRender) {
+          isFirstPreviewRender = false;
+          renderContent();
+          return;
+        }
+        previewContent.classList.add('preview-fading');
+        setTimeout(renderContent, 200);
       }
 
       function renderSidebar() {

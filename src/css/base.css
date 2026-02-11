@@ -97,4 +97,9 @@ code, pre {
 .view-all-link svg {
   width: 16px;
   height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.view-all-link:hover svg {
+  transform: translateX(3px);
 }
