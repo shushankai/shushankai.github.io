@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dnaCanvas.style.display = 'none';
       });
   }
+
 });
 
 // ========== BLOB FLOATING ANIMATION ==========
